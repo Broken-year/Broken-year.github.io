@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Broken-year">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="内网渗透随笔之cs, Broken-year">
+    <meta name="description" content="Cobalt Strike基本使用一、启动首先解压，里面有两个重要的文件
+
+一个teamserver一个cobalstrike
+不能用java直接打开，要通过启动器打开
+添加执行权限在文件夹内启动终端，然后输入
+chmod 777 ./*
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Broken-year</title>
+    <title>内网渗透随笔之cs | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +315,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">内网渗透随笔之cs</h1>
                 </div>
             </div>
         </div>
@@ -428,12 +434,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">网络安全</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                <span class="chip bg-color">内网渗透</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                <span class="chip bg-color">工具使用</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                网络安全
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -442,7 +469,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-12
+                    2022-03-14
                 </div>
                 
 
@@ -463,19 +490,57 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+                <h1 id="Cobalt-Strike基本使用"><a href="#Cobalt-Strike基本使用" class="headerlink" title="Cobalt Strike基本使用"></a>Cobalt Strike基本使用</h1><h2 id="一、启动"><a href="#一、启动" class="headerlink" title="一、启动"></a>一、启动</h2><p>首先解压，里面有两个重要的文件</p>
+<p><img src="/2022/03/14/cs/cs-file.png" alt="image-20220314154035456"></p>
+<p>一个teamserver一个cobalstrike</p>
+<p>不能用java直接打开，要通过启动器打开</p>
+<h3 id="添加执行权限"><a href="#添加执行权限" class="headerlink" title="添加执行权限"></a>添加执行权限</h3><p>在文件夹内启动终端，然后输入</p>
+<pre class=" language-linux"><code class="language-linux">chmod 777 ./*
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<p>给当前目录下所有文件增加所有权限</p>
+<h3 id="打开启动器"><a href="#打开启动器" class="headerlink" title="打开启动器"></a>打开启动器</h3><p>输入命令</p>
+<pre class=" language-linux"><code class="language-linux">./teamserver [本机ip] (密码)
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+<p>键入本机ip地址和密码，启动</p>
+<p><img src="/2022/03/14/cs/cs-login.png" alt="image-20220314155119789"></p>
+<h3 id="启动cs"><a href="#启动cs" class="headerlink" title="启动cs"></a>启动cs</h3><p>打开一个新的窗体，输入</p>
+<pre class=" language-linux"><code class="language-linux">./cobaltstrike
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img src="/2022/03/14/cs/cs-login2.png" alt="image-20220314155459646"></p>
+<p>点击connect进入页面</p>
+<h2 id="二、cs控制远程服务器"><a href="#二、cs控制远程服务器" class="headerlink" title="二、cs控制远程服务器"></a>二、cs控制远程服务器</h2><p><img src="/2022/03/14/cs/cs-main.png" alt="image-20220314160207965"></p>
+<h3 id="新建Listeners"><a href="#新建Listeners" class="headerlink" title="新建Listeners"></a>新建Listeners</h3><blockquote>
+<p>点击Cobalt Strike -&gt; Listeners</p>
+</blockquote>
+<p><img src="/2022/03/14/cs/cs-listeners.png" alt="image-20220314160519575"></p>
+<blockquote>
+<p>在下方点击Add</p>
+</blockquote>
+<p><img src="/2022/03/14/cs/cs-new%20listener.png" alt="image-20220314161144814"></p>
+<blockquote>
+<p>点击保存，监听器就打开了</p>
+</blockquote>
+<h3 id="新建木马程序"><a href="#新建木马程序" class="headerlink" title="新建木马程序"></a>新建木马程序</h3><blockquote>
+<p>Attacks-&gt;Web Drive-by-&gt;Scripted Web Delivery (s) &#x2F;&#x2F;使用网站方式发布</p>
+</blockquote>
+<p><img src="/2022/03/14/cs/cs-web.png" alt="image-20220314162057152"></p>
+<blockquote>
+<p>将内容复制</p>
+</blockquote>
+<p><img src="/2022/03/14/cs/cs-copy.png" alt="image-20220314162204838"></p>
+<blockquote>
+<p>新建一个文本文档，放入进去保存，只要将这条命令在靶机内执行，就会完成控制</p>
+</blockquote>
+<p><img src="/2022/03/14/cs/cs-windows.png" alt="image-20220314162653079"></p>
+<p><img src="/2022/03/14/cs/cs-success.png" alt="image-20220314163104461"></p>
+<h3 id="与肉鸡互动"><a href="#与肉鸡互动" class="headerlink" title="与肉鸡互动"></a>与肉鸡互动</h3><blockquote>
+<p>右键肉鸡-&gt;Interact</p>
+</blockquote>
+<p>打开命令行，输入shell whoami查看</p>
+<p><img src="/2022/03/14/cs/cs-whoami.png" alt="image-20220314163643663"></p>
+<blockquote>
+<p>默认心跳时间60s</p>
+</blockquote>
 
                 
             </div>
@@ -502,7 +567,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/12/hello-world/">http://Broken-year.github.io/2022/03/12/hello-world/</a>
+                    <a href="http://Broken-year.github.io/2022/03/14/cs/">http://Broken-year.github.io/2022/03/14/cs/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -539,7 +604,19 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">网络安全</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                    <span class="chip bg-color">内网渗透</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                    <span class="chip bg-color">工具使用</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -711,9 +788,68 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/03/14/cs/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="内网渗透随笔之cs">
+                        
+                        <span class="card-title">内网渗透随笔之cs</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                    网络安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                        <span class="chip bg-color">工具使用</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/03/13/Hexo-Git/">
                     <div class="card-image">
@@ -731,9 +867,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -754,44 +890,6 @@
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/12/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-12
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Broken-year
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
