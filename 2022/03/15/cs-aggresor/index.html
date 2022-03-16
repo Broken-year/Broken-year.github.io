@@ -4,10 +4,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="cs-beacon, Broken-year">
-    <meta name="description" content="Beacon功能Beacon CommandsCommand                   Description
--------                   -----------
-browserpivot         ">
+    <meta name="keywords" content="cs-aggresor, Broken-year">
+    <meta name="description" content="Aggresor脚本
+.cna后缀的 -Aggressor Script
+Sleep语言
+在View-&amp;gt;Script Console
+
+
+$ = 变量
+@ = 数组
+% = 字典
+
+演示
+在&amp;#x2F;root目录下新建一个文件1.c">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +28,7 @@ browserpivot         ">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>cs-beacon | Broken-year</title>
+    <title>cs-aggresor | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -311,12 +320,12 @@ browserpivot         ">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">cs-beacon</h1>
+                    <h1 class="description center-align post-title">cs-aggresor</h1>
                 </div>
             </div>
         </div>
@@ -465,7 +474,7 @@ browserpivot         ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-14
+                    2022-03-15
                 </div>
                 
 
@@ -486,205 +495,132 @@ browserpivot         ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Beacon功能"><a href="#Beacon功能" class="headerlink" title="Beacon功能"></a>Beacon功能</h1><h2 id="Beacon-Commands"><a href="#Beacon-Commands" class="headerlink" title="Beacon Commands"></a>Beacon Commands</h2><pre><code>Command                   Description
--------                   -----------
-browserpivot              注入受害者浏览器进程
-bypassuac                 绕过UAC
-cancel                    取消正在进行的下载
-cd                        切换目录
-checkin                   强制让被控端回连一次
-clear                     清除beacon内部的任务队列
-connect                   Connect to a Beacon peer over TCP
-covertvpn                 部署Covert VPN客户端
-cp                        复制文件
-dcsync                    从DC中提取密码哈希
-desktop                   远程VNC
-dllinject                 反射DLL注入进程
-dllload                   使用LoadLibrary将DLL加载到进程中
-download                  下载文件
-downloads                 列出正在进行的文件下载
-drives                    列出目标盘符
-elevate                   尝试提权
-execute                   在目标上执行程序(无输出)
-execute-assembly          在目标上内存中执行本地.NET程序
-exit                      退出beacon
-getprivs                  Enable system privileges on current token
-getsystem                 尝试获取SYSTEM权限
-getuid                    获取用户ID
-hashdump                  转储密码哈希值
-help                      帮助
-inject                    在特定进程中生成会话
-jobkill                   杀死一个后台任务
-jobs                      列出后台任务
-kerberos_ccache_use       从ccache文件中导入票据应用于此会话
-kerberos_ticket_purge     清除当前会话的票据
-kerberos_ticket_use       从ticket文件中导入票据应用于此会话
-keylogger                 键盘记录
-kill                      结束进程
-link                      Connect to a Beacon peer over a named pipe
-logonpasswords            使用mimikatz转储凭据和哈希值
-ls                        列出文件
-make_token                创建令牌以传递凭据
-mimikatz                  运行mimikatz
-mkdir                     创建一个目录
-mode dns                  使用DNS A作为通信通道(仅限DNS beacon)
-mode dns-txt              使用DNS TXT作为通信通道(仅限D beacon)
-mode dns6                 使用DNS AAAA作为通信通道(仅限DNS beacon)
-mode http                 使用HTTP作为通信通道
-mv                        移动文件
-net                       net命令
-note                      备注       
-portscan                  进行端口扫描
-powerpick                 通过Unmanaged PowerShell执行命令
-powershell                通过powershell.exe执行命令
-powershell-import         导入powershell脚本
-ppid                      Set parent PID for spawned post-ex jobs
-ps                        显示进程列表
-psexec                    Use a service to spawn a session on a host
-psexec_psh                Use PowerShell to spawn a session on a host
-psinject                  在特定进程中执行PowerShell命令
-pth                       使用Mimikatz进行传递哈希
-pwd                       当前目录位置
-reg                       Query the registry
-rev2self                  恢复原始令牌
-rm                        删除文件或文件夹
-rportfwd                  端口转发
-run                       在目标上执行程序(返回输出)
-runas                     以另一个用户权限执行程序
-runasadmin                在高权限下执行程序
-runu                      Execute a program under another PID
-screenshot                屏幕截图
-setenv                    设置环境变量
-shell                     cmd执行命令
-shinject                  将shellcode注入进程
-shspawn                   生成进程并将shellcode注入其中
-sleep                     设置睡眠延迟时间
-socks                     启动SOCKS4代理
-socks stop                停止SOCKS4
-spawn                     Spawn a session 
-spawnas                   Spawn a session as another user
-spawnto                   Set executable to spawn processes into
-spawnu                    Spawn a session under another PID
-ssh                       使用ssh连接远程主机
-ssh-key                   使用密钥连接远程主机
-steal_token               从进程中窃取令牌
-timestomp                 将一个文件时间戳应用到另一个文件
-unlink                    Disconnect from parent Beacon
-upload                    上传文件
-wdigest                   使用mimikatz转储明文凭据
-winrm                     使用WinRM在主机上生成会话
-wmi                       使用WMI在主机上生成会话
-argue                     进程参数欺骗
+                <h1 id="Aggresor脚本"><a href="#Aggresor脚本" class="headerlink" title="Aggresor脚本"></a>Aggresor脚本</h1><blockquote>
+<p>.cna后缀的 -Aggressor Script</p>
+<p>Sleep语言</p>
+<p>在View-&gt;Script Console</p>
+</blockquote>
+<p><img src="/2022/03/15/cs-aggresor/cs-Script.png"></p>
+<pre class=" language-sleep"><code class="language-sleep">$ = 变量
+@ = 数组
+% = 字典
 </code></pre>
-<h2 id="实机展示"><a href="#实机展示" class="headerlink" title="实机展示"></a>实机展示</h2><h3 id="Sleep"><a href="#Sleep" class="headerlink" title="Sleep"></a>Sleep</h3><p>可以更改睡眠时间，有两种方法</p>
+<h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><blockquote>
+<p>在&#x2F;root目录下新建一个文件1.cna，内容是</p>
+<pre class=" language-sleep"><code class="language-sleep">@arr1=@('a1','a2',887);    //定义一个数组arr1
+println(@arr1[1]);            //输出数组的第二个
+</code></pre>
+<p>完成之后在cs里的Script Console解释器里输入</p>
+<pre><code>load /root/1.cna
+</code></pre>
+</blockquote>
+<p><img src="/2022/03/15/cs-aggresor/cs-load.png" alt="image-20220316100726843"></p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><pre class=" language-sleep"><code class="language-sleep">@arr1 = @('a1','a2',887); 
+foreach $var (@arr1)&#123;   //for循环,定义变量var，循环内容是arr1  
+   println($var);
+&#125;
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-for.png" alt="image-20220316101454410"></p>
+<h3 id="sleep-jar"><a href="#sleep-jar" class="headerlink" title="sleep.jar"></a>sleep.jar</h3><blockquote>
+<p>Sleep语言下载地址：<a target="_blank" rel="noopener" href="http://sleep.dashnine.org/download/sleep.jar">http://sleep.dashnine.org/download/sleep.jar</a></p>
+</blockquote>
+<pre class=" language-linux"><code class="language-linux">java -jar /root/sleep.jar
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-java.png" alt="image-20220316102413454"></p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><pre class=" language-sleep"><code class="language-sleep">$x = 1;
+%dic["key1"] = "value1";
+%dic["key2"] = "value2";
+%dic[$x] = "value3";
+println("%dic is".%dic);
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-key.png" alt="image-20220316103106151"></p>
+<h3 id="交互式"><a href="#交互式" class="headerlink" title="交互式"></a>交互式</h3><blockquote>
+<p>新建一个文件，在文件里随便输入点什么，比如</p>
+<pre class=" language-sleep"><code class="language-sleep">println ("haha nihao");
+</code></pre>
+<p>在Script Console里加载，并通过ls加载</p>
+</blockquote>
+<p><img src="/2022/03/15/cs-aggresor/cs-load2.png" alt="image-20220316103631945"></p>
+<pre class=" language-sleep"><code class="language-sleep">command w&#123;            \\快捷键
+  println("you click w");
+&#125;
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-w.png" alt="image-20220316105353679"></p>
 <blockquote>
-<p>右键肉鸡-&gt;Session-&gt;Sleep</p>
+<p>tron        开启函数跟踪</p>
+<p>troff        关闭函数跟踪</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-sleep1.png" alt="image-20220315094923146"></p>
-<p><img src="/2022/03/14/cs-beacon/cs-sleep2.png" alt="image-20220315095026761"></p>
+<pre class=" language-sleep"><code class="language-sleep">sub fun1&#123;               //定义函数
+  println("run fun1!!!! now $1");
+&#125;
+
+command f1 &#123;
+  fun1($1);
+&#125;
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-fun.png" alt="image-20220316110257416"></p>
+<h3 id="c2客户端"><a href="#c2客户端" class="headerlink" title="c2客户端"></a>c2客户端</h3><blockquote>
+<p>命令中编写的东西可以直接影响界面的内容</p>
+</blockquote>
+<pre class=" language-sleep"><code class="language-sleep">bind Ctrl+O &#123;    //绑定快捷键
+  show_message("this is a alert");
+  elog("i am log");
+&#125;
+</code></pre>
 <blockquote>
-<p>右键肉鸡-&gt;Interact，在Beacon里输入sleep 数字</p>
+<p>重新加载后按快捷键</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/sleep-beacon.png" alt="image-20220315095239991"></p>
-<h3 id="Attacks-packages-Windows-Executable-s-使用"><a href="#Attacks-packages-Windows-Executable-s-使用" class="headerlink" title="Attacks-packages-Windows Executable(s)使用"></a>Attacks-packages-Windows Executable(s)使用</h3><blockquote>
-<p>Attacks-&gt;packages-&gt;Windows Executable(s)</p>
-</blockquote>
-<p>打开界面</p>
-<p><img src="/2022/03/14/cs-beacon/cs-windows.png" alt="image-20220315095745163"></p>
-<p>生成的.exe文件放进靶机中，让目标服务器执行，就可以了</p>
-<p><img src="/2022/03/14/cs-beacon/cs-exe.png" alt="image-20220315100221977"></p>
-<h3 id="一些有意思的东西"><a href="#一些有意思的东西" class="headerlink" title="一些有意思的东西"></a>一些有意思的东西</h3><h4 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a>jobs</h4><blockquote>
-<p>列出当前做的事情</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-jobs.png" alt="image-20220315100643423"></p>
-<h4 id="screenshot"><a href="#screenshot" class="headerlink" title="screenshot"></a>screenshot</h4><blockquote>
-<p>可以截肉鸡上的图，在View-&gt;Screenshots里可以查看截图</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-screenshot.png" alt="image-20220315101243187"></p>
-<h3 id="后渗透模块"><a href="#后渗透模块" class="headerlink" title="后渗透模块"></a>后渗透模块</h3><blockquote>
-<p>后渗透模块可以帮助进行信息搜集，权限提升，端口扫描，横向移动，持久化等操作</p>
-</blockquote>
-<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><blockquote>
-<p>一键提权</p>
-<p>右键肉鸡-&gt;Access-&gt;Elevate</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-Elevate.png" alt="image-20220315102321330"></p>
+<p><img src="/2022/03/15/cs-aggresor/cs-alert.png" alt="image-20220316144939948"></p>
 <blockquote>
-<p>完成之后会多出一些东西，从Administrator提权到System权限</p>
+<p>菜单，重新加载后就会出现图中内容</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-elevate2.png" alt="image-20220315102432952"></p>
-<p><img src="/2022/03/14/cs-beacon/cs-system.png" alt="image-20220315102517329"></p>
+<pre class=" language-sleep"><code class="language-sleep">popup caidan1&#123;   //自定义弹窗
+  item("&item1",&#123;url_open("http://www.baidu.com")&#125;);
+  separator();    //分隔符
+  item("&item2",&#123;url-open("http://www.cctv.com")&#125;);
+&#125;
+
+menubar("my caidan","caidan1");   //菜单栏
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-menu.png" alt="image-20220316145824830"></p>
 <blockquote>
-<p>getsystem也可以完成操作</p>
+<p>可以在别的模块上加入自己写的，比如在beacon上</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-getsystem.png" alt="image-20220315102907401"></p>
+<pre class=" language-sleep"><code class="language-sleep">popup beacon_bottom&#123;
+    menu "attack"&#123;
+        item("&item1",&#123;url_open("http://www.baidu.com")&#125;);   
+    &#125;
+&#125;
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-attack.png" alt="image-20220316150217088"></p>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><pre><code>targets        存储的目标信息    显示上线过的主机信息
+archives    显示最近的信息    显示最近的输出信息（慎用很卡）
+beacons        显示所有的受感染的主机信息    显示在线和上线过的主机
+credentials    显示凭据信息    我们抓取过的密码信息和制作的票据信息
+downloads    显示下载信息    显示我们在受控端下载的信息
+keystrokes    记录键盘输入    当我们选择进程近路键盘的时候，会将得到的键盘信息            记录下来
+screenshots    屏幕截图显示    显示我们截图的二进制信息流
+sites        托管的资产    看起来是我们创建的监听的端口个Stager回连的端口
+</code></pre>
+<pre><code>x targets()   //输出目标信息
+x targets()[0][&#39;name&#39;] //只输出name信息
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-targets.png" alt="image-20220316151406387"></p>
+<p><img src="/2022/03/15/cs-aggresor/cs-name.png" alt="image-20220316151552178"></p>
 <blockquote>
-<p>hashdump</p>
-<p>获取用户密码的hash值，获得hash之后可以使用彩虹表破解</p>
+<p>可以利用在脚本里</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-hash.png" alt="image-20220315103052711"></p>
+<pre class=" language-sleep"><code class="language-sleep">command showme&#123;
+  println("ip address is :".targets()[$1]["address"]."\n os is :".targets()[$1]["os"]);
+&#125;
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-showme.png" alt="image-20220316152026898"></p>
 <blockquote>
-<p>shell net user</p>
-<p>查看靶机用户</p>
+<p>显示所有监听器</p>
 </blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-netuser.png" alt="image-20220315103220373"></p>
-<h4 id="获取密码"><a href="#获取密码" class="headerlink" title="获取密码"></a>获取密码</h4><blockquote>
-<p>run mimikatz</p>
-<p>右键肉鸡-&gt;Access-&gt;Run mimikatz</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-mimikatz.png" alt="image-20220315103447825"></p>
-<blockquote>
-<p>相当于直接在客户机上运行mimikatz</p>
-</blockquote>
-<h4 id="伪造用户"><a href="#伪造用户" class="headerlink" title="伪造用户"></a>伪造用户</h4><blockquote>
-<p>可以通过make token伪造用户</p>
-<p>右键肉鸡-&gt;Access-&gt;Make Token</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-maketoken.png" alt="image-20220315103935772"></p>
-<blockquote>
-<p>相当于这两条命令</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-maketoken2.png" alt="image-20220315104055423"></p>
-<blockquote>
-<p>可以通过模拟的用户去做一些奇怪的事情</p>
-</blockquote>
-<h4 id="文件列表"><a href="#文件列表" class="headerlink" title="文件列表"></a>文件列表</h4><blockquote>
-<p>右键肉鸡-&gt;Explore-&gt;File Browser</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-file.png" alt="image-20220315104244088"></p>
-<p><img src="/2022/03/14/cs-beacon/cs-file2.png" alt="image-20220315104512887"></p>
-<h4 id="Net-View"><a href="#Net-View" class="headerlink" title="Net View"></a>Net View</h4><blockquote>
-<p>可以查看内网中的主机</p>
-<p>右键肉鸡-&gt;Explore-&gt;Net View</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-netview.png" alt="image-20220315183759918"></p>
-<h4 id="Process-List"><a href="#Process-List" class="headerlink" title="Process List"></a>Process List</h4><blockquote>
-<p>查看目标有哪些进程，可以注入进程</p>
-<p>右键肉鸡-&gt;Explore-&gt;Process List</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-process.png" alt="image-20220315183935112"></p>
-<h4 id="SOCKS-Server"><a href="#SOCKS-Server" class="headerlink" title="SOCKS Server"></a>SOCKS Server</h4><blockquote>
-<p>设置代理</p>
-<p>右键肉鸡-&gt;Pivoting-&gt;SOCKS Server</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-sock.png" alt="image-20220315184058658"></p>
-<blockquote>
-<p>然后在View-&gt;Proxy Pivots里查看</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-proxy.png" alt="image-20220315184301756"></p>
-<blockquote>
-<p>点击Tunnel可以通过这条命令在msf里设置代理，把流量引到socks里</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-Tunnel.png" alt="image-20220315184427676"></p>
-<h4 id="Pivoting-Listener"><a href="#Pivoting-Listener" class="headerlink" title="Pivoting-Listener"></a>Pivoting-Listener</h4><blockquote>
-<p>如果要打到内网，通过这个控制其他内网</p>
-<p>右键肉鸡-&gt;Pivoting-&gt;Listener</p>
-<p>连级控制</p>
-</blockquote>
-<p><img src="/2022/03/14/cs-beacon/cs-LIstener.png" alt="image-20220315184642336"></p>
-<h4 id="Spawn"><a href="#Spawn" class="headerlink" title="Spawn"></a>Spawn</h4><blockquote>
-<p>模块派发shell，可以派发给团队其他人</p>
-</blockquote>
+<pre><code>printAll(listeners());
+</code></pre>
+<p><img src="/2022/03/15/cs-aggresor/cs-listeners.png" alt="image-20220316152315506"></p>
 
                 
             </div>
@@ -711,7 +647,7 @@ argue                     进程参数欺骗
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/14/cs-beacon/">http://Broken-year.github.io/2022/03/14/cs-beacon/</a>
+                    <a href="http://Broken-year.github.io/2022/03/15/cs-aggresor/">http://Broken-year.github.io/2022/03/15/cs-aggresor/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -932,17 +868,18 @@ argue                     进程参数欺骗
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/15/cs-command/">
+                <a href="/2022/03/15/cs-aggresor/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="cs-command">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="cs-aggresor">
                         
-                        <span class="card-title">cs-command</span>
+                        <span class="card-title">cs-aggresor</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -952,9 +889,9 @@ argue                     进程参数欺骗
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -967,6 +904,7 @@ argue                     进程参数欺骗
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -993,13 +931,13 @@ argue                     进程参数欺骗
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/14/cs-mode/">
+                <a href="/2022/03/15/cs-command/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="cs-mode">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="cs-command">
                         
-                        <span class="card-title">cs-mode</span>
+                        <span class="card-title">cs-command</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1010,7 +948,7 @@ argue                     进程参数欺骗
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
                             </span>
                         <span class="publish-author">
                             
