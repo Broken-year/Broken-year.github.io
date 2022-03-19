@@ -4,13 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Ubuntu redis部署, Broken-year">
-    <meta name="description" content="Ubuntu Redis部署
+    <meta name="keywords" content="Redis部署, Broken-year">
+    <meta name="description" content="Redis部署
 redis数据库属于nosql系列的数据库，缓存类，支持数据持久化，擅长把内存数据直接读取
 关系型数据库
 
-&amp;#x3D;&amp;#x3D;redis服务器安装&amp;#x3D;&amp;#x3D;
-wget http://down">
+Ubuntu上安装&amp;#x3D;&amp;#x3D;redis服务器安装&amp;#x3D;&amp;#x3D;
+wget http://do">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +22,7 @@ wget http://down">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Ubuntu redis部署 | Broken-year</title>
+    <title>Redis部署 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +314,12 @@ wget http://down">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Ubuntu redis部署</h1>
+                    <h1 class="description center-align post-title">Redis部署</h1>
                 </div>
             </div>
         </div>
@@ -451,6 +451,10 @@ wget http://down">
                                 <span class="chip bg-color">渗透测试</span>
                             </a>
                         
+                            <a href="/tags/kali/">
+                                <span class="chip bg-color">kali</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -493,11 +497,11 @@ wget http://down">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Ubuntu-Redis部署"><a href="#Ubuntu-Redis部署" class="headerlink" title="Ubuntu Redis部署"></a>Ubuntu Redis部署</h1><blockquote>
+                <h1 id="Redis部署"><a href="#Redis部署" class="headerlink" title="Redis部署"></a>Redis部署</h1><blockquote>
 <p>redis数据库属于nosql系列的数据库，缓存类，支持数据持久化，擅长把内存数据直接读取</p>
 <p>关系型数据库</p>
 </blockquote>
-<p>&#x3D;&#x3D;redis服务器安装&#x3D;&#x3D;</p>
+<h2 id="Ubuntu上安装"><a href="#Ubuntu上安装" class="headerlink" title="Ubuntu上安装"></a>Ubuntu上安装</h2><p>&#x3D;&#x3D;redis服务器安装&#x3D;&#x3D;</p>
 <pre class=" language-Linux"><code class="language-Linux">wget http://download.redis.io/releases/redis-4.0.9.tar.gz   //下载
 tar -zxvf redis-4.0.9.tar.gz   //解压
 apt install make  //安装make
@@ -520,12 +524,20 @@ daemonize yes
 <p>保存退出之后进行测试</p>
 </blockquote>
 <pre class=" language-Linux"><code class="language-Linux">redis-server /etc/redis/redis.conf
-pa aux | grep redis
+ps aux | grep redis
 redis-cli -h 192.168.3.135
 </code></pre>
 <blockquote>
 <p>大佬们的玩笑，输入ping回pong</p>
 </blockquote>
+<h2 id="Kali上安装"><a href="#Kali上安装" class="headerlink" title="Kali上安装"></a>Kali上安装</h2><p>&#x3D;&#x3D;redis服务安装&#x3D;&#x3D;</p>
+<pre class=" language-Linux"><code class="language-Linux">wget http://download.redis.io/redis-stable.tar.gz
+tar -zxvf redis-stable.tar.gz
+cd redis-stable
+make
+cp src/redis-cli /usr/bin   //直接使用命令
+redis-cli -h 192.168.3.135
+</code></pre>
 
                 
             </div>
@@ -604,6 +616,10 @@ redis-cli -h 192.168.3.135
                             
                                 <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
                                     <span class="chip bg-color">渗透测试</span>
+                                </a>
+                            
+                                <a href="/tags/kali/">
+                                    <span class="chip bg-color">kali</span>
                                 </a>
                             
                         </div>
@@ -786,9 +802,9 @@ redis-cli -h 192.168.3.135
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Ubuntu redis部署">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Redis部署">
                         
-                        <span class="card-title">Ubuntu redis部署</span>
+                        <span class="card-title">Redis部署</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -831,6 +847,10 @@ redis-cli -h 192.168.3.135
                     
                     <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
                         <span class="chip bg-color">渗透测试</span>
+                    </a>
+                    
+                    <a href="/tags/kali/">
+                        <span class="chip bg-color">kali</span>
                     </a>
                     
                 </div>
