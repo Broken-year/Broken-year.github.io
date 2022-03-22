@@ -4,24 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="php入门, Broken-year">
-    <meta name="description" content="php入门
-新建一个index.php
-index是标准的网页首页命名
-
-&amp;lt;?php
-echo &#34;haha nihao&#34;;
-?&gt;
-
-
-php代码代码必须使用
-
-变量
-php是一种弱类型语言
-
-&amp;lt;?php
-$a = 123;
-$b">
+    <meta name="keywords" content="php和数据库, Broken-year">
+    <meta name="description" content="PHP文本连接数据库准备工作
+首先要打开mysql服务以及apache服务
+在网页中输入127.0.0.1&amp;#x2F;phpmyadmin进入mysql图形化管理界面
+新加一个名叫test的库，库里table1表，表里有id，usernam">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +20,7 @@ $b">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>php入门 | Broken-year</title>
+    <title>php和数据库 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -325,12 +312,12 @@ $b">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">php入门</h1>
+                    <h1 class="description center-align post-title">php和数据库</h1>
                 </div>
             </div>
         </div>
@@ -446,16 +433,16 @@ $b">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/php/">
-                                <span class="chip bg-color">php</span>
-                            </a>
-                        
                             <a href="/tags/%E7%BC%96%E7%A8%8B/">
                                 <span class="chip bg-color">编程</span>
                             </a>
                         
-                            <a href="/tags/%E7%BD%91%E9%A1%B5/">
-                                <span class="chip bg-color">网页</span>
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
                             </a>
                         
                     </div>
@@ -479,7 +466,7 @@ $b">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-20
+                    2022-03-22
                 </div>
                 
 
@@ -500,75 +487,111 @@ $b">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="php入门"><a href="#php入门" class="headerlink" title="php入门"></a>php入门</h1><blockquote>
-<p>新建一个index.php</p>
-<p>index是标准的网页首页命名</p>
+                <h1 id="PHP文本连接数据库"><a href="#PHP文本连接数据库" class="headerlink" title="PHP文本连接数据库"></a>PHP文本连接数据库</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<p>首先要打开mysql服务以及apache服务</p>
+<p>在网页中输入127.0.0.1&#x2F;phpmyadmin进入mysql图形化管理界面</p>
+<p>新加一个名叫test的库，库里table1表，表里有id，username，password三个字段</p>
 </blockquote>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token keyword">echo</span> <span class="token string">"haha nihao"</span><span class="token punctuation">;</span>
-<span class="token delimiter">?></span>
-</code></pre>
-<blockquote>
-<p>php代码代码必须使用<?php xxxx    ?></p>
+<p><img src="/2022/03/22/php-sql/image-20220322200840920.png" alt="image-20220322200840920"></p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><blockquote>
+<p>在www目录下新建一个php，开始php连接数据库</p>
 </blockquote>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><blockquote>
-<p>php是一种弱类型语言</p>
+<pre class=" language-PHP"><code class="language-PHP"><?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "test";
+//创建连接
+$conn = new mysqli($servername,$username,$password,$dbname);
+//检测连接
+if($conn->connect_error)&#123;
+    die("error".$conn->connect_error);
+&#125;
+echo "success";
+?>
+</code></pre>
+<h2 id="数据库增删改查"><a href="#数据库增删改查" class="headerlink" title="数据库增删改查"></a>数据库增删改查</h2><blockquote>
+<p>准备一条数据库语句，然后执行，最后输出结果</p>
 </blockquote>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span> <span class="token operator">=</span> <span class="token number">999</span><span class="token punctuation">;</span>
-<span class="token variable">$c</span><span class="token operator">=</span><span class="token variable">$a</span><span class="token operator">+</span><span class="token variable">$b</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$c</span><span class="token punctuation">;</span>
-<span class="token delimiter">?></span>
+<p><strong>查</strong></p>
+<pre class=" language-PHP"><code class="language-PHP">//查找语句,查找table1里id<3的数据
+$sql = "SELECT * FROM table1 WHERE id < 3";
+
+//执行sql语句，并且返回给变量$result
+$result = $conn->query($sql);
+//条件语句，如果$result不为空
+if ($result->num_rows > 0)
+&#123;    
+    //输出数据,fetch_accos()从结果集中取出一行作为关联数组
+    while ($row=$result->fetch_assoc()) &#123;
+        echo $row['id'].'------'.$row['username'].'------'.$row['password']."<br/>";
+    &#125;
+&#125;else&#123;
+    echo "0 结果";
+&#125;
+
+?>
 </code></pre>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><pre class=" language-php"><code class="language-php"><span class="token comment" spellcheck="true">//haha    单行注释</span>
-<span class="token comment" spellcheck="true">/*
-多行注释
-*/</span>
+<p><strong>增</strong></p>
+<pre class=" language-PHP"><code class="language-PHP">//插入数据
+$sql = "INSERT INTO table1 (id,username,password) VALUES(4,'haha','123456')";
+//===代表全等于 ==必须要求两边数据类型一致，否则会强制类型转换
+if($conn->query($sql)===TRUE)&#123;
+    echo "success";
+&#125;else&#123;
+    echo "error:".$conn->error;
+&#125;
 </code></pre>
-<h2 id="php粘合"><a href="#php粘合" class="headerlink" title="php粘合"></a>php粘合</h2><pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token string">"haha"</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span> <span class="token operator">=</span> <span class="token string">"nihao"</span><span class="token punctuation">;</span>
-<span class="token variable">$c</span> <span class="token operator">=</span> <span class="token variable">$a</span><span class="token punctuation">.</span><span class="token variable">$b</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//这里的.叫做粘合</span>
-<span class="token keyword">echo</span> <span class="token variable">$c</span><span class="token punctuation">;</span>
-<span class="token delimiter">?></span>
+<p><strong>删</strong></p>
+<pre class=" language-PHP"><code class="language-PHP">$sql = "DELETE FROM table1 WHERE username='haha'";
+if($conn->query($sql)===TRUE)&#123;
+    echo "success";
+&#125;else&#123;
+    echo "error:".$conn->error;
+&#125;
 </code></pre>
-<h2 id="互动网站"><a href="#互动网站" class="headerlink" title="互动网站"></a>互动网站</h2><blockquote>
-<p>GET——可以获取提交信息，多用于取东西。</p>
-<p>POST——多用于提交用户名和密码时。</p>
-</blockquote>
-<p>写一个get请求</p>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token punctuation">.</span><span class="token string">"----"</span><span class="token punctuation">.</span><span class="token variable">$b</span><span class="token punctuation">;</span>
-<span class="token delimiter">?></span>
+<p><strong>改</strong></p>
+<pre class=" language-PHP"><code class="language-PHP">$sql = "UPDATE table1 SET password='niu' WHERE username='xm'";
+if($conn->query($sql)===TRUE)&#123;
+    echo "success";
+&#125;else&#123;
+    echo "error:".$conn->error;
+&#125;
 </code></pre>
-<p>参数a和参数b之间用&amp;粘合</p>
-<p>上面那个玩意可以再加一点东西</p>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token operator">></span><span class="token number">18</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-    <span class="token keyword">echo</span> <span class="token string">'chengnian '</span><span class="token punctuation">.</span><span class="token variable">$a</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;else&amp;#123;</span>
-    <span class="token keyword">echo</span> <span class="token string">'wei cheng nian '</span><span class="token punctuation">.</span><span class="token variable">$a</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
-<span class="token delimiter">?></span>
+<h2 id="html和PHP结合起来美化网页"><a href="#html和PHP结合起来美化网页" class="headerlink" title="html和PHP结合起来美化网页"></a>html和PHP结合起来美化网页</h2><pre class=" language-php+HTML"><code class="language-php+HTML"><html>
+ <head>
+  <title> db test </title>
+ </head>
+
+ <body>
+ <?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "test";
+$conn = new mysqli($servername,$username,$password,$dbname);
+if ($conn->connect_error)&#123;
+    die("error".$conn->connect_error);
+&#125;
+$sql = "SELECT * FROM table1 WHERE id < 4";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) &#123;
+    echo "<table border='1'>";
+    echo "<tr><th>id</th> <th>username</th> </tr>";
+    while ($row = $result->fetch_assoc()) &#123;
+        echo "<tr>";
+        echo "<td>".$row['id']."</td>";
+        echo "<td>".$row['username']."</td>";
+        echo "</tr>";
+    &#125;
+    echo "</table>";
+&#125;
+$conn->close();
+
+ ?>
+ </body>
+</html>
 </code></pre>
-<blockquote>
-<p>POST：多用在用户名密 码注册，登录</p>
-<p>GET：多用在取东西</p>
-</blockquote>
-<p>把上面那个get改成post</p>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token punctuation">.</span><span class="token string">"----"</span><span class="token punctuation">.</span><span class="token variable">$b</span><span class="token punctuation">;</span>
-<span class="token delimiter">?></span>
-</code></pre>
-<p>post无法直接在浏览器输入框里更改，可以使用抓包的方式或者使用hackbar</p>
 
                 
             </div>
@@ -595,7 +618,7 @@ $b">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/20/php-introduction/">http://Broken-year.github.io/2022/03/20/php-introduction/</a>
+                    <a href="http://Broken-year.github.io/2022/03/22/php-sql/">http://Broken-year.github.io/2022/03/22/php-sql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -633,16 +656,16 @@ $b">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/php/">
-                                    <span class="chip bg-color">php</span>
-                                </a>
-                            
                                 <a href="/tags/%E7%BC%96%E7%A8%8B/">
                                     <span class="chip bg-color">编程</span>
                                 </a>
                             
-                                <a href="/tags/%E7%BD%91%E9%A1%B5/">
-                                    <span class="chip bg-color">网页</span>
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
+                                </a>
+                            
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
                                 </a>
                             
                         </div>
@@ -816,17 +839,18 @@ $b">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/20/server-system/">
+                <a href="/2022/03/22/php-sql/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="操作系统以及公网服务器部署">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="php和数据库">
                         
-                        <span class="card-title">操作系统以及公网服务器部署</span>
+                        <span class="card-title">php和数据库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -836,38 +860,35 @@ $b">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" class="post-category">
-                                    服务器搭建
+                            <a href="/categories/PHP/" class="post-category">
+                                    PHP
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">编程</span>
                     </a>
                     
-                    <a href="/tags/vps/">
-                        <span class="chip bg-color">vps</span>
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
                     </a>
                     
-                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">
-                        <span class="chip bg-color">服务器搭建</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%85%AC%E7%BD%91/">
-                        <span class="chip bg-color">公网</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>
@@ -881,13 +902,13 @@ $b">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/20/security-introduce/">
+                <a href="/2022/03/22/scanner/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="网络安全行业以及周边介绍">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="漏洞扫描原理以及SQL注入">
                         
-                        <span class="card-title">网络安全行业以及周边介绍</span>
+                        <span class="card-title">漏洞扫描原理以及SQL注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -898,7 +919,7 @@ $b">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
                             </span>
                         <span class="publish-author">
                             
@@ -919,12 +940,16 @@ $b">
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">工具使用</span>
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
                     </a>
                     
-                    <a href="/tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">随笔</span>
+                    <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
+                        <span class="chip bg-color">sql注入</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
                     </a>
                     
                 </div>
