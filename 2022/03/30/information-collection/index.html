@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="frp内网穿透, Broken-year">
-    <meta name="description" content="Frp内网穿透黑客（192.168.3.134）——–（192.168.3.143）server1（172.16.1.105）——–（172.16.1.103）server2
-server1 &amp;#x3D; frp server
-server">
+    <meta name="keywords" content="域内信息搜集, Broken-year">
+    <meta name="description" content="域内信息搜集假如在一个域里
+在内网中搜集
+对域内的角色进行判断
+whoami
+ipconfig /all
+systeminfo | findstr /B /C:&amp;quot;OS Name&amp;quot; /C:&amp;quot;OS Version&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +22,7 @@ server">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>frp内网穿透 | Broken-year</title>
+    <title>域内信息搜集 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -311,12 +314,12 @@ server">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">frp内网穿透</h1>
+                    <h1 class="description center-align post-title">域内信息搜集</h1>
                 </div>
             </div>
         </div>
@@ -440,8 +443,12 @@ server">
                                 <span class="chip bg-color">内网渗透</span>
                             </a>
                         
-                            <a href="/tags/frp/">
-                                <span class="chip bg-color">frp</span>
+                            <a href="/tags/%E5%9F%9F/">
+                                <span class="chip bg-color">域</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
+                                <span class="chip bg-color">信息搜集</span>
                             </a>
                         
                     </div>
@@ -486,30 +493,50 @@ server">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Frp内网穿透"><a href="#Frp内网穿透" class="headerlink" title="Frp内网穿透"></a>Frp内网穿透</h1><p>黑客（192.168.3.134）——–（192.168.3.143）server1（172.16.1.105）——–（172.16.1.103）server2</p>
-<p>server1 &#x3D; frp server</p>
-<p>server2 &#x3D; frp client</p>
-<p>在server1上配置</p>
-<pre><code>nano frps.ini
-[common]
-bind_port = 7000
-token = haha123
-保存退出
-frps -c frps.ini  //启动frp服务端
+                <h1 id="域内信息搜集"><a href="#域内信息搜集" class="headerlink" title="域内信息搜集"></a>域内信息搜集</h1><p>假如在一个域里</p>
+<p>在内网中搜集</p>
+<p>对域内的角色进行判断</p>
+<pre><code>whoami
+ipconfig /all
+systeminfo | findstr /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot;
+systeminfo   //查看服务器信息
+wmic product get name,version //装了哪些东西
+wmic service list brief  //哪些服务
+tasklist  //进程
+wmic startup get command,caption //开机启动
+schtasks /query /fo LIST /v  //计划任务
+net statistics workstation //开机时间
+net user 本机用户
+net localgroup administrators //最高权限表
+query user || qwinsta //查看当前在线用户
+net session //列出断开本机和连接用户对话
+net -ano //列出开放端口
+net share //本机是否开放域共享
+route print //路由表
+arp -a //查看当前内网有多少设备
+whoami /all   //查看唯一标识符
 </code></pre>
-<p>在server2里面配置</p>
-<pre><code>frpc.ini配置
-[common]
-server_addr = 172.16.1.105
-server_port = 7000
-
-[web]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 80
-remote_port = 6080
-
-frpc -c frpc.ini //启动frp客户端
+<p>收集域信息</p>
+<pre><code>whoami 
+net user user1 /domain   //user1在域里面是什么样的
+net config workstation //收集域的名字
+net time /domain  //判断主域
+ping dc-1.test1.com //就能看到ip
+</code></pre>
+<p>查看内网所有的ip</p>
+<pre><code>for /L %I in (1,1,254) DO @ping -w 1 -n 192.1668.1.%I | findstr &quot;TTL=&quot;
+</code></pre>
+<p>使用其他命令继续收集域内信息</p>
+<pre><code>net vice /domain:test1   //权限够的话能看到一些信息
+net group /domain   //能看到域控的组
+net group &quot;domain computers&quot; /domain  //查看域内成员
+net accounts /domain //查看密码使用时间
+nltest /domain_trusts   //获得域信任关系
+nltest /DCLIST:test1   //确认域控
+nslookup -type=SRV_ldap._tcp  //默认服务器
+net group &quot;Domain Controllers&quot; /domain  //确认域控
+netdom query dc //域控计算机名
+wmic useraccount get /all  //域内用户详细信息
 </code></pre>
 
                 
@@ -537,7 +564,7 @@ frpc -c frpc.ini //启动frp客户端
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/30/frp/">http://Broken-year.github.io/2022/03/30/frp/</a>
+                    <a href="http://Broken-year.github.io/2022/03/30/information-collection/">http://Broken-year.github.io/2022/03/30/information-collection/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -583,8 +610,12 @@ frpc -c frpc.ini //启动frp客户端
                                     <span class="chip bg-color">内网渗透</span>
                                 </a>
                             
-                                <a href="/tags/frp/">
-                                    <span class="chip bg-color">frp</span>
+                                <a href="/tags/%E5%9F%9F/">
+                                    <span class="chip bg-color">域</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
+                                    <span class="chip bg-color">信息搜集</span>
                                 </a>
                             
                         </div>
@@ -758,9 +789,10 @@ frpc -c frpc.ini //启动frp客户端
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/30/information-collection/">
                     <div class="card-image">
@@ -778,9 +810,9 @@ frpc -c frpc.ini //启动frp客户端
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -793,6 +825,7 @@ frpc -c frpc.ini //启动frp客户端
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -823,13 +856,13 @@ frpc -c frpc.ini //启动frp客户端
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/29/agents-and-tunnels/">
+                <a href="/2022/03/30/frp/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="代理和隧道技术">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="frp内网穿透">
                         
-                        <span class="card-title">代理和隧道技术</span>
+                        <span class="card-title">frp内网穿透</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -840,7 +873,7 @@ frpc -c frpc.ini //启动frp客户端
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-30
                             </span>
                         <span class="publish-author">
                             
@@ -865,16 +898,8 @@ frpc -c frpc.ini //启动frp客户端
                         <span class="chip bg-color">内网渗透</span>
                     </a>
                     
-                    <a href="/tags/%E7%AB%AF%E5%8F%A3/">
-                        <span class="chip bg-color">端口</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%BB%A3%E7%90%86/">
-                        <span class="chip bg-color">代理</span>
-                    </a>
-                    
-                    <a href="/tags/%E9%9A%A7%E9%81%93/">
-                        <span class="chip bg-color">隧道</span>
+                    <a href="/tags/frp/">
+                        <span class="chip bg-color">frp</span>
                     </a>
                     
                 </div>
