@@ -430,12 +430,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
                             <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                                 <span class="chip bg-color">网络安全</span>
+                            </a>
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
                             <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
@@ -496,7 +496,7 @@
 <li>Docker Image镜像</li>
 <li>DockerContainer容器</li>
 </ol>
-<h1 id="Linux搭建docker环境"><a href="#Linux搭建docker环境" class="headerlink" title="Linux搭建docker环境"></a>Linux搭建docker环境</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h2><pre class=" language-Linux"><code class="language-Linux">apt-install docker.io
+<h1 id="Linux搭建docker环境"><a href="#Linux搭建docker环境" class="headerlink" title="Linux搭建docker环境"></a>Linux搭建docker环境</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h2><pre class=" language-Linux"><code class="language-Linux">apt install docker.io
 </code></pre>
 <p>查看是否安装成功</p>
 <pre class=" language-Linux"><code class="language-Linux">docker --version
@@ -523,7 +523,44 @@
 <h2 id="3-安装vulhub"><a href="#3-安装vulhub" class="headerlink" title="3.安装vulhub"></a>3.安装vulhub</h2><p>git安装</p>
 <pre class=" language-Linux"><code class="language-Linux">git clone https://github.com/vulhub/vulhub.git
 </code></pre>
-<p>(太慢了剩下明天再搞！)</p>
+<p>下载好了之后做一下测试</p>
+<p>选取tomcat弱口令漏洞cd到所在目录</p>
+<pre class=" language-Linux"><code class="language-Linux">cd vulhub/tomcat/tomcat8
+</code></pre>
+<p>建立容器</p>
+<pre class=" language-Linux"><code class="language-Linux">docker-compose build
+</code></pre>
+<p><img src="/2022/04/21/docker/image-20220422112006964.png" alt="image-20220422112006964"></p>
+<p>启动漏洞环境</p>
+<pre class=" language-Linux"><code class="language-Linux">docker-compose up -d
+</code></pre>
+<p><img src="/2022/04/21/docker/image-20220422112050870.png" alt="image-20220422112050870"></p>
+<p>下载一下net-tools（可以使用ifconfig查看本机ip）</p>
+<pre class=" language-Linux"><code class="language-Linux">apt-get install net-tools
+</code></pre>
+<p>查看ip</p>
+<pre class=" language-Linux"><code class="language-Linux">ifconfig
+</code></pre>
+<p>然后测试一下</p>
+<p>在网页中打开ip:8080</p>
+<p><img src="/2022/04/21/docker/image-20220422112316219.png" alt="image-20220422112316219"></p>
+<p>成功！</p>
+<h1 id="tomcat8弱口令-任意文件上传"><a href="#tomcat8弱口令-任意文件上传" class="headerlink" title="tomcat8弱口令+任意文件上传"></a>tomcat8弱口令+任意文件上传</h1><p>tomcat8的默认账号和密码都是tomcat，我们点击server status进入后台</p>
+<p><img src="/2022/04/21/docker/image-20220422133044531.png" alt="image-20220422133044531"></p>
+<p><img src="/2022/04/21/docker/image-20220422133059843.png" alt="image-20220422133059843"></p>
+<p>点击List Applications</p>
+<p><img src="/2022/04/21/docker/image-20220422133239116.png" alt="image-20220422133239116"></p>
+<p>找到上传点，可以上传.war文件</p>
+<p><img src="/2022/04/21/docker/image-20220422141028122.png" alt="image-20220422141028122"></p>
+<p>ps：</p>
+<blockquote>
+<p>里面是哥斯拉生成的木马</p>
+</blockquote>
+<p>上传成功</p>
+<p><img src="/2022/04/21/docker/image-20220422141057705.png" alt="image-20220422141057705"></p>
+<p>测试好不好使</p>
+<p><img src="/2022/04/21/docker/image-20220422144753585.png" alt="image-20220422144753585"></p>
+<p>成了</p>
 
                 
             </div>
@@ -588,12 +625,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
                                 <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                                     <span class="chip bg-color">网络安全</span>
+                                </a>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
                                 <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
@@ -815,12 +852,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
                     <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                         <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                     <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
