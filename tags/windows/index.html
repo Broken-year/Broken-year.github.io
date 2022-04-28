@@ -384,11 +384,11 @@
                 </a>
                 
                 
-                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" title="网络安全: 49">
+                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" title="网络安全: 51">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="网络安全" style="background-color: #D5F5E3;">网络安全
-                        <span class="tag-length">49</span>
+                        <span class="tag-length">51</span>
                     </span>
                 </a>
                 
@@ -411,29 +411,29 @@
                 </a>
                 
                 
-                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/" title="综合实战: 9">
+                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/" title="综合实战: 11">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="综合实战" style="background-color: #F8F9F9;">综合实战
-                        <span class="tag-length">9</span>
+                        <span class="tag-length">11</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" title="渗透测试: 13">
+                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" title="渗透测试: 15">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="渗透测试" style="background-color: #82E0AA;">渗透测试
-                        <span class="tag-length">13</span>
+                        <span class="tag-length">15</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" title="靶场练习: 9">
+                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" title="靶场练习: 11">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="靶场练习" style="background-color: #D7BDE2;">靶场练习
-                        <span class="tag-length">9</span>
+                        <span class="tag-length">11</span>
                     </span>
                 </a>
                 
@@ -645,19 +645,19 @@
                 </a>
                 
                 
-                <a href="/tags/%E5%86%85%E7%BD%91/" title="内网: 1">
+                <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="内网" style="background-color: #85C1E9;">内网
+                            data-tagname="应急响应" style="background-color: #82E0AA;">应急响应
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应: 1">
+                <a href="/tags/%E5%86%85%E7%BD%91/" title="内网: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="应急响应" style="background-color: #82E0AA;">应急响应
+                            data-tagname="内网" style="background-color: #85C1E9;">内网
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -753,6 +753,24 @@
                 </a>
                 
                 
+                <a href="/tags/kali/" title="kali: 5">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="kali" style="background-color: #F9EBEA;">kali
+                        <span class="tag-length">5</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%BC%8F%E6%B4%9E/" title="漏洞: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="漏洞" style="background-color: #F8C471;">漏洞
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/tags/php/" title="php: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
@@ -776,24 +794,6 @@
                              chip-default "
                             data-tagname="网页" style="background-color: #F9EBEA;">网页
                         <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/kali/" title="kali: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="kali" style="background-color: #F9EBEA;">kali
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%BC%8F%E6%B4%9E/" title="漏洞: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="漏洞" style="background-color: #F8C471;">漏洞
-                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
@@ -1229,6 +1229,139 @@ $(function () {
                         data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
                         var index_title = -1;
                         var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
                         var first_occur = -1;
                         // only match artiles with not empty titles and contents
                         if (data_title !== '' && data_content !== '') {
