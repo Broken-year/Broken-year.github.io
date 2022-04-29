@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="综合实战第一章-PUT漏洞实战, Broken-year">
-    <meta name="description" content="综合实战第一章PUT漏洞实战环境准备
-本次环境使用的是vulnhub靶场里面的sickos:1.2
-靶场下载地址:https://www.vulnhub.com/entry/sickos-12,144/
-攻击机:kali 192.168.3">
+    <meta name="keywords" content="DC-2, Broken-year">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>综合实战第一章-PUT漏洞实战 | Broken-year</title>
+    <title>DC-2 | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -312,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">综合实战第一章-PUT漏洞实战</h1>
+                    <h1 class="description center-align post-title">DC-2</h1>
                 </div>
             </div>
         </div>
@@ -431,37 +428,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                <span class="chip bg-color">网络安全</span>
-                            </a>
-                        
-                            <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                <span class="chip bg-color">综合实战</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">渗透测试</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                <span class="chip bg-color">靶场练习</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                靶场练习
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -470,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-26
+                    2022-04-29
                 </div>
                 
 
@@ -491,50 +463,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="综合实战第一章"><a href="#综合实战第一章" class="headerlink" title="综合实战第一章"></a>综合实战第一章</h1><h2 id="PUT漏洞实战"><a href="#PUT漏洞实战" class="headerlink" title="PUT漏洞实战"></a>PUT漏洞实战</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote>
-<p>本次环境使用的是vulnhub靶场里面的sickos:1.2</p>
-<p>靶场下载地址:<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/sickos-12,144/">https://www.vulnhub.com/entry/sickos-12,144/</a></p>
-<p>攻击机:kali 192.168.3.134</p>
-<p>靶机:sickos 192.168.3.158</p>
-</blockquote>
-<h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>又是枯燥的信息搜集</p>
-<pre class=" language-Linux"><code class="language-Linux">namp -p- -A 192.168.3.158
-</code></pre>
-<p><img src="/2022/04/26/sickos/image-20220426205642413.png" alt="image-20220426205642413"></p>
-<p>开放了80端口和22号端口</p>
-<p>访问80端口</p>
-<p><img src="/2022/04/26/sickos/image-20220426205725119.png" alt="image-20220426205725119"></p>
-<p>没啥好找的，用dirb和nikto扫一下</p>
-<pre class=" language-Linux"><code class="language-Linux">dirb http://192.168.3.158
-nikto -h 192.168.3.158
-</code></pre>
-<p><img src="/2022/04/26/sickos/image-20220426205907908.png" alt="image-20220426205907908"></p>
-<p><img src="/2022/04/26/sickos/image-20220426205924146.png" alt="image-20220426205924146"></p>
-<p>找到了一个&#x2F;test&#x2F;目录，进去看看吧</p>
-<p><img src="/2022/04/26/sickos/image-20220426221610553.png" alt="image-20220426221610553"></p>
-<p>用owasp-zap扫描一下</p>
-<pre class=" language-Linux"><code class="language-Linux">owasp-zap
-</code></pre>
-<p><img src="/2022/04/26/sickos/image-20220426222532834.png" alt="image-20220426222532834"></p>
-<p>也没有啥</p>
-<p>可以用curl扫一下</p>
-<pre class=" language-Linux"><code class="language-Linux">curl -x -v OPTIONS http://192.168.3.158/test
-</code></pre>
-<p><img src="/2022/04/26/sickos/image-20220426222829443.png" alt="image-20220426222829443"></p>
-<p>发现支持PUT</p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>可以利用火狐插件进行上传</p>
-<p>首先准备好一个webshell（这里使用weevely）</p>
-<pre class=" language-Linux"><code class="language-Linux">weevely generate 123456 /root/shell.php
-</code></pre>
-<p>然后打开火狐，使用扩展RESTClient</p>
-<p>把webshell扔进去</p>
-<p><img src="/2022/04/26/sickos/image-20220426224415603.png" alt="image-20220426224415603"></p>
-<p>测试一下</p>
-<p><img src="/2022/04/26/sickos/image-20220426224452282.png" alt="image-20220426224452282"></p>
-<p>上去了，连一下试试</p>
-<p><img src="/2022/04/26/sickos/image-20220426224553668.png" alt="image-20220426224553668"></p>
-<p>成了，剩下就是提权！结束！</p>
-
+                
                 
             </div>
             <hr/>
@@ -560,7 +489,7 @@ nikto -h 192.168.3.158
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/04/26/sickos/">http://Broken-year.github.io/2022/04/26/sickos/</a>
+                    <a href="http://Broken-year.github.io/2022/04/29/DC-2/">http://Broken-year.github.io/2022/04/29/DC-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -597,23 +526,7 @@ nikto -h 192.168.3.158
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                    <span class="chip bg-color">网络安全</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                    <span class="chip bg-color">综合实战</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">渗透测试</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                    <span class="chip bg-color">靶场练习</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -785,78 +698,18 @@ nikto -h 192.168.3.158
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/27/Dina/">
+                <a href="/2022/04/29/DC-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="综合实战第一章-命令注入实战">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="DC-2">
                         
-                        <span class="card-title">综合实战第一章-命令注入实战</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-27
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                    靶场练习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                        <span class="chip bg-color">网络安全</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                        <span class="chip bg-color">综合实战</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">渗透测试</span>
-                    </a>
-                    
-                    <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                        <span class="chip bg-color">靶场练习</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/26/b2r/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="综合实战第一章-命令执行实战">
-                        
-                        <span class="card-title">综合实战第一章-命令执行实战</span>
+                        <span class="card-title">DC-2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -867,7 +720,45 @@ nikto -h 192.168.3.158
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Broken-year
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/29/dc-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="综合实战第二章-DC-1">
+                        
+                        <span class="card-title">综合实战第二章-DC-1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-29
                             </span>
                         <span class="publish-author">
                             
