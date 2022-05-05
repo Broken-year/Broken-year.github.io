@@ -520,7 +520,16 @@
 </code></pre>
 <p><img src="/2022/04/21/docker/image-20220421231700513.png" alt="image-20220421231700513"></p>
 <p>成功</p>
-<h2 id="3-安装vulhub"><a href="#3-安装vulhub" class="headerlink" title="3.安装vulhub"></a>3.安装vulhub</h2><p>git安装</p>
+<h2 id="3-设置国内镜像"><a href="#3-设置国内镜像" class="headerlink" title="3.设置国内镜像"></a>3.设置国内镜像</h2><pre class=" language-Linux"><code class="language-Linux">sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+&#123;
+  "registry-mirrors": ["https://l10nt4hq.mirror.aliyuncs.com"]
+&#125;
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+<h2 id="4-安装vulhub"><a href="#4-安装vulhub" class="headerlink" title="4.安装vulhub"></a>4.安装vulhub</h2><p>git安装</p>
 <pre class=" language-Linux"><code class="language-Linux">git clone https://github.com/vulhub/vulhub.git
 </code></pre>
 <p>下载好了之后做一下测试</p>

