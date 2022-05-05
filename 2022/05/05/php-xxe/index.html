@@ -5,11 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="PHP XML外部实体注入漏洞(XXE)复现, Broken-year">
-    <meta name="description" content="XML外部实体注入漏洞复现环境介绍
+    <meta name="description" content="PHP XML外部实体注入漏洞复现环境介绍
 PHP 7.0.30
 libxml 2.8.0
 
-libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进PHP中">
+libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -500,7 +500,7 @@ libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="XML外部实体注入漏洞复现"><a href="#XML外部实体注入漏洞复现" class="headerlink" title="XML外部实体注入漏洞复现"></a>XML外部实体注入漏洞复现</h1><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><blockquote>
+                <h1 id="PHP-XML外部实体注入漏洞复现"><a href="#PHP-XML外部实体注入漏洞复现" class="headerlink" title="PHP XML外部实体注入漏洞复现"></a>PHP XML外部实体注入漏洞复现</h1><h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><blockquote>
 <p>PHP 7.0.30</p>
 <p>libxml 2.8.0</p>
 </blockquote>
@@ -793,18 +793,17 @@ Simplexml_load_string.php #使用simplexml_load_string函数解析body
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/05/05/php-xxe/">
+                <a href="/2022/05/05/php-backdoor/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="PHP XML外部实体注入漏洞(XXE)复现">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="php-8.1.0开发版本后门漏洞">
                         
-                        <span class="card-title">PHP XML外部实体注入漏洞(XXE)复现</span>
+                        <span class="card-title">php-8.1.0开发版本后门漏洞</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -814,9 +813,9 @@ Simplexml_load_string.php #使用simplexml_load_string函数解析body
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -829,7 +828,6 @@ Simplexml_load_string.php #使用simplexml_load_string函数解析body
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -851,10 +849,6 @@ Simplexml_load_string.php #使用simplexml_load_string函数解析body
                     
                     <a href="/tags/PHP/">
                         <span class="chip bg-color">PHP</span>
-                    </a>
-                    
-                    <a href="/tags/XML/">
-                        <span class="chip bg-color">XML</span>
                     </a>
                     
                 </div>
