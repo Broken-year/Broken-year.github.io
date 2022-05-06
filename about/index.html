@@ -18,7 +18,7 @@
 
 
     <title>关于 | Broken-year</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/medias/logo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -599,7 +599,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"靶场练习","value":22},{"name":"漏洞复现","value":14},{"name":"博客","value":1},{"name":"Linux","value":1},{"name":"网络安全","value":36},{"name":"环境搭建","value":2},{"name":"PHP","value":2},{"name":"数据库","value":5},{"name":"python","value":1},{"name":"服务器搭建","value":1}],
+                data: [{"name":"漏洞复现","value":14},{"name":"靶场练习","value":22},{"name":"博客","value":1},{"name":"Linux","value":1},{"name":"网络安全","value":36},{"name":"环境搭建","value":2},{"name":"PHP","value":2},{"name":"数据库","value":5},{"name":"python","value":1},{"name":"服务器搭建","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -973,6 +973,15 @@ $(function () {
 
     
 
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 雪花特效 -->
