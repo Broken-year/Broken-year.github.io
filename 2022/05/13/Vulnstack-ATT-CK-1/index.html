@@ -23,7 +23,7 @@ win7 攻击机
 
 
 win7 服务器
-外网：192.168.3.14">
+外网：192.168.3.17">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -435,7 +435,7 @@ win7 服务器
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    876
+                    1k
                 </div>
                 
 
@@ -475,7 +475,7 @@ win7 服务器
 </tr>
 <tr>
 <td align="center">win7 服务器</td>
-<td align="center">外网：192.168.3.146；内网：192.168.52.143</td>
+<td align="center">外网：192.168.3.176；内网：192.168.52.143</td>
 </tr>
 <tr>
 <td align="center">win2003 域成员主机</td>
@@ -633,7 +633,40 @@ win7 服务器
 <p>查看域内别的主机信息</p>
 <pre class=" language-shell"><code class="language-shell">net view
 </code></pre>
-<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220513195425189.png" alt="image-20220513195425189"></p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220516105236425.png" alt="image-20220516105236425"></p>
+<h4 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h4><p>扫描端口</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523150142185.png" alt="image-20220523150142185"></p>
+<p>选择网段</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523150201181.png" alt="image-20220523150201181"></p>
+<p>点击开始扫描，扫描完之后可以查看</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523150229539.png" alt="image-20220523150229539"></p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523150236249.png" alt="image-20220523150236249"></p>
+<p>可以看到内网中一共有这三个存活主机</p>
+<p>查看本机的hash和密码</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523151753721.png" alt="image-20220523151753721"></p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523151800698.png" alt="image-20220523151800698"></p>
+<p>新建一个<code>smb</code>监听</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152049634.png" alt="image-20220523152049634"></p>
+<p>点击<code>spawn</code>，创建一个新的会话</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152210200.png" alt="image-20220523152210200"></p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152235025.png" alt="image-20220523152235025"></p>
+<p>创建成功的话会有一个链子</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152331391.png" alt="image-20220523152331391"></p>
+<p>此时使用<code>psexec</code></p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152702645.png" alt="image-20220523152702645"></p>
+<p>选择刚才创建的会话</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152751481.png" alt="image-20220523152751481"></p>
+<p>此时得到了<code>root</code>这台主机</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523152950846.png" alt="image-20220523152950846"></p>
+<h4 id="获取token"><a href="#获取token" class="headerlink" title="获取token"></a>获取token</h4><p>查看进程</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523160822572.png" alt="image-20220523160822572"></p>
+<p>在进程中找到<code>god\administrator</code>，获取令牌</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523160932434.png" alt="image-20220523160932434"></p>
+<p>接着用这个<code>token</code>去连接owa</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523162735450.png" alt="image-20220523162735450"></p>
+<p>勾选这个</p>
+<p><img src="/2022/05/13/Vulnstack-ATT-CK-1/image-20220523162903232.png" alt="image-20220523162903232"></p>
+<p>成功获得域控</p>
 
                 
             </div>
